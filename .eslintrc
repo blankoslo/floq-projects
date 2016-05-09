@@ -1,5 +1,8 @@
 {
   "extends": "airbnb",
+  "globals": {
+  	"apiToken"
+  },
   "parser": "babel-eslint",
   "rules": {
     "comma-dangle": 0,
