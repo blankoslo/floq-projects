@@ -15,7 +15,7 @@ deploy:
   - provider: gcs
     bucket: blank-intranet-test
     local_dir: dist
-    upload-dir: employees
+    upload-dir: projects
     cache_control: max-age=0
     acl: public-read
     access_key_id: GOOGFFWIXBHTD746XIUI
@@ -27,7 +27,7 @@ deploy:
   - provider: gcs
     bucket: blank-intranet
     local_dir: dist
-    upload-dir: employees
+    upload-dir: projects
     cache_control: max-age=3600
     acl: public-read
     access_key_id: GOOGFFWIXBHTD746XIUI
