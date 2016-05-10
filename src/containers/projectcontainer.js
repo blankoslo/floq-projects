@@ -15,6 +15,12 @@ class ProjectContainer extends Component {
   }
 }
 
+ProjectContainer.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  project: React.PropTypes.object.isRequired,
+  params: React.PropTypes.object.isRequired
+};
+
 const mapStateToProps = (state) => ({
   project: state.project
 });
