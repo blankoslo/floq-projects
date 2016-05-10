@@ -7,3 +7,5 @@ const axios = axios_.create({
 });
 
 export const getProjects = () => axios.get('/projects?select=id,name,customer{*}');
+
+export const getProject = (id) => axios.get(`/projects?id=eq.${id}`);
