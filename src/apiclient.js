@@ -6,4 +6,4 @@ const axios = axios_.create({
   headers: { Authorization: `Bearer ${apiToken}` }
 });
 
-export const getProjects = () => axios.get('/projects');
+export const getProjects = () => axios.get('/projects?select=id,name,customer{*}');
