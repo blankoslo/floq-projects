@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import { FETCH_PROJECTS } from '../actions/index';
 
-const projectsReducer = (previousState = [], action) => {
+const projectsListReducer = (previousState = [], action) => {
   switch (action.type) {
     case FETCH_PROJECTS:
       return action.payload.data;
@@ -12,7 +12,7 @@ const projectsReducer = (previousState = [], action) => {
 };
 
 const rootReducer = combineReducers({
-  projects: projectsReducer
+  projects: projectsListReducer
 });
 
 export default rootReducer;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProjectList = (props) => {
+const ProjectsList = (props) => {
   const listEntries = props.projects.map(p =>
     <li key={p.id}>
       <b>{p.customer.name}:</b> {p.name}
@@ -12,8 +12,8 @@ const ProjectList = (props) => {
   </div>);
 };
 
-ProjectList.propTypes = {
+ProjectsList.propTypes = {
   projects: React.PropTypes.array.isRequired
 };
 
-export default ProjectList;
+export default ProjectsList;
