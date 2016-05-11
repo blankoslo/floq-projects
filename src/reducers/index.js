@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { FETCH_PROJECTS, FETCH_PROJECT } from '../actions/index';
+import { FETCH_PROJECTS, FETCH_PROJECT, UPDATE_PROJECT } from '../actions/index';
 
 const projectsListReducer = (previousState = [], action) => {
   switch (action.type) {
@@ -15,6 +15,8 @@ const projectReducer = (previousState = {}, action) => {
   switch (action.type) {
     case FETCH_PROJECT:
       return action.payload.data;
+    case UPDATE_PROJECT:
+      return Object.assign(previousState, action.meta);
     default:
       return previousState;
   }
