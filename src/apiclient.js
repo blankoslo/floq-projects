@@ -13,3 +13,5 @@ export const getProject = (id) => axios.get(`/projects?id=eq.${id}`, {
 });
 
 export const updateProject = (id, data) => axios.patch(`/projects?id=eq.${id}`, data);
+
+export const getCustomers = () => axios.get('/customers');

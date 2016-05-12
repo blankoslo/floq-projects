@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { FETCH_PROJECTS, FETCH_PROJECT, UPDATE_PROJECT } from '../actions/index';
+import { FETCH_PROJECTS, FETCH_PROJECT, UPDATE_PROJECT, FETCH_CUSTOMERS } from '../actions/index';
 
 const projectsListReducer = (previousState = [], action) => {
   switch (action.type) {
@@ -22,9 +22,19 @@ const projectReducer = (previousState = {}, action) => {
   }
 };
 
+const customersReducer = (previousState = [], action) => {
+  switch (action.type) {
+    case FETCH_CUSTOMERS:
+      return action.payload.data;
+    default:
+      return previousState;
+  }
+};
+
 const rootReducer = combineReducers({
   projects: projectsListReducer,
-  project: projectReducer
+  project: projectReducer,
+  customers: customersReducer
 });
 
 export default rootReducer;
