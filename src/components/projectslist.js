@@ -1,15 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const ProjectsList = (props) => {
   const listEntries = props.projects.map(p =>
     <li key={p.id}>
-      <b>{p.customer.name}:</b> {p.name}
+      <Link to={`/projects/${p.id}`}><b>{p.customer.name}:</b> {p.name}</Link>
     </li>);
-  return (<div>
-    <ul>
-      {listEntries}
-    </ul>
-  </div>);
+
+  return (
+    <div>
+      <ul>
+        {listEntries}
+      </ul>
+    </div>
+  );
 };
 
 ProjectsList.propTypes = {
