@@ -5,7 +5,9 @@ import ProjectsList from '../components/projectslist';
 import { fetchProjects } from '../actions/index';
 
 class ProjectsListContainer extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+
     this.props.dispatch(fetchProjects());
   }
 

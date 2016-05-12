@@ -3,21 +3,17 @@ import React, { Component } from 'react';
 class Project extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: null };
 
-    this.onNameChange = this.onNameChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.state = { name: null };
   }
 
   componentWillReceiveProps(nextProps) {
     this.state = { name: nextProps.project.name };
   }
 
-  onNameChange(event) {
-    this.setState({ name: event.target.value });
-  }
+  onNameChange = (event) => this.setState({ name: event.target.value });
 
-  onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault();
 
     this.props.onProjectUpdate(this.state);
