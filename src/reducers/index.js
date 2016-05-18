@@ -16,7 +16,7 @@ const projectReducer = (previousState = {}, action) => {
     case FETCH_PROJECT:
       return action.payload.data;
     case UPDATE_PROJECT:
-      return Object.assign(previousState, action.meta);
+      return Object.assign(previousState, action.payload.data);
     default:
       return previousState;
   }
