@@ -22,6 +22,5 @@ export const fetchCustomers = () => ({
 
 export const updateProject = (id, data) => ({
   type: UPDATE_PROJECT,
-  payload: api.updateProject(id, data),
-  meta: data
+  payload: api.updateProject(id, data)
 });
