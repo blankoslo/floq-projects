@@ -44,7 +44,10 @@ class Project extends Component {
               {customerElements}
             </select>
           </div>
-          <button type='submit'>
+          <button
+            className='mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
+            type='submit'
+          >
             Lagre
           </button>
         </form>
