@@ -3,6 +3,7 @@ import * as api from '../apiclient';
 export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 export const FETCH_PROJECT = 'FETCH_PROJECT';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
+export const CREATE_PROJECT = 'UPDATE_PROJECT';
 export const FETCH_CUSTOMERS = 'FETCH_CUSTOMERS';
 
 export const fetchProjects = () => ({
@@ -23,4 +24,9 @@ export const fetchCustomers = () => ({
 export const updateProject = (id, data) => ({
   type: UPDATE_PROJECT,
   payload: api.updateProject(id, data)
+});
+
+export const createProject = data => ({
+  type: CREATE_PROJECT,
+  payload: api.createProject(data)
 });

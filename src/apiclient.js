@@ -9,12 +9,14 @@ const axios = axios_.create({
   }
 });
 
-export const getProjects = () => axios.get('/projects?select=id,name,customer{*}');
+export const getProjects = () => axios.get('/projects?select=id,name,customer{*}&order=id.desc');
 
 export const getProject = (id) => axios.get(`/projects?id=eq.${id}`, {
   headers: { Prefer: 'plurality=singular' }
 });
 
 export const updateProject = (id, data) => axios.patch(`/projects?id=eq.${id}`, data);
+
+export const createProject = data => axios.post('/projects', data);
 
 export const getCustomers = () => axios.get('/customers');
