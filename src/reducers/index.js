@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { combineReducers } from 'redux';
 
 import { FETCH_PROJECTS,
@@ -24,9 +23,9 @@ const projectReducer = (previousState = {}, action) => {
     case FETCH_PROJECT:
       return action.payload.data;
     case UPDATE_PROJECT:
-      return {};
+      return Object.assign(previousState, action.payload.data);
     case CREATE_PROJECT:
-      return {};
+      return Object.assign(previousState, action.payload.data);
     default:
       return previousState;
   }
