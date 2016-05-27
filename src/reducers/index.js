@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { combineReducers } from 'redux';
 
 import { FETCH_PROJECTS,
