@@ -9,6 +9,7 @@ const ProjectsList = (props) => {
 
   return (
     <div>
+      <Link to={'/projects/new'}>New project</Link>
       <ul>
         {listEntries}
       </ul>
