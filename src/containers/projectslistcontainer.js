@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ProjectsList from '../components/projectslist';
-import { fetchProjects, deselectProject } from '../actions/index';
+import { fetchProjects } from '../actions/index';
 
 class ProjectsListContainer extends Component {
   constructor(props) {
     super(props);
 
     this.props.dispatch(fetchProjects());
-    this.props.dispatch(deselectProject());
   }
 
   render() {
