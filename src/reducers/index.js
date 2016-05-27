@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
 
-import { FETCH_PROJECTS, FETCH_PROJECT, UPDATE_PROJECT, FETCH_CUSTOMERS } from '../actions/index';
+import { FETCH_PROJECTS,
+         FETCH_PROJECT,
+         UPDATE_PROJECT,
+         CREATE_PROJECT,
+         FETCH_CUSTOMERS } from '../actions/index';
 
 const projectsListReducer = (previousState = [], action) => {
   switch (action.type) {

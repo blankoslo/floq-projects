@@ -1,10 +1,15 @@
+import * as _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Project from '../components/project';
-import { fetchProject, updateProject, fetchCustomers } from '../actions/index';
+import { fetchProject, updateProject, createProject, fetchCustomers } from '../actions/index';
 
 class ProjectContainer extends Component {
+  static contextTypes = {
+    router: React.PropTypes.object
+  };
+
   constructor(props) {
     super(props);
 
@@ -16,8 +21,15 @@ class ProjectContainer extends Component {
     this.props.fetchCustomers();
   }
 
-  onProjectUpdate = (data) =>
-    this.props.dispatch(updateProject(this.props.project.id, data));
+  onProjectUpdate = (data) => {
+    if (_.isEmpty(this.project)) {
+      this.props.createProject(data)
+      .then(this.context.router.push('/projects'));
+    } else {
+      this.props.updateProject(this.props.project.id, data)
+      .then(this.context.router.push('/projects'));
+    }
+  }
 
   render() {
     return (
@@ -31,10 +43,13 @@ class ProjectContainer extends Component {
 }
 
 ProjectContainer.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
   project: React.PropTypes.object.isRequired,
   customers: React.PropTypes.array.isRequired,
-  params: React.PropTypes.object.isRequired
+  params: React.PropTypes.object.isRequired,
+  fetchProject: React.PropTypes.func,
+  fetchCustomers: React.PropTypes.func,
+  createProject: React.PropTypes.func,
+  updateProject: React.PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -42,4 +57,9 @@ const mapStateToProps = (state) => ({
   customers: state.customers
 });
 
-export default connect(mapStateToProps)(ProjectContainer);
+export default connect(mapStateToProps, {
+  fetchProject,
+  fetchCustomers,
+  createProject,
+  updateProject
+})(ProjectContainer);
