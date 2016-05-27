@@ -22,7 +22,7 @@ class ProjectContainer extends Component {
   }
 
   onProjectUpdate = (data) => {
-    if (_.isEmpty(this.project)) {
+    if (_.isEmpty(this.props.project)) {
       this.props.createProject(data)
       .then(this.context.router.push('/projects'));
     } else {
