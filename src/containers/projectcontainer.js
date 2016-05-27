@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Project from '../components/project';
-import { fetchProject, updateProject, createProject, fetchCustomers } from '../actions/index';
+import {
+  fetchProjects,
+  fetchProject,
+  updateProject,
+  createProject,
+  fetchCustomers
+} from '../actions/index';
 
 class ProjectContainer extends Component {
   static contextTypes = {
@@ -24,9 +30,11 @@ class ProjectContainer extends Component {
   onProjectUpdate = (data) => {
     if (_.isEmpty(this.props.project)) {
       this.props.createProject(data)
+      .then(this.props.fetchProjects())
       .then(this.context.router.push('/projects'));
     } else {
       this.props.updateProject(this.props.project.id, data)
+      .then(this.props.fetchProjects())
       .then(this.context.router.push('/projects'));
     }
   }
@@ -46,6 +54,7 @@ ProjectContainer.propTypes = {
   project: React.PropTypes.object.isRequired,
   customers: React.PropTypes.array.isRequired,
   params: React.PropTypes.object.isRequired,
+  fetchProjects: React.PropTypes.func,
   fetchProject: React.PropTypes.func,
   fetchCustomers: React.PropTypes.func,
   createProject: React.PropTypes.func,
@@ -58,6 +67,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  fetchProjects,
   fetchProject,
   fetchCustomers,
   createProject,
