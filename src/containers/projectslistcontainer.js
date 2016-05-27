@@ -5,7 +5,7 @@ import ProjectsList from '../components/projectslist';
 import { fetchProjects, deselectProject } from '../actions/index';
 
 class ProjectsListContainer extends Component {
-  constructor(props) {    // props kommer fra Redux? Er det slik at props == Redux store?
+  constructor(props) {
     super(props);
 
     this.props.dispatch(fetchProjects());
@@ -23,10 +23,7 @@ ProjectsListContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  projects: state.projects // state.projects
+  projects: state.projects
 });
 
-/*
-  Connects the Redux store to the React component ProjectsListContainer.
-*/
 export default connect(mapStateToProps)(ProjectsListContainer);
