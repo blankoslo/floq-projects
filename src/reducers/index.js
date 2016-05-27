@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import { FETCH_PROJECTS,
          FETCH_PROJECT,
+         DESELECT_PROJECT,
          UPDATE_PROJECT,
          CREATE_PROJECT,
          FETCH_CUSTOMERS } from '../actions/index';
@@ -19,6 +20,8 @@ const projectReducer = (previousState = {}, action) => {
   switch (action.type) {
     case FETCH_PROJECT:
       return action.payload.data;
+    case DESELECT_PROJECT:
+      return {};
     case UPDATE_PROJECT:
       return Object.assign(previousState, action.payload.data);
     case CREATE_PROJECT:

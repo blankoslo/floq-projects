@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ProjectsList from '../components/projectslist';
-import { fetchProjects } from '../actions/index';
+import { fetchProjects, deselectProject } from '../actions/index';
 
 class ProjectsListContainer extends Component {
   constructor(props) {    // props kommer fra Redux? Er det slik at props == Redux store?
     super(props);
 
     this.props.dispatch(fetchProjects());
+    this.props.dispatch(deselectProject());
   }
 
   render() {
