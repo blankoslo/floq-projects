@@ -10,8 +10,10 @@ class ProjectContainer extends Component {
 
     const id = this.props.params.id;
 
-    this.props.dispatch(fetchProject(id));
-    this.props.dispatch(fetchCustomers());
+    if (id !== undefined) {
+      this.props.fetchProject(id);
+    }
+    this.props.fetchCustomers();
   }
 
   onProjectUpdate = (data) =>
