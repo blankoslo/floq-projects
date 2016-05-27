@@ -10,9 +10,6 @@ const projectsListReducer = (previousState = [], action) => {
   switch (action.type) {
     case FETCH_PROJECTS:
       return action.payload.data;
-    // TODO: handle UPDATE_PROJECT
-    case CREATE_PROJECT:
-      return [action.payload.data].append(previousState);
     default:
       return previousState;
   }
