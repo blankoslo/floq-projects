@@ -5,20 +5,20 @@ import { connect } from 'react-redux';
 import Project from '../components/project';
 import { fetchProject, updateProject, createProject, fetchCustomers } from '../actions/index';
 
+// FIXME: temporary workaround. http requests end up in infinite loop here.
+let oldPropsId = undefined;
+
 class ProjectContainer extends Component {
   static contextTypes = {
     router: React.PropTypes.object
   };
 
-  constructor(props) {
-    super(props);
-
-    const id = this.props.params.id;
-
-    if (id !== undefined) {
-      this.props.fetchProject(id);
+  componentWillReceiveProps(props) {
+    if (props.params.id !== undefined && oldPropsId !== props.params.id) {
+      oldPropsId = props.params.id;
+      const selectedId = parseInt(props.params.id);
+      props.fetchProject(selectedId);
     }
-    this.props.fetchCustomers();
   }
 
   onProjectUpdate = (data) => {

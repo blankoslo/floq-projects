@@ -1,14 +1,12 @@
 import React from 'react';
-import { Route, Router } from 'react-router';
+import { Route } from 'react-router';
 
-import ProjectsListContainer from './containers/projectslistcontainer';
+import App from './containers/app';
 import ProjectContainer from './containers/projectcontainer';
 
-
 export default (
-  <Router>
-    <Route path='/projects' component={ProjectsListContainer} />
-    <Route path='/projects/new' component={ProjectContainer} />
-    <Route path='/projects/:id' component={ProjectContainer} />
-  </Router>
+  <Route path='/projects' component={App} >
+    <Route path='new' component={ProjectContainer} />
+    <Route path=':id' component={ProjectContainer} />
+  </Route>
 );
