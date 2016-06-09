@@ -8,6 +8,7 @@ import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import reducers from './reducers';
 
+require('../styles/main.less');
 
 const createStoreWithMiddleware = compose(
     applyMiddleware(promiseMiddleware),
