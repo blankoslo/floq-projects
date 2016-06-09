@@ -17,9 +17,10 @@ module.exports = {
   ],
   devtool: 'source-map',
   module: {
-      preLoaders: [ { test: /\.js?$/, loaders: ['eslint'] } ],
-      loaders: [
-          { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/, include: __dirname }
-      ]
+    preLoaders: [{ test: /\.js?$/, loaders: ['eslint'] }],
+    loaders: [
+        { test: /\.less$/, loader: 'style!css!less' },
+        { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/, include: __dirname }
+    ]
   }
 };
