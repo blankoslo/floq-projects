@@ -10,6 +10,15 @@ class ProjectContainer extends Component {
     router: React.PropTypes.object
   };
 
+  constructor(props) {
+    super(props);
+
+    if (props.params.id !== undefined) {
+      const selectedId = parseInt(props.params.id);
+      props.selectProject(selectedId);
+    }
+  }
+
   componentWillReceiveProps(props) {
     // monitor `id` parameter to keep selected employee in sync
     if (props.params.id !== undefined) {
