@@ -14,7 +14,7 @@ const getProjects = (projects, customers) => {
   return {
     loading: false,
     data: projects.data.map(p =>
-      Object.assign(p, { customer: customers.data.get(p.customer) })
+      Object.assign({}, p, { customer: customers.data.get(p.customer) })
     ).sortBy(lowerCaseName)
   };
 };
