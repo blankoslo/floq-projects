@@ -7,7 +7,7 @@ import { FETCH_PROJECTS,
          CREATE_PROJECT,
          FETCH_CUSTOMERS } from '../actions/index';
 
-const projectsListReducer = (previousState = {
+const projectsReducer = (previousState = {
   loading: true,
   data: new Immutable.Map()
 }, action) => {
@@ -59,7 +59,7 @@ const customersReducer = (previousState = { loading: true, data: new Immutable.M
 };
 
 const rootReducer = combineReducers({
-  projects: projectsListReducer,
+  projects: projectsReducer,
   selected_project: selectedProjectReducer,
   customers: customersReducer
 });
