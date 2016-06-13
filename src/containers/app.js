@@ -42,7 +42,6 @@ class App extends Component {
 App.propTypes = {
   params: React.PropTypes.object.isRequired,
   projects: React.PropTypes.object.isRequired,
-  // project: React.PropTypes.object.isRequired,
   children: React.PropTypes.object,
   customers: React.PropTypes.object.isRequired,
   fetchProjects: React.PropTypes.func.isRequired,
@@ -51,7 +50,6 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   projects: projectsSelector(state),
-  // project: state.project,
   customers: state.customers
 });
 
