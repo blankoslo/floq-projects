@@ -2,7 +2,7 @@ import * as api from '../apiclient';
 
 export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
-export const CREATE_PROJECT = 'UPDATE_PROJECT';
+export const CREATE_PROJECT = 'CREATE_PROJECT';
 export const SELECT_PROJECT = 'SELECT_PROJECT';
 export const FETCH_CUSTOMERS = 'FETCH_CUSTOMERS';
 
