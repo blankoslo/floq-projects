@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import React, { Component } from 'react';
 
 class Project extends Component {
@@ -9,11 +8,18 @@ class Project extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!_.isEmpty(nextProps.project)) {
-      this.setState({
-        name: nextProps.project.name,
-        customer: nextProps.project.customer
-      });
+    if (nextProps.project.loading === false) {
+      if (nextProps.project.data !== null) {
+        this.setState({
+          name: nextProps.project.data.name,
+          customer: nextProps.project.data.customer.id
+        });
+      } else {
+        this.setState({
+          name: '',
+          customer: -1
+        });
+      }
     }
   }
 
@@ -28,16 +34,16 @@ class Project extends Component {
   }
 
   render() {
-    if (this.state.name === null) {
+    if (this.props.project.loading === true || this.props.customers.loading === true) {
       return <p>...loading</p>;
     }
 
-    let customerElements = this.props.customers.map((c) =>
-      <option key={c.id} value={c.id}>{c.name}</option>);
+    let customerElements = this.props.customers.data.valueSeq().map((c) =>
+      <option key={c.id} value={c.id}>{c.name}</option>).toJS();
 
     customerElements.push(<option disabled hidden key='-1' value='-1'></option>);
 
-    const isNew = _.isEmpty(this.props.project);
+    const isNew = this.props.project.data === null;
 
     return (
       <div>
@@ -66,7 +72,7 @@ class Project extends Component {
 
 Project.propTypes = {
   project: React.PropTypes.object.isRequired,
-  customers: React.PropTypes.array.isRequired,
+  customers: React.PropTypes.object.isRequired,
   onProjectUpdate: React.PropTypes.func.isRequired
 };
 

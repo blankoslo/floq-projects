@@ -1,24 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
+import ProjectRow from './projectrow';
+
 
 const ProjectsList = (props) => {
-  const listEntries = props.projects.map(p =>
-    <li key={p.id}>
-      <Link to={`/projects/${p.id}`}><b>{p.customer.name}:</b> {p.name}</Link>
-    </li>);
+  if (props.projects.loading === true) {
+    return <div>Loading</div>;
+  }
+
+  const projectsRows = props.projects.data.valueSeq().map(project =>
+    <ProjectRow key={project.id} project={project} />
+  );
 
   return (
     <div>
-      <Link to={'/projects/new'}>New project</Link>
-      <ul>
-        {listEntries}
-      </ul>
+      <div className='mdl-list'>
+        <div className='employee-list-header'>
+          <div>
+            <h3>Prosjekter</h3>
+          </div>
+          <button
+            onClick={() => browserHistory.push('/projects/new')}
+            id='add-employee-button'
+            className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab'
+          >
+            <i className='material-icons dark-gray'>add</i>
+          </button>
+        </div>
+        <hr />
+        <div className='vert-spacer' />
+        {projectsRows}
+      </div>
     </div>
   );
 };
 
 ProjectsList.propTypes = {
-  projects: React.PropTypes.array.isRequired
+  projects: React.PropTypes.object.isRequired
 };
 
 export default ProjectsList;

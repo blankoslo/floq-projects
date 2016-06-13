@@ -1,9 +1,9 @@
-import * as _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Project from '../components/project';
-import { fetchProject, updateProject, createProject, fetchCustomers } from '../actions/index';
+import { updateProject, createProject, fetchCustomers, selectProject } from '../actions/index';
+import selectedProjectSelector from '../selectors/selectedProject';
 
 class ProjectContainer extends Component {
   static contextTypes = {
@@ -13,21 +13,30 @@ class ProjectContainer extends Component {
   constructor(props) {
     super(props);
 
-    const id = this.props.params.id;
-
-    if (id !== undefined) {
-      this.props.fetchProject(id);
+    if (props.params.id !== undefined) {
+      const selectedId = parseInt(props.params.id);
+      props.selectProject(selectedId);
     }
-    this.props.fetchCustomers();
   }
 
-  onProjectUpdate = (data) => {
-    if (_.isEmpty(this.props.project)) {
-      this.props.createProject(data)
-      .then(this.context.router.push('/projects'));
+  componentWillReceiveProps(props) {
+    // monitor `id` parameter to keep selected employee in sync
+    if (props.params.id !== undefined) {
+      const selectedId = parseInt(props.params.id);
+      this.props.selectProject(selectedId);
     } else {
-      this.props.updateProject(this.props.project.id, data)
-      .then(this.context.router.push('/projects'));
+      this.props.selectProject(null);
+    }
+  }
+
+
+  onProjectUpdate = (data) => {
+    if (this.props.project.data === null) {
+      this.props.createProject(data)
+        .then(p => this.context.router.push(`/projects/${p.payload.data.id}`));
+    } else {
+      this.props.updateProject(this.props.project.data.id, data)
+        .then(() => this.context.router.push(`/projects/${this.props.project.data.id}`));
     }
   }
 
@@ -44,22 +53,22 @@ class ProjectContainer extends Component {
 
 ProjectContainer.propTypes = {
   project: React.PropTypes.object.isRequired,
-  customers: React.PropTypes.array.isRequired,
+  customers: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
-  fetchProject: React.PropTypes.func,
   fetchCustomers: React.PropTypes.func,
   createProject: React.PropTypes.func,
-  updateProject: React.PropTypes.func
+  updateProject: React.PropTypes.func,
+  selectProject: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  project: state.project,
+  project: selectedProjectSelector(state),
   customers: state.customers
 });
 
 export default connect(mapStateToProps, {
-  fetchProject,
   fetchCustomers,
   createProject,
-  updateProject
+  updateProject,
+  selectProject
 })(ProjectContainer);
