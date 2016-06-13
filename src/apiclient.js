@@ -8,7 +8,7 @@ const axios = axios_.create({
   }
 });
 
-export const getProjects = () => axios.get('/projects?select=id,name,customer{*}&order=id.desc');
+export const getProjects = () => axios.get('/projects?select=id,name,customer&order=id.desc');
 
 export const getProject = (id) => axios.get(`/projects?id=eq.${id}`, {
   headers: { Prefer: 'plurality=singular' }

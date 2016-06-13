@@ -4,7 +4,11 @@ import ProjectRow from './projectrow';
 
 
 const ProjectsList = (props) => {
-  const projectsRows = props.projects.map(project =>
+  if (props.projects.loading === true) {
+    return <div>Loading</div>;
+  }
+
+  const projectsRows = props.projects.data.valueSeq().map(project =>
     <ProjectRow key={project.id} project={project} />
   );
 
@@ -32,7 +36,7 @@ const ProjectsList = (props) => {
 };
 
 ProjectsList.propTypes = {
-  projects: React.PropTypes.array.isRequired
+  projects: React.PropTypes.object.isRequired
 };
 
 export default ProjectsList;

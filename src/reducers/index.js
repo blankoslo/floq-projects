@@ -1,37 +1,58 @@
+import * as Immutable from 'immutable';
 import { combineReducers } from 'redux';
 
 import { FETCH_PROJECTS,
-         FETCH_PROJECT,
+         SELECT_PROJECT,
          UPDATE_PROJECT,
          CREATE_PROJECT,
          FETCH_CUSTOMERS } from '../actions/index';
 
-const projectsListReducer = (previousState = [], action) => {
+const projectsListReducer = (previousState = {
+  loading: true,
+  data: new Immutable.Map()
+}, action) => {
   switch (action.type) {
     case FETCH_PROJECTS:
-      return action.payload.data;
-    default:
-      return previousState;
-  }
-};
-
-const projectReducer = (previousState = {}, action) => {
-  switch (action.type) {
-    case FETCH_PROJECT:
-      return action.payload.data;
-    case UPDATE_PROJECT:
-      return Object.assign(previousState, action.payload.data);
+      return {
+        loading: false,
+        data: new Immutable.Map(action.payload.data.map(e => [e.id, e]))
+      };
     case CREATE_PROJECT:
-      return Object.assign(previousState, action.payload.data);
+      return {
+        loading: false,
+        data: previousState.data.set(action.payload.data.id, action.payload.data)
+      };
+    case UPDATE_PROJECT:
+      return {
+        loading: false,
+        // we get back a list of results since (conceptually) several entities might have been
+        // updated. fold over the updated entities and update the current list.
+        data: action.payload.data.reduce(
+          (acc, e) => acc.set(e.id, e),
+          previousState.data
+        )
+      };
     default:
       return previousState;
   }
 };
 
-const customersReducer = (previousState = [], action) => {
+const selectedProjectReducer = (previousState = null, action) => {
+  switch (action.type) {
+    case SELECT_PROJECT:
+      return action.payload;
+    default:
+      return previousState;
+  }
+};
+
+const customersReducer = (previousState = { loading: true, data: new Immutable.Map() }, action) => {
   switch (action.type) {
     case FETCH_CUSTOMERS:
-      return action.payload.data;
+      return {
+        loading: false,
+        data: new Immutable.Map(action.payload.data.map(e => [e.id, e]))
+      };
     default:
       return previousState;
   }
@@ -39,7 +60,7 @@ const customersReducer = (previousState = [], action) => {
 
 const rootReducer = combineReducers({
   projects: projectsListReducer,
-  project: projectReducer,
+  selected_project: selectedProjectReducer,
   customers: customersReducer
 });
 

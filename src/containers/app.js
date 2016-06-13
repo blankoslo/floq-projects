@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ProjectsList from '../components/projectslist';
-import { fetchProjects, fetchProject, fetchCustomers } from '../actions/index';
+import { fetchProjects, fetchCustomers } from '../actions/index';
+import projectsSelector from '../selectors/projects';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +21,6 @@ class App extends Component {
     const children = React.Children.map(this.props.children,
       child => React.cloneElement(child, {
         projects: this.props.projects,
-        project: this.props.project,
         customers: this.props.customers
       }));
 
@@ -41,24 +41,22 @@ class App extends Component {
 
 App.propTypes = {
   params: React.PropTypes.object.isRequired,
-  projects: React.PropTypes.array.isRequired,
-  project: React.PropTypes.object.isRequired,
+  projects: React.PropTypes.object.isRequired,
+  // project: React.PropTypes.object.isRequired,
   children: React.PropTypes.object,
-  customers: React.PropTypes.array.isRequired,
+  customers: React.PropTypes.object.isRequired,
   fetchProjects: React.PropTypes.func.isRequired,
-  fetchProject: React.PropTypes.func.isRequired,
   fetchCustomers: React.PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  projects: state.projects,
-  project: state.project,
+  projects: projectsSelector(state),
+  // project: state.project,
   customers: state.customers
 });
 
 const mapDispatchToProps = {
   fetchProjects,
-  fetchProject,
   fetchCustomers
 };
 
