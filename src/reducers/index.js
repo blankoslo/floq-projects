@@ -15,19 +15,19 @@ const projectsReducer = (previousState = {
     case FETCH_PROJECTS:
       return {
         loading: false,
-        data: new Immutable.Map(action.payload.data.map(e => [e.id, e]))
+        data: new Immutable.Map(action.payload.map(e => [e.id, e]))
       };
     case CREATE_PROJECT:
       return {
         loading: false,
-        data: previousState.data.set(action.payload.data.id, action.payload.data)
+        data: previousState.data.set(action.payload.id, action.payload)
       };
     case UPDATE_PROJECT:
       return {
         loading: false,
         // we get back a list of results since (conceptually) several entities might have been
         // updated. fold over the updated entities and update the current list.
-        data: action.payload.data.reduce(
+        data: action.payload.reduce(
           (acc, e) => acc.set(e.id, e),
           previousState.data
         )
@@ -51,7 +51,7 @@ const customersReducer = (previousState = { loading: true, data: new Immutable.M
     case FETCH_CUSTOMERS:
       return {
         loading: false,
-        data: new Immutable.Map(action.payload.data.map(e => [e.id, e]))
+        data: new Immutable.Map(action.payload.map(e => [e.id, e]))
       };
     default:
       return previousState;

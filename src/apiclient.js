@@ -1,21 +1,34 @@
-import axios_ from 'axios';
+import 'whatwg-fetch';
 
-const axios = axios_.create({
-  baseURL: config.apiUri,
-  headers: {
-    Authorization: `Bearer ${apiToken}`,
-    Prefer: 'return=representation' // ask for the updated entity after modifications (e.g. PATCH)
-  }
+const baseURL = config.apiUri;
+
+const headers = {
+  Authorization: `Bearer ${apiToken}`,
+  Prefer: 'return=representation', // ask for the updated entity after modifications (e.g. PATCH)
+  Accept: 'application/json'
+};
+
+const dataHeaders = Object.assign({}, headers, {
+  'Content-Type': 'application/json; charset=utf-8'
 });
 
-export const getProjects = () => axios.get('/projects?select=id,name,customer&order=id.desc');
-
-export const getProject = (id) => axios.get(`/projects?id=eq.${id}`, {
-  headers: { Prefer: 'plurality=singular' }
+export const getProjects = () =>
+fetch(`${baseURL}/projects?select=id,name,customer&order=id.desc`, {
+  headers
 });
 
-export const updateProject = (id, data) => axios.patch(`/projects?id=eq.${id}`, data);
+export const updateProject = (id, body) => fetch(`${baseURL}/projects?id=eq.${id}`, {
+  method: 'PATCH',
+  headers: dataHeaders,
+  body: JSON.stringify(body)
+});
 
-export const createProject = data => axios.post('/projects', data);
+export const createProject = body => fetch(`${baseURL}/projects`, {
+  method: 'POST',
+  headers: dataHeaders,
+  body: JSON.stringify(body)
+});
 
-export const getCustomers = () => axios.get('/customers');
+export const getCustomers = () => fetch(`${baseURL}/customers`, {
+  headers
+});

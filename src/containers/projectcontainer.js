@@ -33,7 +33,7 @@ class ProjectContainer extends Component {
   onProjectUpdate = (data) => {
     if (this.props.project.data === null) {
       this.props.createProject(data)
-        .then(p => this.context.router.push(`/projects/${p.payload.data.id}`));
+        .then(p => this.context.router.push(`/projects/${p.payload.id}`));
     } else {
       this.props.updateProject(this.props.project.data.id, data)
         .then(() => this.context.router.push(`/projects/${this.props.project.data.id}`));
