@@ -15,20 +15,20 @@ const dataHeaders = Object.assign({}, headers, {
 export const getProjects = () =>
 fetch(`${baseURL}/projects?select=id,name,customer&order=id.desc`, {
   headers
-});
+}).then(response => response.json());
 
 export const updateProject = (id, body) => fetch(`${baseURL}/projects?id=eq.${id}`, {
   method: 'PATCH',
   headers: dataHeaders,
   body: JSON.stringify(body)
-});
+}).then(response => response.json());
 
 export const createProject = body => fetch(`${baseURL}/projects`, {
   method: 'POST',
   headers: dataHeaders,
   body: JSON.stringify(body)
-});
+}).then(response => response.json());
 
 export const getCustomers = () => fetch(`${baseURL}/customers`, {
   headers
-});
+}).then(response => response.json());

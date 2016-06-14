@@ -9,19 +9,16 @@ export const FETCH_CUSTOMERS = 'FETCH_CUSTOMERS';
 export const fetchProjects = () => ({
   type: FETCH_PROJECTS,
   payload: api.getProjects()
-  .then(response => response.json())
 });
 
 export const updateProject = (id, data) => ({
   type: UPDATE_PROJECT,
   payload: api.updateProject(id, data)
-  .then(response => response.json())
 });
 
 export const createProject = data => ({
   type: CREATE_PROJECT,
   payload: api.createProject(data)
-  .then(response => response.json())
 });
 
 export const selectProject = id => ({
@@ -32,5 +29,4 @@ export const selectProject = id => ({
 export const fetchCustomers = () => ({
   type: FETCH_CUSTOMERS,
   payload: api.getCustomers()
-  .then(response => response.json())
 });
