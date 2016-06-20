@@ -76,12 +76,14 @@ ProjectContainer.propTypes = {
   customers: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
   children: React.PropTypes.object.isRequired,
-  form: React.PropTypes.object.isRequired,
   createProject: React.PropTypes.func.isRequired,
   updateProject: React.PropTypes.func.isRequired,
   updateField: React.PropTypes.func.isRequired,
   selectProject: React.PropTypes.func.isRequired,
-  resetForm: React.PropTypes.func.isRequired
+  resetForm: React.PropTypes.func.isRequired,
+
+  // Internal propTypes
+  form: React.PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => (
