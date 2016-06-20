@@ -56,7 +56,6 @@ class ProjectContainer extends Component {
     const isNew = this.props.params.id === undefined;
 
     if (this.props.customers.loading === true ||
-        this.props.form.data === undefined ||
         this.props.form.loading === true) {
       return <p>...loading</p>;
     }
