@@ -5,7 +5,9 @@ import { FETCH_PROJECTS,
          SELECT_PROJECT,
          UPDATE_PROJECT,
          CREATE_PROJECT,
-         FETCH_CUSTOMERS } from '../actions/index';
+         FETCH_CUSTOMERS,
+         FORM_UPDATE_VALUE,
+         FORM_RESET } from '../actions/index';
 
 const projectsReducer = (previousState = {
   loading: true,
@@ -58,10 +60,32 @@ const customersReducer = (previousState = { loading: true, data: new Immutable.M
   }
 };
 
+const defaultForm = {
+  loading: true,
+  data: new Immutable.Map()
+};
+
+const formReducer = (previousState = defaultForm, action) => {
+  switch (action.type) {
+    case FORM_RESET:
+      return defaultForm;
+    case FORM_UPDATE_VALUE: {
+      return {
+        loading: false,
+        data: previousState.data.merge(action.payload)
+      };
+    }
+    default:
+      return previousState;
+  }
+};
+
+
 const rootReducer = combineReducers({
   projects: projectsReducer,
   selected_project: selectedProjectReducer,
-  customers: customersReducer
+  customers: customersReducer,
+  form: formReducer
 });
 
 export default rootReducer;
