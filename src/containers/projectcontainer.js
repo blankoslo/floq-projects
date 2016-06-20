@@ -88,8 +88,7 @@ ProjectContainer.propTypes = {
 
 const mapStateToProps = (state) => (
   {
-    form: selectedProjectSelector(state),
-    customers: state.customers
+    form: selectedProjectSelector(state)
   }
 );
 
