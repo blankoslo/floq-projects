@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Project from '../components/project';
-import { updateProject, createProject, fetchCustomers, selectProject } from '../actions/index';
+import { updateProject, createProject,
+  selectProject, updateField, resetForm } from '../actions/index';
+
 import selectedProjectSelector from '../selectors/selectedProject';
 
 class ProjectContainer extends Component {
@@ -12,7 +13,7 @@ class ProjectContainer extends Component {
 
   constructor(props) {
     super(props);
-
+    props.resetForm();
     if (props.params.id !== undefined) {
       const selectedId = parseInt(props.params.id);
       props.selectProject(selectedId);
@@ -20,7 +21,12 @@ class ProjectContainer extends Component {
   }
 
   componentWillReceiveProps(props) {
-    // monitor `id` parameter to keep selected employee in sync
+    if (this.props.params.id !== props.params.id) {
+      // Resetting form when :id changes.
+      // Notice: if you reclick the same element in the list, the form won't reset
+      props.resetForm();
+    }
+
     if (props.params.id !== undefined) {
       const selectedId = parseInt(props.params.id);
       this.props.selectProject(selectedId);
@@ -29,46 +35,67 @@ class ProjectContainer extends Component {
     }
   }
 
-
-  onProjectUpdate = (data) => {
-    if (this.props.project.data === null) {
+  onSubmit = (e) => {
+    e.preventDefault();
+    const data = this.props.form.data;
+    // TODO: Bytte til selected_project?
+    const id = this.props.params.id;
+    if (id === undefined) {
       this.props.createProject(data)
         .then(p => this.context.router.push(`/projects/${p.payload.id}`));
     } else {
-      this.props.updateProject(this.props.project.data.id, data)
-        .then(() => this.context.router.push(`/projects/${this.props.project.data.id}`));
+      this.props.updateProject(id, data);
     }
   }
 
+  onChange = (fieldName, value) => {
+    this.props.updateField(fieldName, value);
+  }
+
   render() {
-    return (
-      <Project
-        project={this.props.project}
-        customers={this.props.customers}
-        onProjectUpdate={this.onProjectUpdate}
-      />
-    );
+    const isNew = this.props.params.id === undefined;
+
+    if (this.props.customers.loading === true ||
+        this.props.form.data === undefined ||
+        this.props.form.loading === true) {
+      return <p>...loading</p>;
+    }
+    const children = React.Children.map(this.props.children,
+      child => React.cloneElement(child, {
+        customers: this.props.customers,
+        onSubmit: this.onSubmit,
+        onChange: this.onChange,
+        form: this.props.form,
+        isNew
+      }));
+
+    return <div>{children}</div>;
   }
 }
 
 ProjectContainer.propTypes = {
-  project: React.PropTypes.object.isRequired,
   customers: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
-  fetchCustomers: React.PropTypes.func,
-  createProject: React.PropTypes.func,
-  updateProject: React.PropTypes.func,
-  selectProject: React.PropTypes.func.isRequired
+  children: React.PropTypes.object.isRequired,
+  form: React.PropTypes.object.isRequired,
+  createProject: React.PropTypes.func.isRequired,
+  updateProject: React.PropTypes.func.isRequired,
+  updateField: React.PropTypes.func.isRequired,
+  selectProject: React.PropTypes.func.isRequired,
+  resetForm: React.PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  project: selectedProjectSelector(state),
-  customers: state.customers
-});
+const mapStateToProps = (state) => (
+  {
+    form: selectedProjectSelector(state),
+    customers: state.customers
+  }
+);
 
 export default connect(mapStateToProps, {
-  fetchCustomers,
   createProject,
   updateProject,
-  selectProject
+  selectProject,
+  updateField,
+  resetForm
 })(ProjectContainer);
