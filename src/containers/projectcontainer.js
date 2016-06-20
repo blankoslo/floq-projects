@@ -38,7 +38,7 @@ class ProjectContainer extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const data = this.props.form.data;
-    // TODO: Bytte til selected_project?
+    // TODO: Use selected_project instead of props.params.id?
     const id = this.props.params.id;
     if (id === undefined) {
       this.props.createProject(data)
