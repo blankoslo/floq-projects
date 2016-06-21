@@ -4,7 +4,7 @@ import expect from 'expect';
 import ProjectEditor from '../src/components/projectEditor';
 import Immutable from 'immutable';
 
-const formData = {
+const form = {
   loading: false,
   data: new Immutable.Map({
     customer: 1,
@@ -12,7 +12,7 @@ const formData = {
   })
 };
 
-const customersData = {
+const customers = {
   loading: false,
   data: new Immutable.Map([
     {
@@ -26,53 +26,39 @@ const customersData = {
   ].map(e => [e.id, e]))
 };
 
+const setup = {
+  form,
+  customers,
+  wrapper: shallow(
+    <ProjectEditor
+      form={form}
+      customers={customers}
+      onSubmit={() => {}}
+      onChange={() => {}}
+      isNew
+    />)
+};
+
 describe('<ProjectEditor />', () => {
   it('contains <input> with value equal to "form.data.name"', () => {
-    const wrapper = shallow(
-      <ProjectEditor
-        form={formData}
-        customers={customersData}
-        onSubmit={() => {}}
-        onChange={() => {}}
-        isNew
-      />);
-
-    expect(wrapper.find('input').props().value).toEqual(formData.data.get('name'));
+    expect(setup.wrapper.find('input').props().value).toEqual(setup.form.data.get('name'));
   });
 
   it('contains <select> with <option> containing all customers + hidden default', () => {
-    const wrapper = shallow(
-      <ProjectEditor
-        form={formData}
-        customers={customersData}
-        onSubmit={() => {}}
-        onChange={() => {}}
-        isNew
-      />);
-
-    expect(wrapper.find('select').props().children.length)
-    .toBe(customersData.data.size + 1);
+    expect(setup.wrapper.find('select').props().children.length)
+    .toBe(setup.customers.data.size + 1);
   });
 
   it('contains <select> with prop "disabled=false" when isNew===true', () => {
-    const wrapper = shallow(
-      <ProjectEditor
-        form={formData}
-        customers={customersData}
-        onSubmit={() => {}}
-        onChange={() => {}}
-        isNew
-      />);
-
-    expect(wrapper.find('select').prop('disabled'))
+    expect(setup.wrapper.find('select').prop('disabled'))
      .toBeFalsy();
   });
 
   it('contains <select> with prop "disabled=true" when isNew===true', () => {
     const wrapper = shallow(
       <ProjectEditor
-        form={formData}
-        customers={customersData}
+        form={setup.form}
+        customers={setup.customers}
         onSubmit={() => {}}
         onChange={() => {}}
         isNew={false}
