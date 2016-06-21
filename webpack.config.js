@@ -9,7 +9,7 @@ module.exports = {
     './src/index.js'
   ],
   output: {
-    path: __dirname + "/dist/js",
+    path: `${__dirname}/dist/js`,
     filename: 'app.bundle.js'
   },
   plugins: [
@@ -20,7 +20,10 @@ module.exports = {
     preLoaders: [{ test: /\.js?$/, loaders: ['eslint'] }],
     loaders: [
         { test: /\.less$/, loader: 'style!css!less' },
-        { test: /\.js$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/, include: __dirname }
+        { test: /\.js$/,
+          loaders: ['react-hot', 'babel'],
+          exclude: /node_modules/,
+          include: __dirname }
     ]
   }
 };
