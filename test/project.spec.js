@@ -27,7 +27,7 @@ const customersData = {
 };
 
 describe('<ProjectEditor />', () => {
-  it('input contains name as in specified object', () => {
+  it('contains <input> with value equal to "form.data.name"', () => {
     const wrapper = shallow(
       <ProjectEditor
         form={formData}
@@ -40,7 +40,7 @@ describe('<ProjectEditor />', () => {
     expect(wrapper.find('input').props().value).toEqual(formData.data.get('name'));
   });
 
-  it('select-field contains all customers + hidden default', () => {
+  it('contains <select> with <option> containing all customers + hidden default', () => {
     const wrapper = shallow(
       <ProjectEditor
         form={formData}
