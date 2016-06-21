@@ -53,4 +53,32 @@ describe('<ProjectEditor />', () => {
     expect(wrapper.find('select').props().children.length)
     .toBe(customersData.data.size + 1);
   });
+
+  it('contains <select> with prop "disabled=false" when isNew===true', () => {
+    const wrapper = shallow(
+      <ProjectEditor
+        form={formData}
+        customers={customersData}
+        onSubmit={() => {}}
+        onChange={() => {}}
+        isNew
+      />);
+
+    expect(wrapper.find('select').prop('disabled'))
+     .toBeFalsy();
+  });
+
+  it('contains <select> with prop "disabled=true" when isNew===true', () => {
+    const wrapper = shallow(
+      <ProjectEditor
+        form={formData}
+        customers={customersData}
+        onSubmit={() => {}}
+        onChange={() => {}}
+        isNew={false}
+      />);
+
+    expect(wrapper.find('select').prop('disabled'))
+     .toBeTruthy();
+  });
 });
