@@ -89,4 +89,10 @@ describe('<ProjectEditor />', () => {
     wrapper.find('form').simulate('submit');
     expect(actions.onSubmit.calls.length).toEqual(1);
   });
+
+  it('contains <input> that triggers onChange function when edited', () => {
+    const { wrapper, actions } = setup();
+    wrapper.find('input').simulate('change', { target: { value: 'test_new_value' } });
+    expect(actions.onChange.calls.length).toEqual(1);
+  });
 });
