@@ -97,4 +97,11 @@ describe('<ProjectEditor />', () => {
     expect(actions.onChange.calls.length).toEqual(1);
     expect(actions.onChange.calls[0].arguments).toEqual(['name', valueUnderTest]);
   });
+
+  it('contains <select> that triggers onChange function when edited', () => {
+    const { wrapper, actions } = setup();
+    wrapper.find('select').simulate('change', { target: { value: 1 } });
+    expect(actions.onChange.calls.length).toEqual(1);
+    expect(actions.onChange.calls[0].arguments).toEqual(['customer', 1]);
+  });
 });
