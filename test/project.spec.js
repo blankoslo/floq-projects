@@ -81,4 +81,12 @@ describe('<ProjectEditor />', () => {
     expect(wrapper.find('select').prop('disabled'))
      .toBeTruthy();
   });
+
+  it('contains <form> that triggers onSubmit function when submitted', () => {
+    // Enzyme lacks event propagation (simulate()) for shallow tests.
+    // Ideally we want to simulate click button which again triggers form's submit
+    const { wrapper, actions } = setup();
+    wrapper.find('form').simulate('submit');
+    expect(actions.onSubmit.calls.length).toEqual(1);
+  });
 });
