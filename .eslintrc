@@ -1,7 +1,12 @@
 {
   "extends": "airbnb",
   "globals": {
-  	"apiToken"
+    "apiToken",
+    "config",
+    "describe",
+    "it",
+    "expect",
+    "beforeEach"
   },
   "parser": "babel-eslint",
   "rules": {

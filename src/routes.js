@@ -1,21 +1,17 @@
 import React from 'react';
-import { Route, Router } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
-import ProjectContainer from './containers/projectcontainer.js';
-
-const ProjectEditor = () =>
-  <div>
-    <p>
-      Projeskteditor
-    </p>
-  </div>;
-
+import App from './containers/app';
+import ProjectContainer from './containers/projectcontainer';
+import ProjectEditor from './components/projectEditor';
 
 export default (
-  <Router>
-    <Route path='/projects' component={ProjectContainer}>
-      <Route path=':id' component={ProjectEditor} />
-      <Route path='new' component={ProjectEditor} />
+  <Route path='/projects' component={App} >
+    <Route path='new' component={ProjectContainer} >
+      <IndexRoute component={ProjectEditor} />
     </Route>
-  </Router>
+    <Route path=':id' component={ProjectContainer} >
+      <IndexRoute component={ProjectEditor} />
+    </Route>
+  </Route>
 );
