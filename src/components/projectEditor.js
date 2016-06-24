@@ -6,6 +6,12 @@ const ProjectEditor = (props) => {
 
   customerElements.push(<option disabled hidden key='-1' value='-1'></option>);
 
+  let billableElements = [{ id: true, name: 'Ja' }, { id: false, name: 'Nei' }]
+    .map((c) =>
+      <option key={c.id} value={c.id}>{c.name}</option>);
+
+  billableElements.push(<option disabled hidden key='-1' value='-1'></option>);
+
   return (
     <div>
       <form onSubmit={props.onSubmit}>
@@ -26,6 +32,17 @@ const ProjectEditor = (props) => {
               props.onChange('name', e.target.value);
             }}
           />
+        </div>
+        <div>
+          <label>Fakturerbar: </label>
+          <select
+            value={props.form.data.get('billable')}
+            onChange={(e) => {
+              props.onChange('billable', e.target.value);
+            }}
+          >
+            {billableElements}
+          </select>
         </div>
         <div>
           <label>Kunde: </label>
