@@ -10,6 +10,14 @@ const ProjectEditor = (props) => {
     <div>
       <form onSubmit={props.onSubmit}>
         <div>
+          <label>Prosjektkode: </label>
+          <input
+            type='text'
+            value={props.form.data.get('id')}
+            disabled
+          />
+        </div>
+        <div>
           <label>Prosjekt: </label>
           <input
             type='text'
