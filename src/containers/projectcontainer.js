@@ -15,7 +15,7 @@ class ProjectContainer extends Component {
     super(props);
     props.resetForm();
     if (props.params.id !== undefined) {
-      const selectedId = parseInt(props.params.id);
+      const selectedId = props.params.id;
       props.selectProject(selectedId);
     }
   }
@@ -28,7 +28,7 @@ class ProjectContainer extends Component {
     }
 
     if (props.params.id !== undefined) {
-      const selectedId = parseInt(props.params.id);
+      const selectedId = props.params.id;
       this.props.selectProject(selectedId);
     } else {
       this.props.selectProject(null);
