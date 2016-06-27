@@ -20,7 +20,13 @@ const ProjectEditor = (props) => {
           <input
             type='text'
             value={props.form.data.get('id')}
-            disabled
+            onChange={(e) => {
+              if (props.isNew) {
+                props.onChange('id', e.target.value);
+              }
+            }}
+            disabled={!props.isNew}
+            id='id-form'
           />
         </div>
         <div>
@@ -31,6 +37,7 @@ const ProjectEditor = (props) => {
             onChange={(e) => {
               props.onChange('name', e.target.value);
             }}
+            id='name-form'
           />
         </div>
         <div>
@@ -40,6 +47,7 @@ const ProjectEditor = (props) => {
             onChange={(e) => {
               props.onChange('billable', e.target.value);
             }}
+            id='billable-form'
           >
             {billableElements}
           </select>
@@ -52,6 +60,7 @@ const ProjectEditor = (props) => {
             onChange={(e) => {
               props.onChange('customer', e.target.value);
             }}
+            id='customer-form'
           >
             {customerElements}
           </select>
