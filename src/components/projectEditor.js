@@ -6,9 +6,9 @@ const ProjectEditor = (props) => {
 
   customerElements.push(<option disabled hidden key='-1' value='-1'></option>);
 
-  let billableElements = [{ id: true, name: 'Ja' }, { id: false, name: 'Nei' }]
+  let billableElements = [{ value: true, name: 'Ja' }, { value: false, name: 'Nei' }]
     .map((c) =>
-      <option key={c.id} value={c.id}>{c.name}</option>);
+      <option key={c.value} value={c.value}>{c.name}</option>);
 
   billableElements.push(<option disabled hidden key='-1' value='-1'></option>);
 
