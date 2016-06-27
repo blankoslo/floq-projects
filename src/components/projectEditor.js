@@ -6,9 +6,29 @@ const ProjectEditor = (props) => {
 
   customerElements.push(<option disabled hidden key='-1' value='-1'></option>);
 
+  let billableElements = [{ value: true, name: 'Ja' }, { value: false, name: 'Nei' }]
+    .map((c) =>
+      <option key={c.value} value={c.value}>{c.name}</option>);
+
+  billableElements.push(<option disabled hidden key='-1' value='-1'></option>);
+
   return (
     <div>
       <form onSubmit={props.onSubmit}>
+        <div>
+          <label>Prosjektkode: </label>
+          <input
+            type='text'
+            value={props.form.data.get('id')}
+            onChange={(e) => {
+              if (props.isNew) {
+                props.onChange('id', e.target.value);
+              }
+            }}
+            disabled={!props.isNew}
+            id='id-form'
+          />
+        </div>
         <div>
           <label>Prosjekt: </label>
           <input
@@ -17,7 +37,20 @@ const ProjectEditor = (props) => {
             onChange={(e) => {
               props.onChange('name', e.target.value);
             }}
+            id='name-form'
           />
+        </div>
+        <div>
+          <label>Fakturerbar: </label>
+          <select
+            value={props.form.data.get('billable')}
+            onChange={(e) => {
+              props.onChange('billable', e.target.value);
+            }}
+            id='billable-form'
+          >
+            {billableElements}
+          </select>
         </div>
         <div>
           <label>Kunde: </label>
@@ -27,6 +60,7 @@ const ProjectEditor = (props) => {
             onChange={(e) => {
               props.onChange('customer', e.target.value);
             }}
+            id='customer-form'
           >
             {customerElements}
           </select>
