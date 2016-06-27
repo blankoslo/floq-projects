@@ -106,4 +106,41 @@ describe('<ProjectEditor />-form', () => {
     expect(actions.onChange.calls.length).toEqual(1);
     expect(actions.onChange.calls[0].arguments).toEqual(['customer', 1]);
   });
+
+  it('contains id(<input>), when isNew===true expect enabled', () => {
+    const { wrapper } = setup();
+    expect(wrapper.find('#id-form').prop('disabled')).toBeFalsy();
+  });
+
+  it('contains id(<input>), when isNew===false expect disabled', () => {
+    const { customers, form } = setup();
+    const wrapper = shallow(
+      <ProjectEditor
+        form={form}
+        customers={customers}
+        onSubmit={() => {}}
+        onChange={() => {}}
+        isNew={false}
+      />);
+
+    expect(wrapper.find('#id-form').prop('disabled')).toBeTruthy();
+  });
+
+  it('contains id(<input>) with value equal to "form.data.id"', () => {
+    const { wrapper, form } = setup();
+    expect(wrapper.find('#id-form').prop('value')).toEqual(form.data.get('id'));
+  });
+
+  it('contains billable(<select>) with expected value', () => {
+    const { wrapper, form } = setup();
+    expect(wrapper.find('#billable-form').prop('value'))
+    .toEqual(form.data.get('billable'));
+  });
+
+  it('contains billable(<select>) with <option> containing yes/no', () => {
+    const { wrapper } = setup();
+    expect(wrapper.find('#billable-form').text())
+    .toContain('Ja')
+    .toContain('Nei');
+  });
 });
