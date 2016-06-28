@@ -16,7 +16,7 @@ const getProject = (projects, selectedProject, form) => {
     return {
       loading: false,
       data: new Immutable.Map({ name: '', customer: -1, id: '', billable: false })
-      .merge(form.data)
+        .merge(form.data)
     };
   }
   // view/edit project
