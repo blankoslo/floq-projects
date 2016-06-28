@@ -16,18 +16,18 @@ const ProjectEditor = (props) => {
     <div>
       <form onSubmit={props.onSubmit}>
         <div>
-          <label>Prosjektkode: </label>
-          <input
-            type='text'
-            value={props.form.data.get('id')}
-            onChange={(e) => {
-              if (props.isNew) {
-                props.onChange('id', e.target.value);
-              }
-            }}
+          <label>Kunde: </label>
+          <select
             disabled={!props.isNew}
-            id='id-form'
-          />
+            value={props.form.data.get('customer')}
+            onChange={(e) => {
+              props.onChange('customer', e.target.value);
+              props.onChange('id', props.generateProjectId(parseInt(e.target.value)));
+            }}
+            id='customer-form'
+          >
+            {customerElements}
+          </select>
         </div>
         <div>
           <label>Prosjekt: </label>
@@ -53,17 +53,18 @@ const ProjectEditor = (props) => {
           </select>
         </div>
         <div>
-          <label>Kunde: </label>
-          <select
-            disabled={!props.isNew}
-            value={props.form.data.get('customer')}
+          <label>Prosjektkode: </label>
+          <input
+            type='text'
+            value={props.form.data.get('id')}
             onChange={(e) => {
-              props.onChange('customer', e.target.value);
+              if (props.isNew) {
+                props.onChange('id', e.target.value);
+              }
             }}
-            id='customer-form'
-          >
-            {customerElements}
-          </select>
+            disabled={!props.isNew}
+            id='id-form'
+          />
         </div>
         <button
           className='mdl-button mdl-js-button mdl-button--raised mdl-button--colored'
@@ -80,6 +81,7 @@ ProjectEditor.propTypes = {
   customers: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   onChange: React.PropTypes.func,
+  generateProjectId: React.PropTypes.func,
   form: React.PropTypes.object,
   isNew: React.PropTypes.bool
 };

@@ -10,11 +10,13 @@ const getProject = (projects, selectedProject, form) => {
   if (projects.loading) {
     return { loading: true, data: null };
   }
+
   // projects/new
   if (selectedProject === null) {
     return {
       loading: false,
-      data: new Immutable.Map({ name: '', customer: -1, id: '', billable: false }).merge(form.data)
+      data: new Immutable.Map({ name: '', customer: -1, id: '', billable: false })
+        .merge(form.data)
     };
   }
   // view/edit project
