@@ -22,6 +22,7 @@ const ProjectEditor = (props) => {
             value={props.form.data.get('customer')}
             onChange={(e) => {
               props.onChange('customer', e.target.value);
+              props.onChange('id', props.generateProjectId(parseInt(e.target.value)));
             }}
             id='customer-form'
           >
@@ -80,6 +81,7 @@ ProjectEditor.propTypes = {
   customers: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   onChange: React.PropTypes.func,
+  generateProjectId: React.PropTypes.func,
   form: React.PropTypes.object,
   isNew: React.PropTypes.bool
 };

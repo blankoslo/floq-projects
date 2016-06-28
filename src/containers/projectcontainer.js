@@ -52,6 +52,21 @@ class ProjectContainer extends Component {
     this.props.updateField(fieldName, value);
   }
 
+  generateProjectId = (customerId) => {
+    const prefix = this.props.customers.data.get(customerId).name
+      .substring(0, 3)
+      .toUpperCase();
+
+    const nextId = this.props.projects.data.toSeq()
+    .filter(project => project.customer.id === customerId)
+    .reduce((previousId, currentProject) => {
+      const currentNumber = parseInt(currentProject.id.replace(/.*\D/g, ''));
+      return currentNumber >= previousId ? currentNumber + 1 : previousId;
+    }, 1000);
+
+    return `${prefix}${nextId === undefined ? '' : nextId}`;
+  };
+
   render() {
     const isNew = this.props.params.id === undefined;
 
@@ -64,6 +79,7 @@ class ProjectContainer extends Component {
         customers: this.props.customers,
         onSubmit: this.onSubmit,
         onChange: this.onChange,
+        generateProjectId: this.generateProjectId,
         form: this.props.form,
         isNew
       }));
@@ -74,6 +90,7 @@ class ProjectContainer extends Component {
 
 ProjectContainer.propTypes = {
   customers: React.PropTypes.object.isRequired,
+  projects: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
   children: React.PropTypes.object.isRequired,
   createProject: React.PropTypes.func.isRequired,

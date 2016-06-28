@@ -20,11 +20,11 @@ const setup = () => {
     loading: false,
     data: new Immutable.Map([
       {
-        id: 1,
+        id: 'TEST1000',
         name: 'test_customer_one'
       },
       {
-        id: 2,
+        id: 'TEST1001',
         name: 'test_customer_two'
       }
     ].map(e => [e.id, e]))
@@ -32,7 +32,8 @@ const setup = () => {
 
   const actions = {
     onSubmit: expect.createSpy(),
-    onChange: expect.createSpy()
+    onChange: expect.createSpy(),
+    generateProjectId: expect.createSpy()
   };
 
   const wrapper = shallow(
@@ -41,6 +42,7 @@ const setup = () => {
       customers={customers}
       onSubmit={actions.onSubmit}
       onChange={actions.onChange}
+      generateProjectId={actions.generateProjectId}
       isNew
     />);
 
@@ -103,7 +105,8 @@ describe('<ProjectEditor />-form', () => {
   it('contains customer(<select>) that triggers onChange function when edited', () => {
     const { wrapper, actions } = setup();
     wrapper.find('#customer-form').simulate('change', { target: { value: 1 } });
-    expect(actions.onChange.calls.length).toEqual(1);
+    expect(actions.onChange.calls.length).toEqual(2);
+    // TODO: order shouldn't matter.
     expect(actions.onChange.calls[0].arguments).toEqual(['customer', 1]);
   });
 
