@@ -58,11 +58,11 @@ class ProjectContainer extends Component {
       .toUpperCase();
 
     const nextId = this.props.projects.data.toSeq()
-    .filter(project => project.customer.id === customerId)
-    .reduce((previousId, currentProject) => {
-      const currentNumber = parseInt(currentProject.id.replace(/.*\D/g, ''));
-      return currentNumber >= previousId ? currentNumber + 1 : previousId;
-    }, 1000);
+      .filter(project => project.customer.id === customerId)
+      .reduce((previousId, currentProject) => {
+        const currentNumber = parseInt(currentProject.id.replace(/.*\D/g, ''));
+        return currentNumber >= previousId ? currentNumber + 1 : previousId;
+      }, 1000);
 
     return `${prefix}${nextId === undefined ? '' : nextId}`;
   };
