@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomerDialog from '../containers/customerDialog';
 
 const ProjectEditor = (props) => {
   let customerElements = props.customers.data.valueSeq().map((c) =>
@@ -17,22 +18,27 @@ const ProjectEditor = (props) => {
 
   return (
     <div>
-      <form onSubmit={props.onSubmit}>
-        <div>
-          <label>Kunde: </label>
-          <select
-            disabled={!props.isNew}
-            value={props.form.data.get('customer')}
-            onChange={(e) => {
-              props.onChange('customer', e.target.value);
-              props.onChange('id', props.generateProjectId(parseInt(e.target.value)));
-            }}
-            id='customer-form'
-          >
+      <form style={{ width: '100%' }} onSubmit={props.onSubmit}>
+        <div className='mdl-grid'>
+          <div className='mdl-cell mdl-cell--4-col' >
+            <label>Kunde: </label>
+            <select
+              disabled={!props.isNew}
+              value={props.form.data.get('customer')}
+              onChange={(e) => {
+                props.onChange('customer', e.target.value);
+                props.onChange('id', props.generateProjectId(parseInt(e.target.value)));
+              }}
+              id='customer-form'
+            >
             {customerElements}
-          </select>
+            </select>
+          </div>
+          <div className='mdl-cell mdl-cell--3-col'>
+            <CustomerDialog />
+          </div>
         </div>
-        <div>
+        <div className='mdl-grid'>
           <label>Prosjekt: </label>
           <input
             type='text'
@@ -43,31 +49,35 @@ const ProjectEditor = (props) => {
             id='name-form'
           />
         </div>
-        <div>
-          <label>Fakturerbar: </label>
-          <select
-            value={props.form.data.get('billable')}
-            onChange={(e) => {
-              props.onChange('billable', e.target.value);
-            }}
-            id='billable-form'
-          >
-            {billableElements}
-          </select>
+        <div className='mdl-grid'>
+          <div className='mdl-cell mdl-cell--4-col'>
+            <label>Fakturerbar: </label>
+            <select
+              value={props.form.data.get('billable')}
+              onChange={(e) => {
+                props.onChange('billable', e.target.value);
+              }}
+              id='billable-form'
+            >
+              {billableElements}
+            </select>
+          </div>
         </div>
-        <div>
-          <label>Prosjektkode: </label>
-          <input
-            type='text'
-            value={props.form.data.get('id')}
-            onChange={(e) => {
-              if (props.isNew) {
-                props.onChange('id', e.target.value);
-              }
-            }}
-            disabled={!props.isNew}
-            id='id-form'
-          />
+        <div className='mdl-grid'>
+          <div className='mdl-cell mdl-cell--4-col'>
+            <label>Prosjektkode: </label>
+            <input
+              type='text'
+              value={props.form.data.get('id')}
+              onChange={(e) => {
+                if (props.isNew) {
+                  props.onChange('id', e.target.value);
+                }
+              }}
+              disabled={!props.isNew}
+              id='id-form'
+            />
+          </div>
         </div>
         <button
           className='mdl-button mdl-js-button mdl-button--raised mdl-button--colored'

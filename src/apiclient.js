@@ -38,3 +38,9 @@ export const createProject = body => fetch(`${baseURL}/projects`, {
 export const getCustomers = () => fetch(`${baseURL}/customers`, {
   headers
 }).then(response => response.json());
+
+export const createCustomer = body => fetch(`${baseURL}/customers`, {
+  method: 'POST',
+  headers: dataHeaders,
+  body: JSON.stringify(body)
+}).then(response => response.json());
