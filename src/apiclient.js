@@ -1,12 +1,18 @@
 import 'whatwg-fetch';
 
-const baseURL = config.apiUri;
+// resolving this lazily because of tests
+const baseURL = () => (
+  window && window.config && window.config.apiUri
+    ? window.config.apiUri :
+    'http://192.81.222.35:3001'
+);
 
-const headers = {
+// resolving this lazily because of tests
+const headers = () => ({
   Authorization: `Bearer ${apiToken}`,
   Prefer: 'return=representation', // ask for the updated entity after modifications (e.g. PATCH)
   Accept: 'application/json'
-};
+});
 
 const dataHeaders = Object.assign({}, headers, {
   'Content-Type': 'application/json; charset=utf-8'
