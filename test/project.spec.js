@@ -143,7 +143,8 @@ describe('<ProjectEditor />-form', () => {
   it('contains billable(<select>) with <option> containing yes/no', () => {
     const { wrapper } = setup();
     expect(wrapper.find('#billable-form').text())
-    .toContain('Ja')
-    .toContain('Nei');
+    .toContain('Fakturerbart prosjekt')
+    .toContain('Ikke-fakturerbart prosjekt')
+    .toContain('Utilgjengelig tid');
   });
 });
