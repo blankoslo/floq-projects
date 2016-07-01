@@ -15,7 +15,7 @@ const getProject = (projects, selectedProject, form) => {
   if (selectedProject === null) {
     return {
       loading: false,
-      data: new Immutable.Map({ name: '', customer: -1, id: '', billable: false })
+      data: new Immutable.Map({ name: '', customer: -1, id: '', billable: 'billable' })
         .merge(form.data)
     };
   }
