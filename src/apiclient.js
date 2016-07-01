@@ -1,18 +1,20 @@
 import 'whatwg-fetch';
 
 // resolving this lazily because of tests
-const baseURL = () => (
-  window && window.config && window.config.apiUri
-    ? window.config.apiUri :
-    'http://192.81.222.35:3001'
-);
+const baseURL =
+  typeof window !== 'undefined' && window.config && window.config.apiUri
+    ? window.config.apiUri : 'https://api-dev.floq.no';
+
+const apiToken =
+  typeof window !== 'undefined' && window.apiToken
+    ? window.apiToken : 'dev-secret-shhh';
 
 // resolving this lazily because of tests
-const headers = () => ({
+const headers = {
   Authorization: `Bearer ${apiToken}`,
   Prefer: 'return=representation', // ask for the updated entity after modifications (e.g. PATCH)
   Accept: 'application/json'
-});
+};
 
 const dataHeaders = Object.assign({}, headers, {
   'Content-Type': 'application/json; charset=utf-8'
