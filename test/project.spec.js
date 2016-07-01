@@ -12,7 +12,7 @@ const setup = () => {
       customer: 1,
       name: 'test_project_one',
       id: 1,
-      billable: true
+      billable: 'billable'
     })
   };
 
