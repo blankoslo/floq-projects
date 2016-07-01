@@ -34,9 +34,14 @@ const ProjectEditor = (props) => {
             {customerElements}
             </select>
           </div>
-          <div className='mdl-cell mdl-cell--3-col'>
-            <CustomerDialog />
-          </div>
+          {
+            props.isNew ?
+              <div className='mdl-cell mdl-cell--3-col'>
+                <CustomerDialog />
+              </div>
+              : null
+          }
+
         </div>
         <div className='mdl-grid'>
           <label>Prosjekt: </label>
