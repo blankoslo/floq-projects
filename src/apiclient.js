@@ -1,6 +1,5 @@
 import 'whatwg-fetch';
 
-// resolving this lazily because of tests
 const baseURL =
   typeof window !== 'undefined' && window.config && window.config.apiUri
     ? window.config.apiUri : 'https://api-dev.floq.no';
@@ -9,7 +8,6 @@ const apiToken =
   typeof window !== 'undefined' && window.apiToken
     ? window.apiToken : 'dev-secret-shhh';
 
-// resolving this lazily because of tests
 const headers = {
   Authorization: `Bearer ${apiToken}`,
   Prefer: 'return=representation', // ask for the updated entity after modifications (e.g. PATCH)
