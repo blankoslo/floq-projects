@@ -6,7 +6,7 @@
     "start": "webpack-dev-server",
     "dist": "webpack --config ./webpack-prod.config.js",
     "lint": "eslint src",
-    "test": "NODE_ENV=test mocha --compilers js:babel-core/register \"test/**/*.spec.js\"",
+    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register",
     "test:watch": "npm test -- --watch"
   },
   "author": "",
