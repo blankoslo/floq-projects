@@ -7,7 +7,8 @@ import { FETCH_PROJECTS,
          CREATE_PROJECT,
          FETCH_CUSTOMERS,
          FORM_UPDATE_VALUE,
-         FORM_RESET } from '../actions/index';
+         FORM_RESET,
+         CREATE_CUSTOMER } from '../actions/index';
 
 const projectsReducer = (previousState = {
   loading: true,
@@ -55,6 +56,11 @@ const customersReducer = (previousState = { loading: true, data: new Immutable.M
         loading: false,
         data: new Immutable.Map(action.payload.map(e => [e.id, e]))
       };
+    case CREATE_CUSTOMER:
+      return {
+        loading: false,
+        data: previousState.data.set(action.payload.id, action.payload)
+      };
     default:
       return previousState;
   }
@@ -75,11 +81,16 @@ const formReducer = (previousState = defaultForm, action) => {
         data: previousState.data.merge(action.payload)
       };
     }
+    case CREATE_CUSTOMER:
+      return {
+        loading: false,
+        data: previousState.data.set('customer', action.payload.id)
+        .set('id', `${action.payload.name.substring(0, 3).toUpperCase()}1000`)
+      };
     default:
       return previousState;
   }
 };
-
 
 const rootReducer = combineReducers({
   projects: projectsReducer,
