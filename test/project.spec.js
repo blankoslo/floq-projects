@@ -86,14 +86,6 @@ describe('<ProjectEditor />-form', () => {
      .toBeTruthy();
   });
 
-  it('contains <form> that triggers onSubmit function when submitted', () => {
-    // Enzyme lacks event propagation (simulate()) for shallow tests.
-    // Ideally we want to simulate click button which again triggers form's submit
-    const { wrapper, actions } = setup();
-    wrapper.find('form').simulate('submit');
-    expect(actions.onSubmit.calls.length).toEqual(1);
-  });
-
   it('contains id(<input>), when isNew===true expect enabled', () => {
     const { wrapper } = setup();
     expect(wrapper.find('#id-form').prop('disabled')).toBeFalsy();
@@ -132,6 +124,14 @@ describe('<ProjectEditor />-form', () => {
     .toContain('Fakturerbart prosjekt')
     .toContain('Ikke-fakturerbart prosjekt')
     .toContain('Utilgjengelig tid');
+  });
+
+  it('contains <form> that triggers onSubmit function when submitted', () => {
+    // Enzyme lacks event propagation (simulate()) for shallow tests.
+    // Ideally we want to simulate click button which again triggers form's submit
+    const { wrapper, actions } = setup();
+    wrapper.find('form').simulate('submit');
+    expect(actions.onSubmit.calls.length).toEqual(1);
   });
 
   it('contains customer(<select>) that triggers onChange function when edited', () => {
