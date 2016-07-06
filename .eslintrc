@@ -13,6 +13,7 @@
     "comma-dangle": 0,
     "id-length": 0,
     "jsx-quotes": [2, "prefer-single"],
+    "no-extra-parens": 0,
     "radix": 0,
   }
 }
