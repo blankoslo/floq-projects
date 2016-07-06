@@ -15,7 +15,6 @@ class CustomerDialog extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     this.props.createCustomer({ name: this.state.value });
-    // this.props.generateProjectId(parseInt(this.state.value));
     this.handleClose();
   };
 
