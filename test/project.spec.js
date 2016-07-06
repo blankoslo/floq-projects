@@ -11,7 +11,7 @@ const setup = () => {
     data: new Immutable.Map({
       customer: 1,
       name: 'test_project_one',
-      id: 1,
+      id: 'TEST1000',
       billable: 'billable'
     })
   };
@@ -20,11 +20,11 @@ const setup = () => {
     loading: false,
     data: new Immutable.Map([
       {
-        id: 'TEST1000',
+        id: 1,
         name: 'test_customer_one'
       },
       {
-        id: 'TEST1001',
+        id: 2,
         name: 'test_customer_two'
       }
     ].map(e => [e.id, e]))
@@ -60,10 +60,10 @@ describe('<ProjectEditor />-form', () => {
     expect(wrapper.find('#name-form').props().value).toEqual(form.data.get('name'));
   });
 
-  it('contains customer(<select>) with <option> containing all customers + hidden default', () => {
+  it('contains customer(<select>) with <option> containing all customers', () => {
     const { wrapper, customers } = setup();
     expect(wrapper.find('#customer-form').props().children.length)
-    .toBe(customers.data.size + 1);
+    .toBe(customers.data.size);
   });
 
   it('contains customer(<select>) without prop "disabled" when isNew===true', () => {
@@ -92,22 +92,6 @@ describe('<ProjectEditor />-form', () => {
     const { wrapper, actions } = setup();
     wrapper.find('form').simulate('submit');
     expect(actions.onSubmit.calls.length).toEqual(1);
-  });
-
-  it('contains name(<input>) that triggers onChange function when edited', () => {
-    const { wrapper, actions } = setup();
-    const valueUnderTest = 'test_new_value';
-    wrapper.find('#name-form').simulate('change', { target: { value: valueUnderTest } });
-    expect(actions.onChange.calls.length).toEqual(1);
-    expect(actions.onChange.calls[0].arguments).toEqual(['name', valueUnderTest]);
-  });
-
-  it('contains customer(<select>) that triggers onChange function when edited', () => {
-    const { wrapper, actions } = setup();
-    wrapper.find('#customer-form').simulate('change', { target: { value: 1 } });
-    expect(actions.onChange.calls.length).toEqual(2);
-    // TODO: order shouldn't matter.
-    expect(actions.onChange.calls[0].arguments).toEqual(['customer', 1]);
   });
 
   it('contains id(<input>), when isNew===true expect enabled', () => {
@@ -140,11 +124,25 @@ describe('<ProjectEditor />-form', () => {
     .toEqual(form.data.get('billable'));
   });
 
-  it('contains billable(<select>) with <option> containing yes/no', () => {
+  it('contains billable(<select>) with expected <option>\'s', () => {
     const { wrapper } = setup();
-    expect(wrapper.find('#billable-form').text())
+    // TODO: Not satisfied with explicit call to props and primaryText-property
+    // The test should not need to know such implementation details.
+    expect(wrapper.find('#billable-form').children().map(n => n.props().primaryText))
     .toContain('Fakturerbart prosjekt')
     .toContain('Ikke-fakturerbart prosjekt')
     .toContain('Utilgjengelig tid');
+  });
+
+  it('contains customer(<select>) that triggers onChange function when edited', () => {
+    const { wrapper, actions } = setup();
+    wrapper.find('#customer-form').simulate('change', { target: { value: 1 } });
+    expect(actions.onChange.calls.length).toEqual(2);
+  });
+
+  it('contains name(<input>) that triggers onChange function when edited', () => {
+    const { wrapper, actions } = setup();
+    wrapper.find('#name-form').simulate('change', { target: { value: 'test_new_value' } });
+    expect(actions.onChange.calls.length).toEqual(1);
   });
 });

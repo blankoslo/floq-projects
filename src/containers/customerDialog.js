@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 import { createCustomer } from '../actions';
 
@@ -18,8 +19,8 @@ class CustomerDialog extends Component {
     this.handleClose();
   };
 
-  onChange = (e) => {
-    this.setState({ value: e.target.value });
+  onChange = (event, index, value) => {
+    this.setState({ value });
   };
 
   handleClose = () => {
@@ -33,7 +34,13 @@ class CustomerDialog extends Component {
   render() {
     return (
       <div>
-        <RaisedButton label='Opprett ny kunde' onTouchTap={this.handleOpen} />
+        <RaisedButton
+          type='button'
+          onTouchTap={this.handleOpen}
+          label={'Opprett ny kunde'}
+          fullWidth
+          style={{ width: 180 }}
+        />
         <Dialog
           title='Opprett ny kunde'
           modal
@@ -42,9 +49,10 @@ class CustomerDialog extends Component {
         >
           <form onSubmit={this.onSubmit}>
             <div>
-              <label>Kundenavn: </label>
-              <input
+              <TextField
                 type='text'
+                floatingLabelFixed={false}
+                floatingLabelText={'Kundenavn:'}
                 onChange={this.onChange}
                 value={this.state.value}
               />
@@ -58,7 +66,7 @@ class CustomerDialog extends Component {
           />
           <FlatButton
             label='Avbryt'
-            primary
+            secondary
             onTouchTap={this.handleClose}
           />
         </Dialog>
