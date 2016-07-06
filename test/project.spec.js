@@ -142,11 +142,27 @@ describe('<ProjectEditor />-form', () => {
     expect(actions.onChange.calls[0].arguments).toEqual(['customer', 1]);
   });
 
+  it('contains billable(<select>) that triggers onChange function when edited', () => {
+    const { wrapper, actions } = setup();
+    // material-ui SelectField-component has a custom onChange event (event, key, value)
+    wrapper.find('#billable-form').simulate('change', 'event-filler', 'key-filler', 'billable');
+    expect(actions.onChange.calls.length).toEqual(1);
+    expect(actions.onChange.calls[0].arguments).toEqual(['billable', 'billable']);
+  });
+
   it('contains name(<input>) that triggers onChange function when edited', () => {
     const { wrapper, actions } = setup();
     const valueUnderTest = 'test_new_value';
     wrapper.find('#name-form').simulate('change', { target: { value: valueUnderTest } });
     expect(actions.onChange.calls.length).toEqual(1);
     expect(actions.onChange.calls[0].arguments).toEqual(['name', valueUnderTest]);
+  });
+
+  it('contains id(<input>) that triggers onChange function when edited', () => {
+    const { wrapper, actions } = setup();
+    const valueUnderTest = 'test_new_value';
+    wrapper.find('#id-form').simulate('change', { target: { value: valueUnderTest } });
+    expect(actions.onChange.calls.length).toEqual(1);
+    expect(actions.onChange.calls[0].arguments).toEqual(['id', valueUnderTest]);
   });
 });
