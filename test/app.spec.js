@@ -65,8 +65,13 @@ const setup = () => {
 };
 
 describe('<App />', () => {
-  it('contains detail-view class without children', () => {
+  it('contains jsx-div', () => {
     const { wrapper } = setup();
-    expect(wrapper.find('.detail-view').props().children).toEqual(undefined);
+    expect(wrapper.contains(<div />)).toBeTruthy();
+  });
+
+  it('contains html with specified customer', () => {
+    const { wrapper } = setup();
+    expect(wrapper.html()).toContain('test_customer_one');
   });
 });
