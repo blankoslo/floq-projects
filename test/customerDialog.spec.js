@@ -13,7 +13,7 @@ import configureMockStore from 'redux-mock-store';
 // Needed because of the touchTap event
 injectTapEventPlugin();
 
-// setup is a function, so that each call gets it's own objects (mutable state)
+// setup is a function, so that each call gets its own objects (mutable state)
 const setup = () => {
   const wrapper = mount(
     <Provider store={configureMockStore([])({})}>
