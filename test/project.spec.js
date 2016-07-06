@@ -136,8 +136,10 @@ describe('<ProjectEditor />-form', () => {
 
   it('contains customer(<select>) that triggers onChange function when edited', () => {
     const { wrapper, actions } = setup();
-    wrapper.find('#customer-form').simulate('change', { target: { value: 1 } });
+    // material-ui SelectField-component has a custom onChange event (event, key, value)
+    wrapper.find('#customer-form').simulate('change', 'event-filler', 'key-filler', 1);
     expect(actions.onChange.calls.length).toEqual(2);
+    expect(actions.onChange.calls[0].arguments).toEqual(['customer', 1]);
   });
 
   it('contains name(<input>) that triggers onChange function when edited', () => {
