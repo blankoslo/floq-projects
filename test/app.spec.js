@@ -16,7 +16,7 @@ after(() => {
   fetchMock.restore();
 });
 
-// setup is a function, so that each call gets it's own objects (mutable state)
+// setup is a function, so that each call gets its own objects (mutable state)
 const setup = () => {
   const params = {
     id: 1
