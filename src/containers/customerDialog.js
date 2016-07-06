@@ -19,8 +19,8 @@ class CustomerDialog extends Component {
     this.handleClose();
   };
 
-  onChange = (event, index, value) => {
-    this.setState({ value });
+  onChange = event => {
+    this.setState({ value: event.target.value });
   };
 
   handleClose = () => {

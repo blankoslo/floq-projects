@@ -40,8 +40,8 @@ const ProjectEditor = (props) => {
                 value={props.form.data.get('name')}
                 floatingLabelText={'Prosjekt:'}
                 floatingLabelFixed={false}
-                onChange={(event, index, value) => {
-                  props.onChange('name', value);
+                onChange={event => {
+                  props.onChange('name', event.target.value);
                 }}
                 id='name-form'
               />
@@ -63,9 +63,9 @@ const ProjectEditor = (props) => {
                 value={props.form.data.get('id')}
                 floatingLabelText={'Prosjektkode:'}
                 floatingLabelFixed={false}
-                onChange={(event, index, value) => {
+                onChange={event => {
                   if (props.isNew) {
-                    props.onChange('id', value);
+                    props.onChange('id', event.target.value);
                   }
                 }}
                 disabled={!props.isNew}
