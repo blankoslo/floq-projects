@@ -1,6 +1,12 @@
 import 'whatwg-fetch';
 
-const baseURL = config.apiUri;
+const baseURL =
+  typeof window !== 'undefined' && window.config && window.config.apiUri
+    ? window.config.apiUri : 'https://api-dev.floq.no';
+
+const apiToken =
+  typeof window !== 'undefined' && window.apiToken
+    ? window.apiToken : 'dev-secret-shhh';
 
 const headers = {
   Authorization: `Bearer ${apiToken}`,
@@ -31,4 +37,10 @@ export const createProject = body => fetch(`${baseURL}/projects`, {
 
 export const getCustomers = () => fetch(`${baseURL}/customers`, {
   headers
+}).then(response => response.json());
+
+export const createCustomer = body => fetch(`${baseURL}/customers`, {
+  method: 'POST',
+  headers: dataHeaders,
+  body: JSON.stringify(body)
 }).then(response => response.json());

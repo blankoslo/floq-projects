@@ -8,6 +8,7 @@ export const SELECT_PROJECT = 'SELECT_PROJECT';
 export const FETCH_CUSTOMERS = 'FETCH_CUSTOMERS';
 export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
 export const FORM_RESET = 'FORM_RESET';
+export const CREATE_CUSTOMER = 'CREATE_CUSTOMER';
 
 export const fetchProjects = () => ({
   type: FETCH_PROJECTS,
@@ -41,4 +42,9 @@ export const updateField = (fieldName, value) => ({
 
 export const resetForm = () => ({
   type: FORM_RESET
+});
+
+export const createCustomer = data => ({
+  type: CREATE_CUSTOMER,
+  payload: api.createCustomer(data)
 });
