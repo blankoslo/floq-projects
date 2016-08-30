@@ -65,11 +65,6 @@ const setup = () => {
 };
 
 describe('<App />', () => {
-  it('contains jsx-div', () => {
-    const { wrapper } = setup();
-    expect(wrapper.contains(<div />)).toBeTruthy();
-  });
-
   it('contains html with specified customer', () => {
     const { wrapper } = setup();
     expect(wrapper.html()).toContain('test_customer_one');

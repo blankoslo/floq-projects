@@ -29,15 +29,8 @@ class App extends Component {
         <div className={listClasses}>
           <ProjectsList projects={this.props.projects} />
         </div>
-        <div style={{ position: 'fixed' }}>
-          <div
-            id='detail'
-            className='mdl-cell mdl-cell--12-col mdl-cell--5-col-tablet'
-          >
-            <div>
-              {children}
-            </div>
-          </div>
+        <div className='mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet'>
+            {children}
         </div>
       </div>
     );
