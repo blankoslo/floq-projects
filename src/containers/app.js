@@ -21,7 +21,7 @@ class App extends Component {
       }));
 
     return (
-      <div className='projects mdl-grid'>
+      <div className='projects'>
         <div className='project-list'>
           <ProjectsList projects={this.props.projects} />
         </div>
