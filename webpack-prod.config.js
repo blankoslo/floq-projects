@@ -1,16 +1,16 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: [ './src/index.js' ],
+  entry: ['./src/index.js'],
   output: {
-    path: __dirname + "/dist/js",
-    filename: "app.bundle.js"
+    path: `${__dirname}/dist/js`,
+    filename: 'app.bundle.js'
   },
   devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({
-      'process.env':{
-        'NODE_ENV': JSON.stringify('production')
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -21,10 +21,9 @@ module.exports = {
     })
   ],
   module: {
-      loaders: [
-          { test: /\.less$/, loader: 'style!css!less' },
-          { test: /\.json$/, loader: "json" },
-          { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/, include: __dirname }
-      ]
+    loaders: [
+        { test: /\.less$/, loader: 'style!css!less' },
+        { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/, include: __dirname }
+    ]
   }
 };

@@ -17,7 +17,7 @@ const ProjectEditor = (props) => {
     <MenuItem key={c.value} value={c.value} primaryText={c.name} />);
 
   return (
-    <div>
+    <div className='project'>
       <form onSubmit={props.onSubmit}>
         <div className='mdl-grid'>
           <div className='mdl-cell mdl-cell--6-col'>

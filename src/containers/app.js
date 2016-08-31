@@ -14,10 +14,6 @@ class App extends Component {
   }
 
   render() {
-    const listClasses = this.props.children === null
-                      ? 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet'
-                      : 'mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--hide-phone';
-
     const children = React.Children.map(this.props.children,
       child => React.cloneElement(child, {
         projects: this.props.projects,
@@ -25,19 +21,12 @@ class App extends Component {
       }));
 
     return (
-      <div className='mdl-grid'>
-        <div className={listClasses}>
+      <div className='projects'>
+        <div className='project-list'>
           <ProjectsList projects={this.props.projects} />
         </div>
-        <div style={{ position: 'fixed' }}>
-          <div
-            id='detail'
-            className='mdl-cell mdl-cell--12-col mdl-cell--5-col-tablet'
-          >
-            <div>
-              {children}
-            </div>
-          </div>
+        <div className='project-wrapper'>
+            {children}
         </div>
       </div>
     );

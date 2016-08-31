@@ -8,12 +8,6 @@ const ProjectRow = (props) => (
   >
     <span className='mdl-list__item-primary-content'>
       <span><b>{props.project.customer.name}:</b> {props.project.name}</span>
-      <div className='mdl-layout-spacer'></div>
-      <img
-        className='employee-list-image'
-        src={'https://www.gravatar.com/avatar/placeholder'}
-        alt={props.project.name}
-      />
     </span>
   </div>
 );
