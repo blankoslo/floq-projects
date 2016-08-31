@@ -25,11 +25,6 @@ const setup = () => {
 };
 
 describe('<ProjectRow />', () => {
-  it('contains <img>.alt with supplied project name', () => {
-    const { wrapper, project } = setup();
-    expect(wrapper.find('img').props().alt).toEqual(project.name);
-  });
-
   it('contains text which includes customer and project name', () => {
     const { wrapper, project } = setup();
     expect(wrapper.text())
