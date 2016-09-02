@@ -52,7 +52,7 @@ class CustomerDialog extends Component {
               <TextField
                 type='text'
                 floatingLabelFixed={false}
-                floatingLabelText={'Kundenavn:'}
+                floatingLabelText={'Kundenavn'}
                 onChange={this.onChange}
                 value={this.state.value}
               />
