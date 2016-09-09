@@ -84,7 +84,7 @@ class ProjectContainer extends Component {
         isNew
       }));
 
-    return <div>{children}</div>;
+    return <div className='floq-details-sticky'>{children}</div>;
   }
 }
 

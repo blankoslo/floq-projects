@@ -21,11 +21,9 @@ class App extends Component {
       }));
 
     return (
-      <div className='projects'>
-        <div className='project-list'>
-          <ProjectsList projects={this.props.projects} />
-        </div>
-        <div className='project-wrapper'>
+      <div className='floq-app-projects floq-list-and-details'>
+        <ProjectsList projects={this.props.projects} />
+        <div className='floq-details'>
             {children}
         </div>
       </div>

@@ -1,0 +1,53 @@
+.floq-list {
+  .floq-list-header {
+    display:flex;
+    justify-content: space-between;
+  }
+  .floq-list-row {
+    padding: 16px 0;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all 0.5s ease;
+    &:hover {
+      background-color: rgba(125,125,125,0.1);
+    }
+  }
+}
+
+.floq-details {
+
+}
+
+.floq-list-and-details {
+  padding: 16px;
+  display:flex;
+  &.floq-hide-list-mobile {
+    .floq-list {
+      @media (max-width: 620px) {
+        display: none;
+      }
+    }
+  }
+  &.floq-hide-details-mobile {
+    .floq-details {
+      @media (max-width: 620px) {
+        display: none;
+      }
+    }
+  }
+  .floq-list {
+    flex:1;
+  }
+  .floq-details {
+    flex:1;
+    margin-left: 20px;
+    .floq-details-sticky {
+      @media (max-width: 620px) {
+        position: static;
+      }
+      position: fixed;
+      min-width: 320px;
+    }
+  }
+}
