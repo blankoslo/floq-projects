@@ -71,29 +71,24 @@ const customersReducer = (previousState = {
   }
 };
 
-const defaultForm = {
-  loading: true,
-  data: new Immutable.Map()
-};
-
-const formReducer = (previousState = defaultForm, action) => {
+const formReducer = (state = { loading: true, data: new Immutable.Map() }, action) => {
   switch (action.type) {
     case FORM_RESET:
-      return defaultForm;
+      return { loading: true, data: new Immutable.Map() };
     case FORM_UPDATE_VALUE: {
       return {
         loading: false,
-        data: previousState.data.merge(action.payload)
+        data: state.data.merge(action.payload)
       };
     }
     case CREATE_CUSTOMER:
       return {
         loading: false,
-        data: previousState.data.set('customer', action.payload.id)
+        data: state.data.set('customer', action.payload.id)
         .set('id', `${action.payload.name.substring(0, 3).toUpperCase()}1000`)
       };
     default:
-      return previousState;
+      return state;
   }
 };
 
