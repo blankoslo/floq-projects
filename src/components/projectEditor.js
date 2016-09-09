@@ -4,31 +4,44 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import AutoComplete from 'material-ui/AutoComplete';
 
-const ProjectEditor = (props) => {
-  let customerElements = props.customers.data.valueSeq().map((c) =>
-    <MenuItem key={c.id} value={c.id} primaryText={c.name} />).toJS();
+const ProjectEditor = props => {
+  const customers = props.customers.data.valueSeq();
+  const customerElements = customers.map(c => ({
+    text: c.name,
+    id: c.id,
+    value: (<MenuItem primaryText={c.name} secondaryText={c.id} />)
+  })).toJS();
 
-  let billableElements = [
+  const billableElements = [
     { value: 'billable', name: 'Fakturerbart prosjekt' },
     { value: 'nonbillable', name: 'Ikke-fakturerbart prosjekt' },
     { value: 'unavailable', name: 'Utilgjengelig tid' }
   ].map((c) =>
     <MenuItem key={c.value} value={c.value} primaryText={c.name} />);
 
+  // Callback function that is fired when a list item is selected,
+  // or enter is pressed in the TextField
+  const onNewRequest = (chosenRequest: string, index: number) => {
+    if (index === -1) return;
+    const id = customers.get(index).id;
+    props.onChange('customer', id);
+    props.onChange('id', props.generateProjectId(id));
+  };
+
   return (
     <form onSubmit={props.onSubmit}>
       <div>
-        <SelectField
-          children={customerElements}
+        <AutoComplete
+          floatingLabelText='Kundenavn'
           disabled={!props.isNew}
-          value={props.form.data.get('customer')}
-          floatingLabelText={'Kunde'}
-          floatingLabelFixed={false}
-          onChange={(event, index, value) => {
-            props.onChange('customer', value);
-            props.onChange('id', props.generateProjectId(value));
-          }}
+          filter={AutoComplete.fuzzyFilter}
+          openOnFocus
+          dataSource={customerElements}
+          searchText={props.customers.data
+            .get(props.form.data.get('customer'), { name: '' }).name}
+          onNewRequest={onNewRequest}
           id='customer-form'
         />
       </div>

@@ -53,7 +53,7 @@ class ProjectContainer extends Component {
   }
 
   generateProjectId = (customerId) => {
-    const prefix = this.props.customers.data.get(customerId).name
+    const prefix = this.props.customers.data.get(customerId, { name: customerId }).name
       .substring(0, 3)
       .toUpperCase();
 
