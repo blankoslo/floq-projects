@@ -30,7 +30,7 @@ const ProjectEditor = (props) => {
                 floatingLabelFixed={false}
                 onChange={(event, index, value) => {
                   props.onChange('customer', value);
-                  props.onChange('id', props.generateProjectId(parseInt(value)));
+                  props.onChange('id', props.generateProjectId(value));
                 }}
                 id='customer-form'
               />
