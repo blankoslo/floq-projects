@@ -37,14 +37,20 @@ class ProjectContainer extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const data = this.props.form.data;
+    const form = this.props.form.data;
+    if (form.get('billable').length < 1 ||
+        form.get('customer').length < 1 ||
+        form.get('id').length < 1 ||
+        form.get('name').length < 1) {
+      return;
+    }
     // TODO: Use selected_project instead of props.params.id?
-    const id = this.props.params.id;
-    if (id === undefined) {
-      this.props.createProject(data)
+    const selectedProjectId = this.props.params.id;
+    if (selectedProjectId === undefined) {
+      this.props.createProject(form)
         .then(p => this.context.router.push(`/projects/${p.payload.id}`));
     } else {
-      this.props.updateProject(id, data);
+      this.props.updateProject(selectedProjectId, form);
     }
   }
 
