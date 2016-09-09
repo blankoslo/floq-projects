@@ -10,25 +10,17 @@ import { createCustomer } from '../actions';
 class CustomerDialog extends Component {
   state = {
     open: false,
-    // Currently same as in database
-    customer: {
-      id: '',
-      name: '',
-    },
+    value: ''
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.createCustomer(this.state.customer);
+    this.props.createCustomer({ name: this.state.value });
     this.handleClose();
   };
 
-  onCustomerNameChanged = event => {
-    this.setState({ customer: { name: event.target.value, id: this.state.customer.id } });
-  };
-
-  onCustomerCodeChanged = event => {
-    this.setState({ customer: { name: this.state.customer.name, id: event.target.value } });
+  onChange = event => {
+    this.setState({ value: event.target.value });
   };
 
   handleClose = () => {
@@ -60,16 +52,9 @@ class CustomerDialog extends Component {
               <TextField
                 type='text'
                 floatingLabelFixed={false}
-                floatingLabelText={'Kundekode:'}
-                onChange={this.onCustomerCodeChanged}
-              />
-            </div>
-            <div>
-              <TextField
-                type='text'
-                floatingLabelFixed={false}
                 floatingLabelText={'Kundenavn:'}
-                onChange={this.onCustomerNameChanged}
+                onChange={this.onChange}
+                value={this.state.value}
               />
             </div>
           </form>
