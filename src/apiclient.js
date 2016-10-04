@@ -44,3 +44,8 @@ export const createCustomer = body => fetch(`${baseURL}/customers`, {
   headers: dataHeaders,
   body: JSON.stringify(body)
 }).then(response => response.json());
+
+export const getEmployees = () =>
+fetch(`${baseURL}/employees?select=id,first_name,last_name`, {
+  headers
+}).then(response => response.json());
