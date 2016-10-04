@@ -18,8 +18,14 @@ const ProjectEditor = props => {
     { value: 'billable', name: 'Fakturerbart prosjekt' },
     { value: 'nonbillable', name: 'Ikke-fakturerbart prosjekt' },
     { value: 'unavailable', name: 'Utilgjengelig tid' }
-  ].map((c) =>
+  ].map(c =>
     <MenuItem key={c.value} value={c.value} primaryText={c.name} />);
+
+  const employeeElements = props.employees.map(c => ({
+    text: c.name,
+    id: c.id,
+    value: (<MenuItem primaryText={c.name} />)
+  })).toJS();
 
   // Callback function that is fired when a list item is selected,
   // or enter is pressed in the TextField
@@ -90,6 +96,17 @@ const ProjectEditor = props => {
         />
       </div>
       <div>
+        <AutoComplete
+          floatingLabelText='Ansvarlig'
+          filter={AutoComplete.fuzzyFilter}
+          openOnFocus
+          dataSource={employeeElements}
+          searchText={props.customers.data
+            .get(props.form.data.get('responsible'), { name: '' }).name}
+          id='responsible-form'
+        />
+      </div>
+      <div>
         <RaisedButton
           type='submit'
           label='Lagre'
@@ -102,6 +119,7 @@ const ProjectEditor = props => {
 
 ProjectEditor.propTypes = {
   customers: React.PropTypes.object,
+  employees: React.PropTypes.object,
   onSubmit: React.PropTypes.func,
   onChange: React.PropTypes.func,
   generateProjectId: React.PropTypes.func,
