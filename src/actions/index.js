@@ -9,6 +9,7 @@ export const FETCH_CUSTOMERS = 'FETCH_CUSTOMERS';
 export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
 export const FORM_RESET = 'FORM_RESET';
 export const CREATE_CUSTOMER = 'CREATE_CUSTOMER';
+export const FETCH_EMPLOYEES = 'FETCH_EMPLOYEES';
 
 export const fetchProjects = () => ({
   type: FETCH_PROJECTS,
@@ -47,4 +48,9 @@ export const resetForm = () => ({
 export const createCustomer = data => ({
   type: CREATE_CUSTOMER,
   payload: api.createCustomer(data)
+});
+
+export const fetchEmployees = () => ({
+  type: FETCH_EMPLOYEES,
+  payload: api.getEmployees()
 });
