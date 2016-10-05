@@ -19,7 +19,7 @@ const dataHeaders = Object.assign({}, headers, {
 });
 
 export const getProjects = () =>
-fetch(`${baseURL}/projects?select=id,name,billable,customer&order=id.desc`, {
+fetch(`${baseURL}/projects?select=id,name,billable,customer,responsible&order=id.desc`, {
   headers
 }).then(response => response.json());
 

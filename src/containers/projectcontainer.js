@@ -42,7 +42,8 @@ class ProjectContainer extends Component {
     if (form.get('billable').length < 1 ||
         form.get('customer').length < 1 ||
         form.get('id').length < 1 ||
-        form.get('name').length < 1) {
+        form.get('name').length < 1 ||
+        form.get('responsible').length < 1) {
       return;
     }
     // TODO: Use selected_project instead of props.params.id?

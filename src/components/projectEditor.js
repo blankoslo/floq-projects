@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import CustomerDialog from '../containers/customerDialog';
 import MenuItem from 'material-ui/MenuItem';
@@ -21,7 +23,8 @@ const ProjectEditor = props => {
   ].map(c =>
     <MenuItem key={c.value} value={c.value} primaryText={c.name} />);
 
-  const employeeElements = props.employees.map(c => ({
+  const employees = props.employees.valueSeq();
+  const employeeElements = employees.map(c => ({
     text: c.name,
     id: c.id,
     value: (<MenuItem primaryText={c.name} />)
@@ -29,11 +32,17 @@ const ProjectEditor = props => {
 
   // Callback function that is fired when a list item is selected,
   // or enter is pressed in the TextField
-  const onNewRequest = (chosenRequest: string, index: number) => {
+  const onCustomerChange = (chosenRequest: string, index: number) => {
     if (index === -1) return;
     const id = customers.get(index).id;
     props.onChange('customer', id);
     props.onChange('id', props.generateProjectId(id));
+  };
+
+  const onResponsibleChange = (chosenRequest: string, index: number) => {
+    if (index === -1) return;
+    const id = employees.get(index).id;
+    props.onChange('responsible', id);
   };
 
   return (
@@ -47,7 +56,7 @@ const ProjectEditor = props => {
           dataSource={customerElements}
           searchText={props.customers.data
             .get(props.form.data.get('customer'), { name: '' }).name}
-          onNewRequest={onNewRequest}
+          onNewRequest={onCustomerChange}
           id='customer-form'
         />
       </div>
@@ -101,8 +110,9 @@ const ProjectEditor = props => {
           filter={AutoComplete.fuzzyFilter}
           openOnFocus
           dataSource={employeeElements}
-          searchText={props.customers.data
+          searchText={props.employees
             .get(props.form.data.get('responsible'), { name: '' }).name}
+          onNewRequest={onResponsibleChange}
           id='responsible-form'
         />
       </div>

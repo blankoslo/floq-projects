@@ -12,8 +12,13 @@ const getProject = (projects, selectedProject, form) => {
     // TODO: Map() can be interchanged with json or Immutable class
     return {
       loading: false,
-      data: new Immutable.Map({ name: '', customer: '', id: '', billable: 'billable' })
-        .merge(form.data)
+      data: new Immutable.Map({
+        name: '',
+        customer: '',
+        id: '',
+        billable: 'billable',
+        responsible: '' }
+      ).merge(form.data)
     };
   }
   // view/edit project
