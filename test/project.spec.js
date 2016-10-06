@@ -40,6 +40,7 @@ const setup = () => {
     <ProjectEditor
       form={form}
       customers={customers}
+      employees={new Immutable.List()}
       onSubmit={actions.onSubmit}
       onChange={actions.onChange}
       generateProjectId={actions.generateProjectId}
@@ -78,6 +79,7 @@ describe('<ProjectEditor />-form', () => {
       <ProjectEditor
         form={form}
         customers={customers}
+        employees={new Immutable.List()}
         onSubmit={() => {}}
         onChange={() => {}}
         isNew={false}
@@ -97,6 +99,7 @@ describe('<ProjectEditor />-form', () => {
       <ProjectEditor
         form={form}
         customers={customers}
+        employees={new Immutable.List()}
         onSubmit={() => {}}
         onChange={() => {}}
         isNew={false}

@@ -19,7 +19,7 @@ const dataHeaders = Object.assign({}, headers, {
 });
 
 export const getProjects = () =>
-fetch(`${baseURL}/projects?select=id,name,billable,customer&order=id.desc`, {
+fetch(`${baseURL}/projects?select=id,name,billable,customer,responsible&order=id.desc`, {
   headers
 }).then(response => response.json());
 
@@ -43,4 +43,9 @@ export const createCustomer = body => fetch(`${baseURL}/customers`, {
   method: 'POST',
   headers: dataHeaders,
   body: JSON.stringify(body)
+}).then(response => response.json());
+
+export const getEmployees = () =>
+fetch(`${baseURL}/employees?select=id,first_name,last_name`, {
+  headers
 }).then(response => response.json());

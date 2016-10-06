@@ -1,22 +1,24 @@
 import { createSelector } from 'reselect';
 import * as Immutable from 'immutable';
 
-const selectedProjectselector = state => state.selected_project;
-const projectsSelector = state => state.projects;
-const currentForm = state => state.form;
-
 const getProject = (projects, selectedProject, form) => {
   // Loading
   if (projects.loading) {
-    return { loading: true, data: null };
+    return { loading: true, data: new Immutable.Map() };
   }
 
   // projects/new
   if (selectedProject === null) {
+    // TODO: Map() can be interchanged with json or Immutable class
     return {
       loading: false,
-      data: new Immutable.Map({ name: '', customer: '', id: '', billable: 'billable' })
-        .merge(form.data)
+      data: new Immutable.Map({
+        name: '',
+        customer: '',
+        id: '',
+        billable: 'billable',
+        responsible: '' }
+      ).merge(form.data)
     };
   }
   // view/edit project
@@ -38,8 +40,8 @@ const getProject = (projects, selectedProject, form) => {
 };
 
 export default createSelector(
-  projectsSelector,
-  selectedProjectselector,
-  currentForm,
+  state => state.projects,
+  state => state.selected_project,
+  state => state.form,
   getProject,
 );
