@@ -9,7 +9,7 @@ const setup = () => {
   const form = {
     loading: false,
     data: new Immutable.Map({
-      customer: 1,
+      customer: '1',
       name: 'test_project_one',
       id: 'TEST1000',
       billable: 'billable'
@@ -20,11 +20,11 @@ const setup = () => {
     loading: false,
     data: new Immutable.Map([
       {
-        id: 1,
+        id: '1',
         name: 'test_customer_one'
       },
       {
-        id: 2,
+        id: '2',
         name: 'test_customer_two'
       }
     ].map(e => [e.id, e]))
@@ -40,6 +40,7 @@ const setup = () => {
     <ProjectEditor
       form={form}
       customers={customers}
+      employees={new Immutable.List()}
       onSubmit={actions.onSubmit}
       onChange={actions.onChange}
       generateProjectId={actions.generateProjectId}
@@ -62,7 +63,7 @@ describe('<ProjectEditor />-form', () => {
 
   it('contains customer(<select>) with <option> containing all customers', () => {
     const { wrapper, customers } = setup();
-    expect(wrapper.find('#customer-form').props().children.length)
+    expect(wrapper.find('#customer-form').props().dataSource.length)
     .toBe(customers.data.size);
   });
 
@@ -78,6 +79,7 @@ describe('<ProjectEditor />-form', () => {
       <ProjectEditor
         form={form}
         customers={customers}
+        employees={new Immutable.List()}
         onSubmit={() => {}}
         onChange={() => {}}
         isNew={false}
@@ -97,6 +99,7 @@ describe('<ProjectEditor />-form', () => {
       <ProjectEditor
         form={form}
         customers={customers}
+        employees={new Immutable.List()}
         onSubmit={() => {}}
         onChange={() => {}}
         isNew={false}
@@ -136,10 +139,11 @@ describe('<ProjectEditor />-form', () => {
 
   it('contains customer(<select>) that triggers onChange function when edited', () => {
     const { wrapper, actions } = setup();
-    // material-ui SelectField-component has a custom onChange event (event, key, value)
-    wrapper.find('#customer-form').simulate('change', 'event-filler', 'key-filler', 1);
+    // material-ui SelectField-component has a custom onNewRequest event:
+    //  (chosenRequest: string, index: number)
+    wrapper.find('#customer-form').simulate('newRequest', 'test_customer_one', 0);
     expect(actions.onChange.calls.length).toEqual(2);
-    expect(actions.onChange.calls[0].arguments).toEqual(['customer', 1]);
+    expect(actions.onChange.calls[0].arguments).toEqual(['customer', '1']);
   });
 
   it('contains billable(<select>) that triggers onChange function when edited', () => {

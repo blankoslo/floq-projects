@@ -1,9 +1,6 @@
 import * as Immutable from 'immutable';
 import { createSelector } from 'reselect';
 
-const projectsSelector = state => state.projects;
-const customersSelector = state => state.customers;
-
 const lowerCaseName = p => `${p.customer.name}${p.name}`.toLowerCase();
 
 const getProjects = (projects, customers) => {
@@ -20,7 +17,7 @@ const getProjects = (projects, customers) => {
 };
 
 export default createSelector(
-  projectsSelector,
-  customersSelector,
+  state => state.projects,
+  state => state.customers,
   getProjects
 );
