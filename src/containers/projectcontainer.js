@@ -13,11 +13,11 @@ class ProjectContainer extends Component {
 
   constructor(props) {
     super(props);
+    props.fetchEmployees();
     props.resetForm();
     if (props.params.id !== undefined) {
       const selectedId = props.params.id;
       props.selectProject(selectedId);
-      props.fetchEmployees();
     }
   }
 
