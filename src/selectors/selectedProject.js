@@ -17,7 +17,8 @@ const getProject = (projects, selectedProject, form) => {
         customer: '',
         id: '',
         billable: 'billable',
-        responsible: '' }
+        responsible: '',
+        active: true }
       ).merge(form.data)
     };
   }

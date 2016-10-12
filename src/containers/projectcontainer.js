@@ -39,11 +39,7 @@ class ProjectContainer extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const form = this.props.form.data;
-    if (form.get('billable').length < 1 ||
-        form.get('customer').length < 1 ||
-        form.get('id').length < 1 ||
-        form.get('name').length < 1 ||
-        form.get('responsible').length < 1) {
+    if (form.some(x => x.length < 1)) {
       return;
     }
     // TODO: Use selected_project instead of props.params.id?
