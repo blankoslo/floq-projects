@@ -7,6 +7,7 @@ import SelectField from 'material-ui/SelectField';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AutoComplete from 'material-ui/AutoComplete';
+import Toggle from 'material-ui/Toggle';
 
 const ProjectEditor = props => {
   const customers = props.customers.data.valueSeq();
@@ -47,6 +48,14 @@ const ProjectEditor = props => {
 
   return (
     <form onSubmit={props.onSubmit}>
+      <div>
+        <Toggle
+          label='Aktiv'
+          onToggle={(e, value) => { props.onChange('active', value); }}
+          toggled={props.form.data.get('active', true)}
+        />
+      </div>
+      <hr />
       <div>
         <AutoComplete
           floatingLabelText='Kundenavn'
