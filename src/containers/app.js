@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import ProjectsList from '../components/projectslist';
 import { fetchProjects, fetchCustomers } from '../actions/index';
 import projectsSelector from '../selectors/projects';
@@ -32,12 +32,12 @@ class App extends Component {
 }
 
 App.propTypes = {
-  params: React.PropTypes.object.isRequired,
-  projects: React.PropTypes.object.isRequired,
-  children: React.PropTypes.object,
-  customers: React.PropTypes.object.isRequired,
-  fetchProjects: React.PropTypes.func.isRequired,
-  fetchCustomers: React.PropTypes.func.isRequired
+  params: PropTypes.object.isRequired,
+  projects: PropTypes.object.isRequired,
+  children: PropTypes.object,
+  customers: PropTypes.object.isRequired,
+  fetchProjects: PropTypes.func.isRequired,
+  fetchCustomers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

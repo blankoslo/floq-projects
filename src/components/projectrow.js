@@ -1,5 +1,8 @@
-import React from 'react';
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import createHistory from 'history/createBrowserHistory';
 import { browserHistory } from 'react-router';
+
 
 const ProjectRow = (props) => (
   <div
@@ -11,7 +14,7 @@ const ProjectRow = (props) => (
 );
 
 ProjectRow.propTypes = {
-  project: React.PropTypes.object.isRequired
+  project: PropTypes.object.isRequired
 };
 
 export default ProjectRow;

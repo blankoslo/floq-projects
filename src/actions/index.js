@@ -1,5 +1,5 @@
-import * as api from '../apiclient';
 import * as Immutable from 'immutable';
+import * as api from '../apiclient';
 
 export const FETCH_PROJECTS = 'FETCH_PROJECTS';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
@@ -10,7 +10,7 @@ export const FORM_UPDATE_VALUE = 'FORM_UPDATE_VALUE';
 export const FORM_RESET = 'FORM_RESET';
 export const CREATE_CUSTOMER = 'CREATE_CUSTOMER';
 export const FETCH_EMPLOYEES = 'FETCH_EMPLOYEES';
-
+export const API_ERROR = 'API_ERROR';
 export const fetchProjects = () => ({
   type: FETCH_PROJECTS,
   payload: api.getProjects()
@@ -53,4 +53,8 @@ export const createCustomer = data => ({
 export const fetchEmployees = () => ({
   type: FETCH_EMPLOYEES,
   payload: api.getEmployees()
+});
+export const apiError = error => ({
+  type: API_ERROR,
+  payload: error
 });

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { updateProject, createProject,
   selectProject, updateField, resetForm, fetchEmployees } from '../actions/index';
-
 import selectedProjectSelector from '../selectors/selectedProject';
 
 class ProjectContainer extends Component {
   static contextTypes = {
-    router: React.PropTypes.object
+    router: PropTypes.object
   };
 
   constructor(props) {
@@ -94,22 +94,22 @@ class ProjectContainer extends Component {
 }
 
 ProjectContainer.propTypes = {
-  customers: React.PropTypes.object.isRequired,
-  projects: React.PropTypes.object.isRequired,
-  params: React.PropTypes.object.isRequired,
-  children: React.PropTypes.object.isRequired,
+  customers: PropTypes.object.isRequired,
+  projects: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
 
   // mapStateToProps
-  form: React.PropTypes.object.isRequired,
-  employees: React.PropTypes.object.isRequired,
+  form: PropTypes.object.isRequired,
+  employees: PropTypes.object.isRequired,
 
   // mapDispatchToProps
-  createProject: React.PropTypes.func.isRequired,
-  updateProject: React.PropTypes.func.isRequired,
-  updateField: React.PropTypes.func.isRequired,
-  selectProject: React.PropTypes.func.isRequired,
-  resetForm: React.PropTypes.func.isRequired,
-  fetchEmployees: React.PropTypes.func.isRequired,
+  createProject: PropTypes.func.isRequired,
+  updateProject: PropTypes.func.isRequired,
+  updateField: PropTypes.func.isRequired,
+  selectProject: PropTypes.func.isRequired,
+  resetForm: PropTypes.func.isRequired,
+  fetchEmployees: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => (

@@ -4,13 +4,12 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-
+import PropTypes from 'prop-types';
 import { createCustomer } from '../actions';
 
 class CustomerDialog extends Component {
   state = {
     open: false,
-    // Currently same as in database
     customer: {
       id: '',
       name: '',
@@ -93,7 +92,7 @@ class CustomerDialog extends Component {
 const mapStateToProps = () => ({});
 
 CustomerDialog.propTypes = {
-  createCustomer: React.PropTypes.func
+  createCustomer: PropTypes.func
 };
 
 export default connect(mapStateToProps, { createCustomer })(CustomerDialog);

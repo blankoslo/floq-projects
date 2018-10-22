@@ -6,9 +6,8 @@ export default store => next => action => (
   isPromise(action.payload)
     ? action.payload.then(
       result => store.dispatch({ ...action, payload: result }),
-      error => {
+      (error) => {
         store.dispatch(apiError(`${error.data.message}: ${error.data.details}`));
-
         return Promise.reject(error);
       }
     )

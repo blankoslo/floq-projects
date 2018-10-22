@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import CustomerDialog from '../containers/customerDialog';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AutoComplete from 'material-ui/AutoComplete';
 import Toggle from 'material-ui/Toggle';
+import PropTypes from 'prop-types';
 
 const ProjectEditor = props => {
   const customers = props.customers.data.valueSeq();
@@ -137,13 +138,13 @@ const ProjectEditor = props => {
 };
 
 ProjectEditor.propTypes = {
-  customers: React.PropTypes.object,
-  employees: React.PropTypes.object,
-  onSubmit: React.PropTypes.func,
-  onChange: React.PropTypes.func,
-  generateProjectId: React.PropTypes.func,
-  form: React.PropTypes.object,
-  isNew: React.PropTypes.bool
+  customers: PropTypes.object,
+  employees: PropTypes.object,
+  onSubmit: PropTypes.func,
+  onChange: PropTypes.func,
+  generateProjectId: PropTypes.func,
+  form: PropTypes.object,
+  isNew: PropTypes.bool
 };
 
 export default ProjectEditor;
