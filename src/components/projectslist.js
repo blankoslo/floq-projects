@@ -2,14 +2,16 @@ import * as React from 'react';
 import createHistory from 'history/createBrowserHistory';
 import PropTypes from 'prop-types';
 import ProjectRow from './projectrow';
-import { browserHistory } from 'react-router';
 
-const ProjectsList = (props) => {
-  if (props.projects.loading === true) {
+
+import Toggle from 'material-ui/Toggle';
+
+const ProjectsList = ({ projects, excludeInactiveProjects, toggleShowInactiveProjects }) => {
+  if (projects.loading === true) {
     return <div>Loading</div>;
   }
 
-  const projectsRows = props.projects.data.valueSeq().map(project =>
+  const projectsRows = projects.data.valueSeq().map(project =>
     <ProjectRow key={project.id} project={project} />
   );
 
@@ -17,13 +19,13 @@ const ProjectsList = (props) => {
     <div className='floq-list'>
       <div className='floq-list-header'>
         <h3>Prosjekter</h3>
-        <button
-          onClick={() => browserHistory.push('/projects/new')}
-          id='add-employee-button'
-          className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab new-project-button'
-        >
-          <i className='material-icons dark-gray'>add</i>
-        </button>
+        <div className='floq-inactive-projects-toggle'>
+          <Toggle
+            label={"Vis inaktive"}
+            defaultToggled={!excludeInactiveProjects}
+            onToggle={toggleShowInactiveProjects}
+          />
+        </div>
       </div>
       <div className="projectRows">
         {projectsRows}
@@ -33,7 +35,9 @@ const ProjectsList = (props) => {
 };
 
 ProjectsList.propTypes = {
-  projects: PropTypes.object.isRequired
+  projects: PropTypes.object.isRequired,
+  toggleShowInactiveProjects: PropTypes.func.isRequired,
+  excludeInactiveProjects: PropTypes.bool
 };
 
 export default ProjectsList;

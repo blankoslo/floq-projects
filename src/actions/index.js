@@ -11,6 +11,8 @@ export const FORM_RESET = 'FORM_RESET';
 export const CREATE_CUSTOMER = 'CREATE_CUSTOMER';
 export const FETCH_EMPLOYEES = 'FETCH_EMPLOYEES';
 export const API_ERROR = 'API_ERROR';
+export const TOGGLE_SHOW_INACTIVE_PROJECTS = 'TOGGLE_SHOW_INACTIVE_PROJECTS';
+
 export const fetchProjects = () => ({
   type: FETCH_PROJECTS,
   payload: api.getProjects()
@@ -58,3 +60,7 @@ export const apiError = error => ({
   type: API_ERROR,
   payload: error
 });
+
+export const toggleShowInactiveProjects = () => ({
+  type: TOGGLE_SHOW_INACTIVE_PROJECTS
+})

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ProjectsList from '../components/projectslist';
-import { fetchProjects, fetchCustomers } from '../actions/index';
+import { fetchProjects, fetchCustomers, toggleShowInactiveProjects } from '../actions/index';
 import projectsSelector from '../selectors/projects';
+import AddProjectButton from '../components/addProjectButton';
 
 class App extends Component {
   constructor(props) {
@@ -22,9 +23,10 @@ class App extends Component {
 
     return (
       <div className='floq-app-projects floq-list-and-details'>
-        <ProjectsList projects={this.props.projects} />
+        <ProjectsList projects={this.props.projects} excludeInactiveProjects={this.props.excludeInactiveProjects} toggleShowInactiveProjects={this.props.toggleShowInactiveProjects} />
         <div className='floq-details'>
-            {children}
+          {children}
+          <AddProjectButton />
         </div>
       </div>
     );
@@ -37,17 +39,23 @@ App.propTypes = {
   children: PropTypes.object,
   customers: PropTypes.object.isRequired,
   fetchProjects: PropTypes.func.isRequired,
-  fetchCustomers: PropTypes.func.isRequired
+  fetchCustomers: PropTypes.func.isRequired,
+  toggleShowInactiveProjects: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  projects: projectsSelector(state),
-  customers: state.customers
-});
+const mapStateToProps = (state) => {
+  console.log(state)
+  return ({
+    projects: projectsSelector(state),
+    excludeInactiveProjects: state.projects.excludeInactiveProjects,
+    customers: state.customers,
+  })
+};
 
 const mapDispatchToProps = {
   fetchProjects,
-  fetchCustomers
+  fetchCustomers,
+  toggleShowInactiveProjects
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

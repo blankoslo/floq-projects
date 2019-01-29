@@ -8,11 +8,18 @@ const getProjects = (projects, customers) => {
     return { loading: true, data: new Immutable.OrderedMap() };
   }
 
+  let data = projects.data;
+
+  if (projects.excludeInactiveProjects) {
+    data = data
+      .filter(v => v.active)
+  }
+
   return {
     loading: false,
-    data: projects.data.map(p =>
-      Object.assign({}, p, { customer: customers.data.get(p.customer) })
-    ).sortBy(lowerCaseName)
+    data: data
+      .map(p => ({ ...p, customer: customers.data.get(p.customer) }))
+      .sortBy(lowerCaseName)
   };
 };
 
