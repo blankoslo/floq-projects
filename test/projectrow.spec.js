@@ -1,6 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import expect from 'expect';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 import ProjectRow from '../src/components/projectrow';
 
 // setup is a function, so that each call gets its own objects (mutable state)
@@ -27,8 +28,7 @@ const setup = () => {
 describe('<ProjectRow />', () => {
   it('contains text which includes customer and project name', () => {
     const { wrapper, project } = setup();
-    expect(wrapper.text())
-    .toContain(project.customer.name)
-    .toContain(project.name);
+    expect(wrapper.text()).toContain(project.customer.name);
+    expect(wrapper.text()).toContain(project.name);
   });
 });

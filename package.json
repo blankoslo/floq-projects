@@ -9,14 +9,23 @@
   },
   "author": "",
   "license": "UNLICENSED",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/scripts/"
+    ]
+  },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.2.1",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^7.1.2",
-    "babel-preset-react-app": "^3.1.1",
+    "babel-loader": "^8.0.5",
+    "babel-preset-react-app": "^7.0.0",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "css-loader": "^1.0.0",
     "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.8.0",
     "eslint": "^5.7.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-loader": "^2.1.1",
@@ -27,6 +36,7 @@
     "fetch-mock": "^7.1.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "2.29.0",
+    "jest": "^24.0.0",
     "jsdom": "^12.2.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
@@ -42,9 +52,6 @@
     "url-loader": "^1.1.2"
   },
   "dependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-core": "^6.26.3",
     "chalk": "^2.4.1",
     "dotenv": "^6.2.0",
     "dotenv-expand": "^4.2.0",
@@ -64,8 +71,7 @@
     "sw-precache-webpack-plugin": "^0.11.5",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
-    "webpack-manifest-plugin": "^2.0.4",
-    "whatwg-fetch": "^3.0.0"
+    "webpack-manifest-plugin": "^2.0.4"
   },
   "babel": {
     "presets": [

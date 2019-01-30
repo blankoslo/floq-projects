@@ -1,24 +1,22 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
-import expect from 'expect';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CustomerDialog from '../src/containers/customerDialog';
 import configureMockStore from 'redux-mock-store';
-
-// Needed because of the touchTap event
-injectTapEventPlugin();
 
 // setup is a function, so that each call gets its own objects (mutable state)
 const setup = () => {
   const wrapper = mount(
     <Provider store={configureMockStore([])({})}>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <CustomerDialog createCustomer={() => {}} />
+        <CustomerDialog createCustomer={() => { }} />
       </MuiThemeProvider>
     </Provider>);
 
@@ -34,13 +32,14 @@ describe('<CustomerDialog />', () => {
 
     // A work-around because of lacking functionality in enzyme/react.
     // TODO: Change to wrappper.find('button').simulate('touchTap') when available
-    const node = ReactDOM.findDOMNode(
-        ReactTestUtils.findRenderedDOMComponentWithTag(
-          wrapper.instance(), 'button'
-        )
-      );
-    ReactTestUtils.Simulate.touchTap(node);
-
+    // const node = ReactDOM.findDOMNode(
+    //   ReactTestUtils.findRenderedDOMComponentWithTag(
+    //     wrapper.instance(), 'button'
+    //   )
+    // );
+    // console.log(node)
+    // ReactTestUtils.Simulate.click(node);
+    wrapper.find('button').simulate('click')
     expect(wrapper.find('Dialog').props().open).toBeTruthy();
   });
 });

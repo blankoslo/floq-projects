@@ -1,6 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import expect from 'expect';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
 import ProjectEditor from '../src/components/projectEditor';
 import Immutable from 'immutable';
 
@@ -31,9 +32,9 @@ const setup = () => {
   };
 
   const actions = {
-    onSubmit: expect.createSpy(),
-    onChange: expect.createSpy(),
-    generateProjectId: expect.createSpy()
+    onSubmit: jest.fn(),
+    onChange: jest.fn(),
+    generateProjectId: jest.fn()
   };
 
   const wrapper = shallow(
@@ -64,13 +65,13 @@ describe('<ProjectEditor />-form', () => {
   it('contains customer(<select>) with <option> containing all customers', () => {
     const { wrapper, customers } = setup();
     expect(wrapper.find('#customer-form').props().dataSource.length)
-    .toBe(customers.data.size);
+      .toBe(customers.data.size);
   });
 
   it('contains customer(<select>) without prop "disabled" when isNew===true', () => {
     const { wrapper } = setup();
     expect(wrapper.find('#customer-form').prop('disabled'))
-     .toBeFalsy();
+      .toBeFalsy();
   });
 
   it('contains customer(<select>) with prop "disabled" when isNew===true', () => {
@@ -80,12 +81,12 @@ describe('<ProjectEditor />-form', () => {
         form={form}
         customers={customers}
         employees={new Immutable.List()}
-        onSubmit={() => {}}
-        onChange={() => {}}
+        onSubmit={() => { }}
+        onChange={() => { }}
         isNew={false}
       />);
     expect(wrapper.find('#customer-form').prop('disabled'))
-     .toBeTruthy();
+      .toBeTruthy();
   });
 
   it('contains id(<input>), when isNew===true expect enabled', () => {
@@ -100,8 +101,8 @@ describe('<ProjectEditor />-form', () => {
         form={form}
         customers={customers}
         employees={new Immutable.List()}
-        onSubmit={() => {}}
-        onChange={() => {}}
+        onSubmit={() => { }}
+        onChange={() => { }}
         isNew={false}
       />);
 
@@ -116,17 +117,14 @@ describe('<ProjectEditor />-form', () => {
   it('contains billable(<select>) with expected value', () => {
     const { wrapper, form } = setup();
     expect(wrapper.find('#billable-form').prop('value'))
-    .toEqual(form.data.get('billable'));
+      .toEqual(form.data.get('billable'));
   });
 
   it('contains billable(<select>) with expected <option>\'s', () => {
     const { wrapper } = setup();
-    // TODO: Not satisfied with explicit call to props and primaryText-property
-    // The test should not need to know such implementation details.
-    expect(wrapper.find('#billable-form').children().map(n => n.props().primaryText))
-    .toContain('Fakturerbart prosjekt')
-    .toContain('Ikke-fakturerbart prosjekt')
-    .toContain('Utilgjengelig tid');
+    expect(wrapper.find('#billable-form').children().map(n => n.props().primaryText)).toContain('Fakturerbart prosjekt');
+    expect(wrapper.find('#billable-form').children().map(n => n.props().primaryText)).toContain('Ikke-fakturerbart prosjekt');
+    expect(wrapper.find('#billable-form').children().map(n => n.props().primaryText)).toContain('Utilgjengelig tid');
   });
 
   it('contains <form> that triggers onSubmit function when submitted', () => {
@@ -134,7 +132,7 @@ describe('<ProjectEditor />-form', () => {
     // Ideally we want to simulate click button which again triggers form's submit
     const { wrapper, actions } = setup();
     wrapper.find('form').simulate('submit');
-    expect(actions.onSubmit.calls.length).toEqual(1);
+    expect(actions.onSubmit.mock.calls.length).toEqual(1);
   });
 
   it('contains customer(<select>) that triggers onChange function when edited', () => {
@@ -142,31 +140,31 @@ describe('<ProjectEditor />-form', () => {
     // material-ui SelectField-component has a custom onNewRequest event:
     //  (chosenRequest: string, index: number)
     wrapper.find('#customer-form').simulate('newRequest', 'test_customer_one', 0);
-    expect(actions.onChange.calls.length).toEqual(2);
-    expect(actions.onChange.calls[0].arguments).toEqual(['customer', '1']);
+    expect(actions.onChange.mock.calls.length).toEqual(2);
+    expect(actions.onChange.mock.calls[0]).toEqual(['customer', '1']);
   });
 
   it('contains billable(<select>) that triggers onChange function when edited', () => {
     const { wrapper, actions } = setup();
     // material-ui SelectField-component has a custom onChange event (event, key, value)
     wrapper.find('#billable-form').simulate('change', 'event-filler', 'key-filler', 'billable');
-    expect(actions.onChange.calls.length).toEqual(1);
-    expect(actions.onChange.calls[0].arguments).toEqual(['billable', 'billable']);
+    expect(actions.onChange.mock.calls.length).toEqual(1);
+    expect(actions.onChange.mock.calls[0]).toEqual(['billable', 'billable']);
   });
 
   it('contains name(<input>) that triggers onChange function when edited', () => {
     const { wrapper, actions } = setup();
     const valueUnderTest = 'test_new_value';
     wrapper.find('#name-form').simulate('change', { target: { value: valueUnderTest } });
-    expect(actions.onChange.calls.length).toEqual(1);
-    expect(actions.onChange.calls[0].arguments).toEqual(['name', valueUnderTest]);
+    expect(actions.onChange.mock.calls.length).toEqual(1);
+    expect(actions.onChange.mock.calls[0]).toEqual(['name', valueUnderTest]);
   });
 
   it('contains id(<input>) that triggers onChange function when edited', () => {
     const { wrapper, actions } = setup();
     const valueUnderTest = 'test_new_value';
     wrapper.find('#id-form').simulate('change', { target: { value: valueUnderTest } });
-    expect(actions.onChange.calls.length).toEqual(1);
-    expect(actions.onChange.calls[0].arguments).toEqual(['id', valueUnderTest]);
+    expect(actions.onChange.mock.calls.length).toEqual(1);
+    expect(actions.onChange.mock.calls[0]).toEqual(['id', valueUnderTest]);
   });
 });

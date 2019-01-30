@@ -1,19 +1,24 @@
 {
   "extends": "airbnb",
   "globals": {
-    "apiToken",
-    "config",
-    "describe",
-    "it",
-    "expect",
-    "beforeEach"
+    "apiToken": true,
+    "config": true,
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "beforeEach": true,
+    "window": true,
+    "document": true
   },
   "parser": "babel-eslint",
   "rules": {
     "comma-dangle": 0,
     "id-length": 0,
-    "jsx-quotes": [2, "prefer-single"],
+    "jsx-quotes": [
+      2,
+      "prefer-single"
+    ],
     "no-extra-parens": 0,
-    "radix": 0,
+    "radix": 0
   }
 }

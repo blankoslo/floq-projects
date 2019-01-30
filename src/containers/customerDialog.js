@@ -43,7 +43,7 @@ class CustomerDialog extends Component {
       <div>
         <RaisedButton
           type='button'
-          onTouchTap={this.handleOpen}
+          onClick={this.handleOpen}
           label={'Opprett ny kunde'}
           fullWidth
           style={{ width: 180 }}
@@ -75,13 +75,13 @@ class CustomerDialog extends Component {
           <FlatButton
             label='Lagre'
             primary
-            onTouchTap={this.onSubmit}
+            onClick={this.onSubmit}
             type='submit'
           />
           <FlatButton
             label='Avbryt'
             secondary
-            onTouchTap={this.handleClose}
+            onClick={this.handleClose}
           />
         </Dialog>
       </div>

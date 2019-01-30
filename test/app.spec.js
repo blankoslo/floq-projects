@@ -1,18 +1,23 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import expect from 'expect';
-import App from '../src/containers/app';
+import Enzyme, { mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({ adapter: new Adapter() });
+import { App, mapStateToProps } from '../src/containers/app';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import Immutable from 'immutable';
 import fetchMock from 'fetch-mock';
+import { connect } from 'react-redux';
 
-before(() => {
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+
+beforeAll(() => {
   // If missing, fetch global will be undefined. The json-content is unused.
   fetchMock.mock('^https://api-dev.floq.no', { unused: 'data' });
 });
 
-after(() => {
+afterAll(() => {
   fetchMock.restore();
 });
 
@@ -24,11 +29,13 @@ const setup = () => {
 
   const projects = {
     loading: false,
+    excludeInactiveProjects: true,
     data: new Immutable.Map([
       {
         id: 1,
         name: 'test_project_one',
-        customer: 'TEST1000'
+        customer: 'TEST1000',
+        active: true
       }
     ].map(e => [e.id, e]))
   };
@@ -49,15 +56,25 @@ const setup = () => {
 
   const state = {
     projects,
-    customers
+    customers,
+    selected_project: null
   };
+
+  const mapDispatchToProps = {
+    fetchProjects: () => ({ type: "MOCKED_ACTIONS" }),
+    fetchCustomers: () => ({ type: "MOCKED_ACTIONS" }),
+    toggleShowInactiveProjects: () => ({ type: "MOCKED_ACTIONS" })
+  }
+
+  const AppMocked = connect(mapStateToProps, mapDispatchToProps)(App)
 
   const wrapper = mount(
     <Provider store={configureMockStore([])(state)}>
-      <App
-        params={params}
-      />
+      <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <AppMocked params={params} />
+      </MuiThemeProvider>
     </Provider>);
+
 
   return {
     wrapper

@@ -6,10 +6,12 @@ import { fetchProjects, fetchCustomers, toggleShowInactiveProjects } from '../ac
 import projectsSelector from '../selectors/projects';
 import AddProjectButton from '../components/addProjectButton';
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
+  }
 
+  componentDidMount() {
     this.props.fetchProjects();
     this.props.fetchCustomers();
   }
@@ -43,8 +45,7 @@ App.propTypes = {
   toggleShowInactiveProjects: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
-  console.log(state)
+export const mapStateToProps = (state) => {
   return ({
     projects: projectsSelector(state),
     excludeInactiveProjects: state.projects.excludeInactiveProjects,
