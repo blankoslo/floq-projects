@@ -4,7 +4,7 @@
   "description": "The frontend application for projects",
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "dist": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "lint": "eslint src test"
   },
