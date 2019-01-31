@@ -1,8 +1,9 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
 import ProjectRow from '../src/components/projectrow';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 // setup is a function, so that each call gets its own objects (mutable state)
 const setup = () => {
@@ -17,7 +18,8 @@ const setup = () => {
   const wrapper = shallow(
     <ProjectRow
       project={project}
-    />);
+    />
+  );
 
   return {
     project,

@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   selected_project: SelectedProjectReducer,
   customers: CustomersReducer,
   form: FormReducer,
-  employees: EmployeesReducer,
+  employees: EmployeesReducer
 });
 
 export default rootReducer;

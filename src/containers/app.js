@@ -45,13 +45,11 @@ App.propTypes = {
   toggleShowInactiveProjects: PropTypes.func.isRequired
 };
 
-export const mapStateToProps = (state) => {
-  return ({
-    projects: projectsSelector(state),
-    excludeInactiveProjects: state.projects.excludeInactiveProjects,
-    customers: state.customers,
-  })
-};
+export const mapStateToProps = state => ({
+  projects: projectsSelector(state),
+  excludeInactiveProjects: state.projects.excludeInactiveProjects,
+  customers: state.customers,
+});
 
 const mapDispatchToProps = {
   fetchProjects,

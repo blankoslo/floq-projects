@@ -1,5 +1,4 @@
 {
-  "extends": "airbnb",
   "globals": {
     "apiToken": true,
     "config": true,
@@ -17,8 +16,6 @@
     "jsx-quotes": [
       2,
       "prefer-single"
-    ],
-    "no-extra-parens": 0,
-    "radix": 0
+    ]
   }
 }

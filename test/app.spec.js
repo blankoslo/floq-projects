@@ -1,16 +1,17 @@
 import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-import { App, mapStateToProps } from '../src/containers/app';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import Immutable from 'immutable';
 import fetchMock from 'fetch-mock';
 import { connect } from 'react-redux';
 
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { App, mapStateToProps } from '../src/containers/app';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 beforeAll(() => {
   // If missing, fetch global will be undefined. The json-content is unused.
@@ -61,19 +62,20 @@ const setup = () => {
   };
 
   const mapDispatchToProps = {
-    fetchProjects: () => ({ type: "MOCKED_ACTIONS" }),
-    fetchCustomers: () => ({ type: "MOCKED_ACTIONS" }),
-    toggleShowInactiveProjects: () => ({ type: "MOCKED_ACTIONS" })
-  }
+    fetchProjects: () => ({ type: 'MOCKED_ACTIONS' }),
+    fetchCustomers: () => ({ type: 'MOCKED_ACTIONS' }),
+    toggleShowInactiveProjects: () => ({ type: 'MOCKED_ACTIONS' })
+  };
 
-  const AppMocked = connect(mapStateToProps, mapDispatchToProps)(App)
+  const AppMocked = connect(mapStateToProps, mapDispatchToProps)(App);
 
   const wrapper = mount(
     <Provider store={configureMockStore([])(state)}>
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <AppMocked params={params} />
       </MuiThemeProvider>
-    </Provider>);
+    </Provider>
+  );
 
 
   return {

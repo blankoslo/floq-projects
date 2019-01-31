@@ -22,11 +22,11 @@ class CustomerDialog extends Component {
     this.handleClose();
   };
 
-  onCustomerNameChanged = event => {
+  onCustomerNameChanged = (event) => {
     this.setState({ customer: { name: event.target.value, id: this.state.customer.id } });
   };
 
-  onCustomerCodeChanged = event => {
+  onCustomerCodeChanged = (event) => {
     this.setState({ customer: { name: this.state.customer.name, id: event.target.value } });
   };
 
@@ -44,7 +44,7 @@ class CustomerDialog extends Component {
         <RaisedButton
           type='button'
           onClick={this.handleOpen}
-          label={'Opprett ny kunde'}
+          label='Opprett ny kunde'
           fullWidth
           style={{ width: 180 }}
         />
@@ -59,7 +59,7 @@ class CustomerDialog extends Component {
               <TextField
                 type='text'
                 floatingLabelFixed={false}
-                floatingLabelText={'Kundekode:'}
+                floatingLabelText='Kundekode:'
                 onChange={this.onCustomerCodeChanged}
               />
             </div>
@@ -67,7 +67,7 @@ class CustomerDialog extends Component {
               <TextField
                 type='text'
                 floatingLabelFixed={false}
-                floatingLabelText={'Kundenavn:'}
+                floatingLabelText='Kundenavn:'
                 onChange={this.onCustomerNameChanged}
               />
             </div>

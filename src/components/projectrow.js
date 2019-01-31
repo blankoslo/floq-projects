@@ -1,15 +1,20 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import createHistory from 'history/createBrowserHistory';
 import { browserHistory } from 'react-router';
 
-
-const ProjectRow = (props) => (
+const ProjectRow = props => (
   <div
     className='floq-list-row'
+    tabIndex='0'
+    role='option'
     onClick={() => browserHistory.push(`/projects/${props.project.id}`)}
   >
-    <b>{props.project.customer.name}:</b> {props.project.name}
+    <b>
+      {props.project.customer.name}
+      :
+    </b>
+    {' '}
+    {props.project.name}
   </div>
 );
 

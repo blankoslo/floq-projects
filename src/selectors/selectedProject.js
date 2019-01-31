@@ -18,8 +18,8 @@ const getProject = (projects, selectedProject, form) => {
         id: '',
         billable: 'billable',
         responsible: '',
-        active: true }
-      ).merge(form.data)
+        active: true
+      }).merge(form.data)
     };
   }
   // view/edit project
@@ -31,8 +31,8 @@ const getProject = (projects, selectedProject, form) => {
       data: new Immutable.Map(originalProject)
     };
   }
-  const result = form.data === null ? originalProject :
-   new Immutable.Map(originalProject).merge(form.data);
+  const result = form.data === null ? originalProject
+    : new Immutable.Map(originalProject).merge(form.data);
 
   return {
     loading: false,

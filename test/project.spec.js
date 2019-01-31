@@ -1,9 +1,10 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() });
-import ProjectEditor from '../src/components/projectEditor';
 import Immutable from 'immutable';
+import ProjectEditor from '../src/components/projectEditor';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 // setup is a function, so that each test get its own state
 const setup = () => {
@@ -46,7 +47,8 @@ const setup = () => {
       onChange={actions.onChange}
       generateProjectId={actions.generateProjectId}
       isNew
-    />);
+    />
+  );
 
   return {
     form,
@@ -84,7 +86,8 @@ describe('<ProjectEditor />-form', () => {
         onSubmit={() => { }}
         onChange={() => { }}
         isNew={false}
-      />);
+      />
+    );
     expect(wrapper.find('#customer-form').prop('disabled'))
       .toBeTruthy();
   });
@@ -104,7 +107,8 @@ describe('<ProjectEditor />-form', () => {
         onSubmit={() => { }}
         onChange={() => { }}
         isNew={false}
-      />);
+      />
+    );
 
     expect(wrapper.find('#id-form').prop('disabled')).toBeTruthy();
   });

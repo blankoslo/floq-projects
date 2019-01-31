@@ -12,7 +12,7 @@ const getProjects = (projects, customers) => {
 
   if (projects.excludeInactiveProjects) {
     data = data
-      .filter(v => v.active)
+      .filter(v => v.active);
   }
 
   return {

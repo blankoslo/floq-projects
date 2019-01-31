@@ -1,19 +1,16 @@
 import * as React from 'react';
 import createHistory from 'history/createBrowserHistory';
 import PropTypes from 'prop-types';
+import Toggle from 'material-ui/Toggle';
 import ProjectRow from './projectrow';
 
-
-import Toggle from 'material-ui/Toggle';
 
 const ProjectsList = ({ projects, excludeInactiveProjects, toggleShowInactiveProjects }) => {
   if (projects.loading === true) {
     return <div>Loading</div>;
   }
 
-  const projectsRows = projects.data.valueSeq().map(project =>
-    <ProjectRow key={project.id} project={project} />
-  );
+  const projectsRows = projects.data.valueSeq().map(project => <ProjectRow key={project.id} project={project} />);
 
   return (
     <div className='floq-list'>
@@ -21,13 +18,13 @@ const ProjectsList = ({ projects, excludeInactiveProjects, toggleShowInactivePro
         <h3>Prosjekter</h3>
         <div className='floq-inactive-projects-toggle'>
           <Toggle
-            label={"Vis inaktive"}
+            label='Vis inaktive'
             defaultToggled={!excludeInactiveProjects}
             onToggle={toggleShowInactiveProjects}
           />
         </div>
       </div>
-      <div className="projectRows">
+      <div className='projectRows'>
         {projectsRows}
       </div>
     </div>

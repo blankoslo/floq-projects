@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { updateProject, createProject,
-  selectProject, updateField, resetForm, fetchEmployees } from '../actions/index';
+import {
+  updateProject, createProject,
+  selectProject, updateField, resetForm, fetchEmployees
+} from '../actions/index';
 import selectedProjectSelector from '../selectors/selectedProject';
 
 class ProjectContainer extends Component {
@@ -112,7 +114,7 @@ ProjectContainer.propTypes = {
   fetchEmployees: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => (
+const mapStateToProps = state => (
   {
     form: selectedProjectSelector(state),
     employees: state.employees,

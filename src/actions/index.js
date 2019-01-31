@@ -63,4 +63,4 @@ export const apiError = error => ({
 
 export const toggleShowInactiveProjects = () => ({
   type: TOGGLE_SHOW_INACTIVE_PROJECTS
-})
+});
