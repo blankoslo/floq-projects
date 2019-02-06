@@ -72,6 +72,7 @@ const ProjectEditor = (props) => {
           searchText={props.customers.data.get(props.form.data.get('customer'), { name: '' }).name}
           onNewRequest={onCustomerChange}
           id='customer-form'
+          menuStyle={{maxHeight: '30vh'}}
         />
       </div>
       {props.isNew ? (
@@ -126,6 +127,7 @@ const ProjectEditor = (props) => {
           searchText={props.employees.get(props.form.data.get('responsible'), { name: '' }).name}
           onNewRequest={onResponsibleChange}
           id='responsible-form'
+          menuStyle={{maxHeight: '30vh'}}
         />
       </div>
       <div>
