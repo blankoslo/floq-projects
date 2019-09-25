@@ -6,17 +6,17 @@ import CustomerTI from "./validators/customer-ti";
 import EmployeeTI from "./validators/employee-ti";
 import ProjectTI from "./validators/project-ti";
 
-const { Customer } = createCheckers(CustomerTI);
+const { CustomerChecker } = createCheckers(CustomerTI);
 export function IsValidCustomer(value: any): value is Customer {
-  return Customer.test(value);
+  return CustomerChecker.test(value);
 }
 
-const { Employee } = createCheckers(EmployeeTI);
+const { EmployeeChecker } = createCheckers(EmployeeTI);
 export function IsValidEmployee(value: any): value is Employee {
-  return Employee.test(value);
+  return EmployeeChecker.test(value);
 }
 
-const { Project } = createCheckers(ProjectTI);
+const { ProjectChecker } = createCheckers(ProjectTI);
 export function IsValidProject(value: any): value is Project {
-  return Project.test(value);
+  return ProjectChecker.test(value);
 }
