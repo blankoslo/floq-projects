@@ -14,7 +14,10 @@ export const Project = t.iface([], {
   deductable: t.opt("boolean"),
 });
 
+export const Projects = t.array("Project");
+
 const exportedTypeSuite: t.ITypeSuite = {
   Project,
+  Projects,
 };
 export default exportedTypeSuite;

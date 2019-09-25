@@ -1,6 +1,3 @@
-import { Customer } from "./customer";
-import { Employee } from "./employee";
-
 export interface Project {
   id: string;
   name: string;

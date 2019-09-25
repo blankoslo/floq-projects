@@ -9,7 +9,10 @@ export const Customer = t.iface([], {
   name: "string",
 });
 
+export const Customers = t.array("Customer");
+
 const exportedTypeSuite: t.ITypeSuite = {
   Customer,
+  Customers,
 };
 export default exportedTypeSuite;

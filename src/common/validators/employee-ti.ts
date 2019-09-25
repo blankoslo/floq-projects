@@ -30,8 +30,11 @@ export const Employee = t.iface([], {
   bio: t.opt("string"),
 });
 
+export const Employees = t.array("Employee");
+
 const exportedTypeSuite: t.ITypeSuite = {
   Gender,
   Employee,
+  Employees,
 };
 export default exportedTypeSuite;
