@@ -3,6 +3,7 @@
  */
 import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
+/* eslint-disable @typescript-eslint/camelcase */
 
 export const Gender = t.union(t.lit("male"), t.lit("female"), t.lit("other"));
 

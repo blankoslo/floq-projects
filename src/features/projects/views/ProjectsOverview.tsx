@@ -1,5 +1,11 @@
 import React from "react";
+import ProjectsList from "../components/ProjectsList";
 
-export default function ProjectsOverview() {
-  return <h1>Hello!</h1>;
+export default function ProjectsOverview(): React.ReactElement {
+  return (
+    <div>
+      <h1>Hello!</h1>
+      <ProjectsList />
+    </div>
+  );
 }

@@ -1,8 +1,8 @@
 import React from "react";
-import { Route, BrowserRouter, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ProjectsOverview from "./features/projects/views/ProjectsOverview";
 
-export default function ProjectsRouter() {
+export default function ProjectsRouter(): React.ReactElement {
   return (
     <BrowserRouter>
       <Switch>

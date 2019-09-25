@@ -1,6 +1,10 @@
-import { FloqWindow } from "../FloqWindow";
+declare global {
+  interface Window {
+    config: { apiUri: string };
+    apiToken: string;
+  }
+}
 
-declare let window: FloqWindow;
 const API_URL = window.config.apiUri;
 const API_TOKEN = window.apiToken;
 

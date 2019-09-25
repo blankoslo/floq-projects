@@ -8,6 +8,8 @@ import ProjectTI from "./validators/project-ti";
 
 const { CustomerChecker, CustomersChecker } = createCheckers(CustomerTI);
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export function IsValidCustomer(value: any): value is Customer {
   return CustomerChecker.test(value);
 }
