@@ -7,7 +7,7 @@ import * as t from "ts-interface-checker";
 export const Project = t.iface([], {
   id: "string",
   name: "string",
-  billable: "boolean",
+  billable: "string",
   customer: "string",
   responible: t.opt("number"),
   active: "boolean",

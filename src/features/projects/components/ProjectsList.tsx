@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Projects } from "../../../types/project";
+import { Projects } from "../../../types/Project";
 import { ProjectAPI } from "../../../common/api/ProjectAPI";
 
 export default function ProjectsList(): React.ReactElement {
   const [projects, setProjects] = useState<Projects>([]);
-  useEffect(() => {
+
+  const getAllProjects = (): void => {
     ProjectAPI.getAll().then(res => setProjects(res));
+  };
+
+  useEffect(() => {
+    getAllProjects();
   }, []);
 
   return (

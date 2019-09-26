@@ -1,7 +1,7 @@
 export interface Project {
   id: string;
   name: string;
-  billable: boolean;
+  billable: string;
   customer: string; // Customer["id"]
   responible?: number; // Employee["id"]
   active: boolean;

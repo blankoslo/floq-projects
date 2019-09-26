@@ -1,8 +1,8 @@
-import { BaseAPI } from "./BaseAPI";
-import { Projects } from "../../types/project";
+import { Projects } from "../../types/Project";
 import { IsValidProjects } from "../DataCheckers";
+import { BaseAPI } from "./BaseAPI";
 
-const PROJECT_API_URL = `${BaseAPI.API_URL}/projects`;
+const PROJECT_API_URL = `${BaseAPI.config.config.apiUri}/projects`;
 
 const GET_ALL_QUERY = new URLSearchParams({
   select: "id,name,billable,customer,responsible,active",

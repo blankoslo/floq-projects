@@ -1,19 +1,11 @@
-declare global {
-  interface Window {
-    config: { apiUri: string };
-    apiToken: string;
-  }
-}
-
-const API_URL = window.config.apiUri;
-const API_TOKEN = window.apiToken;
+import config from "../Config";
 
 export const BaseAPI = {
-  API_URL,
-  API_TOKEN,
+  config,
   requestOptions: {
+    credentials: "include",
     headers: {
-      "Authorization": `Bearer ${API_TOKEN}`,
+      "Authorization": `Bearer ${config.apiToken}`,
       "Prefer": "return=representation",
       "Accept": "application/json",
       "Content-Type": "application/json; charset=utf-8",

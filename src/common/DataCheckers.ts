@@ -1,14 +1,23 @@
 import { createCheckers } from "ts-interface-checker";
-import { Customer, Customers } from "../types/customer";
-import { Employee, Employees } from "../types/employee";
-import { Project, Projects } from "../types/project";
-import CustomerTI from "./validators/customer-ti";
-import EmployeeTI from "./validators/employee-ti";
-import ProjectTI from "./validators/project-ti";
-
-const { CustomerChecker, CustomersChecker } = createCheckers(CustomerTI);
+import { BasicType, basicTypes } from "ts-interface-checker/dist/types";
+import { Customer, Customers } from "../types/Customer";
+import { Employee, Employees } from "../types/Employee";
+import { Project, Projects } from "../types/Project";
+import { TokenData } from "../types/TokenData";
+import CustomerTI from "./validators/Customer-ti";
+import EmployeeTI from "./validators/Employee-ti";
+import ProjectTI from "./validators/Project-ti";
+import TokenDataTI from "./validators/TokenData-ti";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-function-return-type  */
+
+basicTypes["Date"] = new BasicType(v => v instanceof Date, "is not a Date");
+
+const {
+  Customer: CustomerChecker,
+  Customers: CustomersChecker,
+} = createCheckers(CustomerTI);
 
 export function IsValidCustomer(value: any): value is Customer {
   return CustomerChecker.test(value);
@@ -18,7 +27,10 @@ export function IsValidCustomers(value: any): value is Customers {
   return CustomersChecker.test(value);
 }
 
-const { EmployeeChecker, EmployeesChecker } = createCheckers(EmployeeTI);
+const {
+  Employee: EmployeeChecker,
+  Employees: EmployeesChecker,
+} = createCheckers(EmployeeTI);
 
 export function IsValidEmployee(value: any): value is Employee {
   return EmployeeChecker.test(value);
@@ -28,7 +40,9 @@ export function IsValidEmployees(value: any): value is Employees {
   return EmployeesChecker.test(value);
 }
 
-const { ProjectChecker, ProjectsChecker } = createCheckers(ProjectTI);
+const { Project: ProjectChecker, Projects: ProjectsChecker } = createCheckers(
+  ProjectTI
+);
 
 export function IsValidProject(value: any): value is Project {
   return ProjectChecker.test(value);
@@ -36,4 +50,10 @@ export function IsValidProject(value: any): value is Project {
 
 export function IsValidProjects(value: any): value is Projects {
   return ProjectsChecker.test(value);
+}
+
+const { TokenData: TokenDataChecker } = createCheckers(TokenDataTI);
+
+export function IsValidTokenData(value: any): value is TokenData {
+  return TokenDataChecker.test(value);
 }
