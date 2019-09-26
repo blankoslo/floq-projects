@@ -4,7 +4,7 @@ import ProjectsList from "../components/ProjectsList";
 export default function ProjectsOverview(): React.ReactElement {
   return (
     <div>
-      <h1>Hello!</h1>
+      <h1>Projects</h1>
       <ProjectsList />
     </div>
   );

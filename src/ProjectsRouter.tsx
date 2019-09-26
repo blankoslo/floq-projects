@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import ProjectsOverview from "./features/projects/views/ProjectsOverview";
+import ProjectsOverview from "features/projects/views/ProjectsOverview";
 
 export default function ProjectsRouter(): React.ReactElement {
   return (

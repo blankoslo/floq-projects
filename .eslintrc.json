@@ -1,21 +1,28 @@
 {
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": ["react", "@typescript-eslint", "import"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
   "env": {
     "browser": true,
     "es6": true
   },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "prettier/@typescript-eslint"
-  ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -28,6 +35,9 @@
     "useJSXTextNode": true,
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint"],
-  "rules": {}
+
+  "rules": {
+    // turn on errors for missing imports
+    "import/no-unresolved": "error"
+  }
 }
