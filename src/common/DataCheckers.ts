@@ -27,7 +27,7 @@ export function IsValidCustomers(value: any): value is Customers {
   return CustomersChecker.test(value);
 }
 
-const {
+export const {
   Employee: EmployeeChecker,
   Employees: EmployeesChecker,
 } = createCheckers(EmployeeTI);
@@ -38,6 +38,19 @@ export function IsValidEmployee(value: any): value is Employee {
 
 export function IsValidEmployees(value: any): value is Employees {
   return EmployeesChecker.test(value);
+}
+
+export const {
+  ProjectEmployee: ProjectEmployeeChecker,
+  ProjectEmployees: ProjectEmployeesChecker,
+} = createCheckers(EmployeeTI);
+
+export function IsValidProjectEmployee(value: any): value is Employee {
+  return ProjectEmployeeChecker.test(value);
+}
+
+export function IsValidProjectEmployees(value: any): value is Employees {
+  return ProjectEmployeesChecker.test(value);
 }
 
 const { Project: ProjectChecker, Projects: ProjectsChecker } = createCheckers(

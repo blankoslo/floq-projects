@@ -1,11 +1,23 @@
+import { CustomersContextProvider } from "common/context/CustomersContext";
+import { EmployeesContextProvider } from "common/context/EmployeesContext";
+import { ProjectsContextProvider } from "common/context/ProjectsContext";
+import "features/projects/styles/projects.scss";
 import React from "react";
+import { RouteComponentProps } from "react-router";
 import ProjectsList from "../components/ProjectsList";
 
-export default function ProjectsOverview(): React.ReactElement {
+type AllProps = RouteComponentProps;
+
+const ProjectsOverview: React.FC<AllProps> = (props: AllProps) => {
   return (
-    <div>
-      <h1>Projects</h1>
-      <ProjectsList />
-    </div>
+    <EmployeesContextProvider>
+      <CustomersContextProvider>
+        <ProjectsContextProvider>
+          <ProjectsList />
+        </ProjectsContextProvider>
+      </CustomersContextProvider>
+    </EmployeesContextProvider>
   );
-}
+};
+
+export default ProjectsOverview;

@@ -1,9 +1,11 @@
+type Billable = "billable" | "nonbillable" | "unavailable";
+
 export interface Project {
   id: string;
   name: string;
-  billable: string;
+  billable: Billable;
   customer: string; // Customer["id"]
-  responible?: number; // Employee["id"]
+  responsible?: number; // Employee["id"]
   active: boolean;
   deductable?: boolean;
 }

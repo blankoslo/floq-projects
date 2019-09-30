@@ -3,7 +3,6 @@
  */
 import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
-/* eslint-disable @typescript-eslint/camelcase */
 
 export const TokenData = t.iface([], {
   id_token: "string",

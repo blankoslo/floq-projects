@@ -4,12 +4,18 @@
 import * as t from "ts-interface-checker";
 // tslint:disable:object-literal-key-quotes
 
+export const Billable = t.union(
+  t.lit("billable"),
+  t.lit("nonbillable"),
+  t.lit("unavailable")
+);
+
 export const Project = t.iface([], {
   id: "string",
   name: "string",
-  billable: "string",
+  billable: "Billable",
   customer: "string",
-  responible: t.opt("number"),
+  responsible: t.opt("number"),
   active: "boolean",
   deductable: t.opt("boolean"),
 });
@@ -17,6 +23,7 @@ export const Project = t.iface([], {
 export const Projects = t.array("Project");
 
 const exportedTypeSuite: t.ITypeSuite = {
+  Billable,
   Project,
   Projects,
 };

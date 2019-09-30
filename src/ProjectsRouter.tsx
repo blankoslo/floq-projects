@@ -6,9 +6,9 @@ export default function ProjectsRouter(): React.ReactElement {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/projects/" component={ProjectsOverview} />
         <Route path="/projects/:id" component={ProjectsOverview} />
         <Route path="/projects/new" component={ProjectsOverview} />
+        <Route path="/projects/" component={ProjectsOverview} />
         <Redirect to="/projects" />
       </Switch>
     </BrowserRouter>

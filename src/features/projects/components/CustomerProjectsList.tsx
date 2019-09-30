@@ -1,23 +1,23 @@
 import React from "react";
-import ProjectEntry from "./ProjectEntry";
 import { Customer } from "types/Customer";
 import { Project } from "types/Project";
+import ProjectEntry from "./ProjectEntry";
 
-interface CustomerProjectsListProps {
+interface Props {
   customer: Customer;
   projects: Project[];
 }
 
-export default function CustomerProjectsList(
-  props: CustomerProjectsListProps
-): React.ReactElement {
+const CustomerProjectsList: React.FC<Props> = (props: Props) => {
   const { customer, projects } = props;
   return (
-    <div>
-      <h2>{customer.name}</h2>
+    <div className="customer">
+      <span className="customer-name">{customer.name}</span>
       {projects.map(p => (
         <ProjectEntry key={`project-${p.id}`} project={p} />
       ))}
     </div>
   );
-}
+};
+
+export default CustomerProjectsList;

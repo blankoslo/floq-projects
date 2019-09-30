@@ -1,5 +1,5 @@
-import { Projects } from "../../types/Project";
-import { IsValidProjects } from "../DataCheckers";
+import { Projects, Project } from "../../types/Project";
+import { IsValidProjects, IsValidProject } from "../DataCheckers";
 import { BaseAPI } from "./BaseAPI";
 
 const PROJECT_API_URL = `${BaseAPI.config.config.apiUri}/projects`;
@@ -19,6 +19,23 @@ const getAll = (): Promise<Projects> =>
       return Promise.reject("Response does not validate");
     });
 
+const get = (id: Project["id"]): Promise<Project> =>
+  fetch(
+    `${PROJECT_API_URL}?${new URLSearchParams({
+      select: "id,name,billable,customer,responsible,active",
+      id: `eq.${id}`,
+    }).toString()}`,
+    BaseAPI.requestOptions
+  )
+    .then(res => res.json())
+    .then(res => {
+      if (IsValidProject(res)) {
+        return Promise.resolve(res);
+      }
+      return Promise.reject("Response does not validate");
+    });
+
 export const ProjectAPI = {
   getAll,
+  get,
 };
