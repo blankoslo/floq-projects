@@ -8,6 +8,21 @@ $color-pink: #f7d1db;
   margin: 0 auto;
 }
 
+.topbar {
+  width: 100%;
+  margin: 0;
+  background-color: #efe5ff;
+}
+
+@media only screen and (min-width: 600px) {
+  .topbar {
+    padding: 1rem;
+    & > *:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}
+
 .projects {
   display: flex;
   flex-direction: column;
@@ -21,7 +36,9 @@ $color-pink: #f7d1db;
     column-fill: balance;
     column-gap: 24px;
 
-    margin: 0 auto;
+    max-width: 80%;
+    width: 100%;
+    margin: 2rem auto;
 
     & > .customer {
       max-width: 320px;

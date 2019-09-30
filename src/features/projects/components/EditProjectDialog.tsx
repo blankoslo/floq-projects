@@ -93,7 +93,7 @@ const EditProjectDialog: React.FC<Props> = (props: Props) => {
             {customer.name}: {project.name}
           </DialogTitle>
           <DialogContent>
-            <Grid container direction="column">
+            <Grid container spacing={2} direction="column">
               <FormControlLabel
                 control={<Switch checked={project.active} color="primary" />}
                 label="Aktiv"
