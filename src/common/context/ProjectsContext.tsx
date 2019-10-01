@@ -9,18 +9,16 @@ interface Props {
 interface ProjectContextProps {
   data: Project[];
   actions: {
-    create: (dto: Project) => void;
-    update: (id: Project["id"], dto: Project) => void;
-    delete: (id: Project["id"]) => void;
+    create: (dto: Project) => Promise<Project>;
+    update: (id: Project["id"], dto: Project) => Promise<Project>;
   };
 }
 
 const ProjectsContext = React.createContext<ProjectContextProps>({
   data: [],
   actions: {
-    create: (dto: Project): void => {},
-    update: (id: Project["id"], dto: Project): void => {},
-    delete: (id: Project["id"]): void => {},
+    create: (): Promise<Project> => Promise.reject(),
+    update: (): Promise<Project> => Promise.reject(),
   },
 });
 export default ProjectsContext;
@@ -30,27 +28,32 @@ export const ProjectsContextProvider: React.FC<Props> = (props: Props) => {
 
   const [projects, setProjects] = useState<Project[]>([]);
 
-  const getAllProjects = (): void => {
-    ProjectAPI.getAll().then(res => setProjects(res));
+  const getAllProjects = (): Promise<Project[]> => {
+    return ProjectAPI.getAll().then(res => {
+      setProjects(res);
+      return res;
+    });
   };
 
-  const createProject = (dto: Project): void => {
-    setProjects([...projects, dto]);
+  const createProject = (dto: Project): Promise<Project> => {
+    return ProjectAPI.create(dto).then(res => {
+      setProjects([...projects, dto]);
+      return res;
+    });
   };
 
-  const updateProject = (id: Project["id"], dto: Project): void => {
-    setProjects(
-      projects.map(p => {
-        if (p.id === id) {
-          return dto;
-        }
-        return p;
-      })
-    );
-  };
-
-  const deleteProject = (id: Project["id"]): void => {
-    setProjects(projects.filter(p => p.id !== id));
+  const updateProject = (id: Project["id"], dto: Project): Promise<Project> => {
+    return ProjectAPI.update(id, dto).then(res => {
+      setProjects(
+        projects.map(p => {
+          if (p.id === id) {
+            return dto;
+          }
+          return p;
+        })
+      );
+      return res;
+    });
   };
 
   useEffect(() => {
@@ -64,7 +67,6 @@ export const ProjectsContextProvider: React.FC<Props> = (props: Props) => {
         actions: {
           create: createProject,
           update: updateProject,
-          delete: deleteProject,
         },
       }}>
       {children}

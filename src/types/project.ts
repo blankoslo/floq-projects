@@ -1,4 +1,4 @@
-type Billable = "billable" | "nonbillable" | "unavailable";
+export type Billable = "billable" | "nonbillable" | "unavailable";
 
 export interface Project {
   id: string;
