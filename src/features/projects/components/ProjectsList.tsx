@@ -1,19 +1,18 @@
+import {
+  Button,
+  FormControlLabel,
+  InputAdornment,
+  Switch,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { useCustomers } from "common/context/CustomersContext";
 import { useProjects } from "common/context/ProjectsContext";
 import React, { useEffect, useState } from "react";
 import { Customer } from "types/Customer";
 import { Project } from "types/Project";
 import CustomerProjectsList from "./CustomerProjectsList";
-import {
-  Button,
-  TextField,
-  FormControlLabel,
-  Switch,
-  Grid,
-  InputAdornment,
-  Typography,
-} from "@material-ui/core";
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 
 interface CustomerProjects {
   customer: Customer;
