@@ -1,5 +1,6 @@
 import {
   Button,
+  CircularProgress,
   FormControlLabel,
   InputAdornment,
   Switch,
@@ -13,6 +14,7 @@ import React, { useEffect, useState } from "react";
 import { Customer } from "types/Customer";
 import { Project } from "types/Project";
 import CustomerProjectsList from "./CustomerProjectsList";
+import "features/projects/styles/projects.scss";
 
 interface CustomerProjects {
   customer: Customer;
@@ -71,6 +73,9 @@ const ProjectsList: React.FC = () => {
     );
   }, [filterActive, search, ctxCustomers.data, ctxProjects.data]);
 
+  const hasData = ctxProjects.data.length > 0;
+  const hasFilteredData = filteredProjects.length > 0;
+
   return (
     <div className="overview">
       <div className="topbar">
@@ -82,7 +87,7 @@ const ProjectsList: React.FC = () => {
           color="primary"
           label="Søk"
           autoFocus
-          onChange={e => setSearch(e.currentTarget.value)}
+          onChange={(e): void => setSearch(e.currentTarget.value)}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -96,24 +101,25 @@ const ProjectsList: React.FC = () => {
             <Switch
               color="primary"
               checked={filterActive}
-              onChange={e => setFilterActive(e.target.checked)}
+              onChange={(e): void => setFilterActive(e.target.checked)}
             />
           }
           label="Vis kun aktive prosjekter"
         />
       </div>
       <div className="projects">
-        {filteredProjects.length > 0 ? (
+        {!hasData && <CircularProgress variant="indeterminate" />}
+        {hasData && !hasFilteredData && (
+          <Typography variant="h1">😬</Typography>
+        )}
+        {hasFilteredData &&
           filteredProjects.map(c => (
             <CustomerProjectsList
               key={`customer-${c.customer.id}`}
               customer={c.customer}
               projects={c.projects}
             />
-          ))
-        ) : (
-          <Typography variant="h1">😬</Typography>
-        )}
+          ))}
       </div>
     </div>
   );

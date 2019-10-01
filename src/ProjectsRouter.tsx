@@ -1,16 +1,50 @@
+/* eslint-disable react/prop-types */
+import { CustomersContextProvider } from "common/context/CustomersContext";
+import { EmployeesContextProvider } from "common/context/EmployeesContext";
+import { ProjectsContextProvider } from "common/context/ProjectsContext";
+import EditProjectDialog from "features/projects/components/EditProjectDialog";
+import ProjectsList from "features/projects/components/ProjectsList";
 import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import ProjectsOverview from "features/projects/views/ProjectsOverview";
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  RouteComponentProps,
+  Switch,
+} from "react-router-dom";
 
-export default function ProjectsRouter(): React.ReactElement {
+const WrapContext: React.FC<{ children: React.ReactNode }> = (props: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <EmployeesContextProvider>
+      <CustomersContextProvider>
+        <ProjectsContextProvider>{props.children}</ProjectsContextProvider>
+      </CustomersContextProvider>
+    </EmployeesContextProvider>
+  );
+};
+
+const ProjectsRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/projects/:id" component={ProjectsOverview} />
-        <Route path="/projects/new" component={ProjectsOverview} />
-        <Route path="/projects/" component={ProjectsOverview} />
+        <Route path="/projects/">
+          <WrapContext>
+            <ProjectsList />
+            <Route
+              path="/projects/:id"
+              render={(
+                props: RouteComponentProps<{ id: string }>
+              ): React.ReactNode => (
+                <EditProjectDialog projectId={props.match.params.id} />
+              )}
+            />
+          </WrapContext>
+        </Route>
         <Redirect to="/projects" />
       </Switch>
     </BrowserRouter>
   );
-}
+};
+export default ProjectsRouter;

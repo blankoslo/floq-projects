@@ -15,6 +15,7 @@ import { useProjects } from "common/context/ProjectsContext";
 import { Field, Form, Formik, FormikActions } from "formik";
 import { Switch, TextField } from "formik-material-ui";
 import React from "react";
+import { useHistory } from "react-router";
 import { Billable, Project } from "types/Project";
 import * as yup from "yup";
 
@@ -38,8 +39,6 @@ type FormikProject = yup.InferType<typeof EditProjectSchema>;
 
 interface Props {
   projectId: Project["id"];
-  isOpen: boolean;
-  onClose: () => void;
 }
 
 const mapBillable: { value: Billable; name: string }[] = [
@@ -55,10 +54,7 @@ const billableElements = mapBillable.map(c => (
 ));
 
 const EditProjectDialog: React.FC<Props> = (props: Props) => {
-  const { projectId, isOpen, onClose } = props;
-  if (!isOpen) {
-    return null;
-  }
+  const { projectId } = props;
 
   const ctxEmployees = useEmployees();
   const ctxCustomers = useCustomers();
@@ -90,6 +86,12 @@ const EditProjectDialog: React.FC<Props> = (props: Props) => {
     </MenuItem>
   ));
 
+  const history = useHistory();
+
+  const onClose = (): void => {
+    history.push("/projects");
+  };
+
   const onSubmit = (
     values: FormikProject,
     actions: FormikActions<FormikProject>
@@ -108,7 +110,7 @@ const EditProjectDialog: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} fullWidth>
+    <Dialog open={true} onClose={onClose} fullWidth>
       <DialogTitle>
         {customer.name}: {project.name}
       </DialogTitle>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import { useHistory } from "react-router";
 import { Project } from "types/Project";
-import EditProjectDialog from "./EditProjectDialog";
 
 interface Props {
   project: Project;
@@ -8,27 +8,16 @@ interface Props {
 
 const ProjectEntry: React.FC<Props> = (props: Props) => {
   const { project } = props;
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  const onOpen = (): void => {
-    setOpen(true);
-  };
-
-  const onClose = (): void => {
-    setOpen(false);
-  };
+  const history = useHistory();
 
   return (
     <>
-      <div className="project" onClick={onOpen}>
+      <div
+        className="project"
+        onClick={(): void => history.push(`/projects/${project.id}`)}>
         <span className="name">{project.name}</span>
         <span className="code">{project.id}</span>
       </div>
-      <EditProjectDialog
-        projectId={project.id}
-        isOpen={isOpen}
-        onClose={onClose}
-      />
     </>
   );
 };
