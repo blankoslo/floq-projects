@@ -17,9 +17,8 @@ interface ProjectContextProps {
 const ProjectsContext = React.createContext<ProjectContextProps>({
   data: [],
   actions: {
-    create: (dto: Project): Promise<Project> => Promise.reject(),
-    update: (id: Project["id"], dto: Project): Promise<Project> =>
-      Promise.reject(),
+    create: (): Promise<Project> => Promise.reject(),
+    update: (): Promise<Project> => Promise.reject(),
   },
 });
 export default ProjectsContext;

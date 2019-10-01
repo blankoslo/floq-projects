@@ -12,7 +12,7 @@ import {
 import { useCustomers } from "common/context/CustomersContext";
 import { useEmployees } from "common/context/EmployeesContext";
 import { useProjects } from "common/context/ProjectsContext";
-import { Field, Form, Formik, FormikActions, FormikProps } from "formik";
+import { Field, Form, Formik, FormikActions } from "formik";
 import { Switch, TextField } from "formik-material-ui";
 import React from "react";
 import { Billable, Project } from "types/Project";
@@ -116,7 +116,7 @@ const EditProjectDialog: React.FC<Props> = (props: Props) => {
         initialValues={EditProjectSchema.cast(project)}
         validationSchema={EditProjectSchema}
         onSubmit={onSubmit}
-        render={(formikProps: FormikProps<FormikProject>): React.ReactNode => (
+        render={(): React.ReactNode => (
           <Form>
             <DialogContent>
               <Grid container direction="column">
