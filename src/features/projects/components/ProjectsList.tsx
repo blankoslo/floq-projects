@@ -15,6 +15,7 @@ import { Customer } from "types/Customer";
 import { Project } from "types/Project";
 import CustomerProjectsList from "./CustomerProjectsList";
 import "features/projects/styles/projects.scss";
+import { useHistory } from "react-router";
 
 interface CustomerProjects {
   customer: Customer;
@@ -76,10 +77,16 @@ const ProjectsList: React.FC = () => {
   const hasData = ctxProjects.data.length > 0;
   const hasFilteredData = filteredProjects.length > 0;
 
+  const history = useHistory();
+
   return (
     <div className="overview">
       <div className="topbar">
-        <Button variant="contained" color="primary" size="medium">
+        <Button
+          variant="contained"
+          color="primary"
+          size="medium"
+          onClick={(): void => history.push("/projects/new")}>
           Legg til prosjekt
         </Button>
         <TextField
