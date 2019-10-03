@@ -42,8 +42,8 @@ const create = (dto: Project): Promise<Project> =>
   })
     .then(res => res.json())
     .then(res => {
-      if (IsValidProject(res)) {
-        return Promise.resolve(res);
+      if (IsValidProjects(res) && res.length === 1) {
+        return Promise.resolve(res[0]);
       }
       return Promise.reject("Response does not validate");
     });
