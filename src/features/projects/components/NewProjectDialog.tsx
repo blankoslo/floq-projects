@@ -21,6 +21,7 @@ const NewProjectDialog: React.FC = () => {
   const onSubmit = (values: any): void => {
     // TODO: Implement this in database
     delete values.subcontractor;
+
     const project = { ...values, active: true };
     if (IsValidProject(project)) {
       ctxProjects.actions.create(project).then(() => {

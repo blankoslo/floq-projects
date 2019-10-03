@@ -46,8 +46,8 @@ export const ProjectsContextProvider: React.FC<Props> = (props: Props) => {
     return ProjectAPI.update(id, dto).then(res => {
       setProjects(
         projects.map(p => {
-          if (p.id === id) {
-            return dto;
+          if (p.id === res.id) {
+            return res;
           }
           return p;
         })
