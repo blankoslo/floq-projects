@@ -1,0 +1,14 @@
+@import "common/floq/floq-vars.scss";
+
+.wrapper {
+  display: block;
+  margin: $half-spacing 0 $eight-spacing 0;
+
+  font-family: "Work Sans", sans-serif;
+  font-size: 0.875rem;
+  color: $blank-purple-dark;
+}
+
+.label {
+  margin-left: $quarter-spacing;
+}

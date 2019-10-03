@@ -16,7 +16,6 @@ $color-pink: #f7d1db;
 
 @media only screen and (min-width: 600px) {
   .topbar {
-    padding: 1rem;
     & > *:not(:last-child) {
       margin-right: 1rem;
     }

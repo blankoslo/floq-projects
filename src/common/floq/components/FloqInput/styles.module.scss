@@ -1,0 +1,25 @@
+@import "common/floq/floq-vars.scss";
+
+.wrapper {
+  position: relative;
+
+  margin-bottom: $quarter-spacing;
+}
+
+.input {
+  height: $spacing;
+  border: none;
+  border-bottom: 1px solid change-color($color: $blank-black, $alpha: 0.12);
+
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.125rem;
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -#{$half-spacing};
+  right: 0;
+
+  font-size: 0.75rem;
+  color: $blank-pink;
+}
