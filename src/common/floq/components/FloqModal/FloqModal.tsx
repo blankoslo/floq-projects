@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import modalStyles from "./styles.module.scss";
 
 type FloqModalProps = {
