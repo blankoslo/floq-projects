@@ -1,5 +1,6 @@
 import { useCustomers } from "common/context/CustomersContext";
 import { useEmployees } from "common/context/EmployeesContext";
+import { useProjects } from "common/context/ProjectsContext";
 import FloqButton from "common/floq/components/FloqButton/FloqButton";
 import FloqButtonGroup from "common/floq/components/FloqButtonGroup/FloqButtonGroup";
 import FloqCheckbox from "common/floq/components/FloqCheckbox/FloqCheckbox";
@@ -15,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import useForm from "react-hook-form";
 import Select from "react-select";
 import Creatable from "react-select/creatable";
+import { ActionMeta, ValueType } from "react-select/src/types";
 import { Billable } from "types/Project";
 
 type CustomerOption = { value: string; label: string; tag: string };
@@ -55,6 +57,30 @@ const NewProjectForm: React.FC<NewProjectDialogProps> = (
     })
   );
 
+  const ctxProjects = useProjects();
+
+  const suggestProjectId = (customerId: string): string => {
+    const existing = ctxProjects.data
+      .map(p => p.id)
+      .filter(p => p.startsWith(customerId));
+    if (existing.length === 0) {
+      return `${customerId}1000`;
+    }
+
+    const sorted = existing.sort((a, b) => {
+      if (a < b) return -1;
+      if (a > b) return 1;
+      return 0;
+    });
+
+    const current = parseInt(
+      sorted[sorted.length - 1].slice(customerId.length),
+      10
+    );
+
+    return `${customerId}${current + 1}`;
+  };
+
   const [values, setValues] = useState<{
     billable?: Billable;
     customer?: CustomerOption;
@@ -69,6 +95,55 @@ const NewProjectForm: React.FC<NewProjectDialogProps> = (
     register({ name: "billable" }, { required: true });
   }, [register]);
 
+  const onChangeCustomer = (
+    value: ValueType<CustomerOption>,
+    action: ActionMeta
+  ): void => {
+    switch (action.action) {
+      case "select-option": {
+        const option = value as CustomerOption;
+        setValue("customer", option.value, true);
+        setValue("id", suggestProjectId(option.value), true);
+        setValues({
+          ...values,
+          customer: option,
+        });
+        break;
+      }
+      case "clear": {
+        setValue("customer", undefined, true);
+        setValue("id", undefined, true);
+        setValues({
+          ...values,
+          customer: undefined,
+        });
+        break;
+      }
+      case "create-option": {
+        const option = value as { label: string };
+        console.log(`User wants to create customer: ${option.label}`);
+        break;
+      }
+    }
+  };
+
+  const onChangeEmployee = (
+    value: ValueType<EmployeeOption>,
+    action: ActionMeta
+  ): void => {
+    switch (action.action) {
+      case "select-option": {
+        const option = value as EmployeeOption;
+        setValue("responsible", option.value, true);
+        setValues({
+          ...values,
+          responsible: option,
+        });
+        break;
+      }
+    }
+  };
+
   return (
     <FloqForm>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -77,13 +152,7 @@ const NewProjectForm: React.FC<NewProjectDialogProps> = (
           <FloqInput error={errors.customer && "Påkrevd"}>
             <Creatable
               value={values.customer}
-              onChange={(option): void => {
-                setValue("customer", (option as CustomerOption).value, true);
-                setValues({
-                  ...values,
-                  customer: option as CustomerOption,
-                });
-              }}
+              onChange={onChangeCustomer}
               styles={FloqReactSelectStyles}
               formatOptionLabel={SelectOption}
               options={optionsCustomers}
@@ -120,13 +189,7 @@ const NewProjectForm: React.FC<NewProjectDialogProps> = (
           <FloqInput error={errors.responsible && "Påkrevd"}>
             <Select
               value={values.responsible}
-              onChange={(option): void => {
-                setValue("responsible", (option as EmployeeOption).value, true);
-                setValues({
-                  ...values,
-                  responsible: option as EmployeeOption,
-                });
-              }}
+              onChange={onChangeEmployee}
               styles={FloqReactSelectStyles}
               options={optionsEmployees}
               placeholder={"Knut?"}
