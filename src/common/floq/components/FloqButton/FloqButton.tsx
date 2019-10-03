@@ -11,15 +11,16 @@ type FloqButtonProps = {
 >;
 
 const FloqButton: React.FC<FloqButtonProps> = (props: FloqButtonProps) => {
+  const { variant, fullWidth, action, ...forward } = props;
   const classNames = [
     buttonStyles.button,
-    props.variant && buttonStyles[props.variant],
-    props.fullWidth && buttonStyles.fullWidth,
-    props.action && buttonStyles.action,
+    variant && buttonStyles[variant],
+    fullWidth && buttonStyles.fullWidth,
+    action && buttonStyles.action,
   ]
     .filter(Boolean)
     .join(" ");
-  return <button className={classNames} {...props} />;
+  return <button className={classNames} {...forward} />;
 };
 
 export default FloqButton;
