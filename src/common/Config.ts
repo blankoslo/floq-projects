@@ -1,10 +1,11 @@
 import { TokenData } from "../types/TokenData";
 import { IsValidTokenData } from "./DataCheckers";
-import tokenData from "./tokenData.dev.local.json";
 
 const getConfig = (): TokenData => {
   // Import local tokenData if dev env
   if (process.env.NODE_ENV !== "production") {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const tokenData = require("./tokenData.dev.local.json");
     return tokenData;
   }
 

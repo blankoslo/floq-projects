@@ -78,11 +78,7 @@ module.exports = function(webpackEnv) {
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
-      isEnvDevelopment && require.resolve("style-loader"),
-      isEnvProduction && {
-        loader: MiniCssExtractPlugin.loader,
-        options: shouldUseRelativeAssetPaths ? { publicPath: "../../" } : {},
-      },
+      require.resolve("style-loader"),
       {
         loader: require.resolve("css-loader"),
         options: cssOptions,
@@ -170,14 +166,14 @@ module.exports = function(webpackEnv) {
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
       filename: isEnvProduction
-        ? "static/js/[name].[contenthash:8].js"
-        : isEnvDevelopment && "static/js/bundle.js",
+        ? "js/app.bundle.js"
+        : isEnvDevelopment && "js/bundle.js",
       // TODO: remove this when upgrading to webpack 5
       futureEmitAssets: true,
       // There are also additional JS chunk files if you use code splitting.
-      chunkFilename: isEnvProduction
-        ? "static/js/[name].[contenthash:8].chunk.js"
-        : isEnvDevelopment && "static/js/[name].chunk.js",
+      // chunkFilename: isEnvProduction
+      //   ? "static/js/[name].[contenthash:8].chunk.js"
+      //   : isEnvDevelopment && "static/js/[name].chunk.js",
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
@@ -268,9 +264,9 @@ module.exports = function(webpackEnv) {
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
       // https://github.com/facebook/create-react-app/issues/5358
-      runtimeChunk: {
-        name: entrypoint => `runtime-${entrypoint.name}`,
-      },
+      // runtimeChunk: {
+      //   name: entrypoint => `runtime-${entrypoint.name}`,
+      // },
     },
     resolve: {
       // This allows you to set a fallback for where Webpack should look for modules.
@@ -560,13 +556,13 @@ module.exports = function(webpackEnv) {
       // See https://github.com/facebook/create-react-app/issues/186
       isEnvDevelopment &&
         new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-      isEnvProduction &&
-        new MiniCssExtractPlugin({
-          // Options similar to the same options in webpackOptions.output
-          // both options are optional
-          filename: "static/css/[name].[contenthash:8].css",
-          chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
-        }),
+      // isEnvProduction &&
+      //   new MiniCssExtractPlugin({
+      //     // Options similar to the same options in webpackOptions.output
+      //     // both options are optional
+      //     filename: "static/css/[name].[contenthash:8].css",
+      //     chunkFilename: "static/css/[name].[contenthash:8].chunk.css",
+      //   }),
       // Generate a manifest file which contains a mapping of all asset filenames
       // to their corresponding output file so that tools can pick it up without
       // having to parse `index.html`.
