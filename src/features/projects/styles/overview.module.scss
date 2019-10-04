@@ -1,0 +1,25 @@
+@import "common/floq/floq-vars.scss";
+
+.projects {
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 600px) {
+  .projects {
+    display: block;
+    column-count: auto;
+    column-width: 320px;
+    column-fill: balance;
+    column-gap: 24px;
+
+    max-width: 80%;
+    width: 100%;
+    margin: 2rem auto;
+
+    & > .customer {
+      max-width: 320px;
+      width: 100%;
+    }
+  }
+}

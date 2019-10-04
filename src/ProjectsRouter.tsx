@@ -3,7 +3,7 @@ import { EmployeesContextProvider } from "common/context/EmployeesContext";
 import { ProjectsContextProvider } from "common/context/ProjectsContext";
 import EditProjectDialog from "features/projects/components/EditProjectDialog";
 import NewProjectDialog from "features/projects/components/NewProjectDialog";
-import ProjectsList from "features/projects/components/ProjectsList";
+import ProjectsOverview from "features/projects/components/ProjectsOverview";
 import React from "react";
 import {
   BrowserRouter,
@@ -31,7 +31,7 @@ const ProjectsRouter: React.FC = () => {
       <Switch>
         <Route path="/projects/">
           <WrapContext>
-            <ProjectsList />
+            <ProjectsOverview />
             <Switch>
               <Route path="/projects/new" component={NewProjectDialog} />
               <Route

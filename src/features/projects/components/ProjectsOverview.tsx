@@ -1,28 +1,20 @@
-import {
-  Button,
-  CircularProgress,
-  FormControlLabel,
-  InputAdornment,
-  Switch,
-  TextField,
-  Typography,
-} from "@material-ui/core";
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { useCustomers } from "common/context/CustomersContext";
 import { useProjects } from "common/context/ProjectsContext";
+import FloqCheckbox from "common/floq/components/FloqCheckbox/FloqCheckbox";
+import topbarStyles from "features/projects/styles/topbar.module.scss";
+import overviewStyles from "features/projects/styles/overview.module.scss";
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { Customer } from "types/Customer";
 import { Project } from "types/Project";
 import CustomerProjectsList from "./CustomerProjectsList";
-import "features/projects/styles/projects.scss";
-import { useHistory } from "react-router";
 
 interface CustomerProjects {
   customer: Customer;
   projects: Project[];
 }
 
-const ProjectsList: React.FC = () => {
+const ProjectsOverview: React.FC = () => {
   const ctxCustomers = useCustomers();
   const ctxProjects = useProjects();
 
@@ -81,43 +73,35 @@ const ProjectsList: React.FC = () => {
 
   return (
     <div className="overview">
-      <div className="topbar">
-        <Button
-          variant="contained"
-          color="primary"
-          size="medium"
+      <div className={topbarStyles.topbar}>
+        <button
+          className={topbarStyles.addButton}
           onClick={(): void => history.push("/projects/new")}>
-          Legg til prosjekt
-        </Button>
-        <TextField
-          variant="standard"
-          color="primary"
-          label="Søk"
-          autoFocus
-          onChange={(e): void => setSearch(e.currentTarget.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchOutlinedIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-        <FormControlLabel
-          control={
-            <Switch
-              color="primary"
-              checked={filterActive}
-              onChange={(e): void => setFilterActive(e.target.checked)}
-            />
-          }
+          <i className="material-icons dark-gray">add</i>
+          <span>Legg til prosjekt</span>
+        </button>
+        <div className={topbarStyles.searchWrapper}>
+          <i className={`${topbarStyles.searchIcon} material-icons dark-gray`}>
+            search
+          </i>
+          <input
+            type="text"
+            autoFocus
+            className={topbarStyles.search}
+            placeholder="Søk på navn, tittel, emoji"
+            onChange={(e): void => setSearch(e.currentTarget.value)}
+          />
+        </div>
+        <FloqCheckbox
           label="Vis kun aktive prosjekter"
+          checked={filterActive}
+          onChange={(e): void => setFilterActive(e.target.checked)}
         />
       </div>
-      <div className="projects">
-        {!hasData && <CircularProgress variant="indeterminate" />}
+      <div className={overviewStyles.projects}>
+        {!hasData && <span style={{ fontSize: "32rem" }}>⏳</span>}
         {hasData && !hasFilteredData && (
-          <Typography variant="h1">😬</Typography>
+          <span style={{ fontSize: "32rem" }}>😬</span>
         )}
         {hasFilteredData &&
           filteredProjects.map(c => (
@@ -132,4 +116,4 @@ const ProjectsList: React.FC = () => {
   );
 };
 
-export default ProjectsList;
+export default ProjectsOverview;

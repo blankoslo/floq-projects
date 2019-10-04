@@ -1,4 +1,3 @@
-import { CircularProgress } from "@material-ui/core";
 import { useProjects } from "common/context/ProjectsContext";
 import { IsValidProject } from "common/DataCheckers";
 import FloqModal from "common/floq/components/FloqModal/FloqModal";
@@ -6,6 +5,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Project } from "types/Project";
 import EditProjectForm, { EditProjectValues } from "./EditProjectForm";
+import FloqForm from "common/floq/components/FloqForm/FloqForm";
 
 interface Props {
   projectId: Project["id"];
@@ -34,7 +34,7 @@ const EditProjectDialog: React.FC<Props> = (props: Props) => {
           history.push("/projects");
         }}
         title="Rediger prosjekt">
-        <CircularProgress variant="indeterminate" />
+        <FloqForm>Laster...</FloqForm>
       </FloqModal>
     );
   }

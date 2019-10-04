@@ -88,12 +88,13 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
     responsible?: EmployeeOption;
   }>({});
 
-  const { register, handleSubmit, setValue, errors } = useForm<
+  const { register, handleSubmit, setValue, getValues, errors } = useForm<
     NewProjectValues
   >();
 
   useEffect(() => {
-    if (customerId) {
+    if (ctxCustomers.data.length === 0 || ctxProjects.data.length === 0) return;
+    if (customerId && !getValues().customer) {
       setValue("customer", customerId);
       setValues({
         ...values,
@@ -101,7 +102,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
       });
       setValue("id", suggestProjectId(customerId), true);
     }
-  }, [ctxCustomers.data]);
+  }, [customerId, ctxCustomers.data, ctxProjects.data]);
 
   useEffect(() => {
     register({ name: "customer" }, { required: true });
