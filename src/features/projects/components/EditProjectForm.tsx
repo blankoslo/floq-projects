@@ -121,6 +121,16 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
         </FloqFormControl>
 
         <FloqFormControl size="medium">
+          <FloqInput>
+            <FloqCheckbox
+              name="subcontractor"
+              label="Underleverandør"
+              ref={register}
+            />
+          </FloqInput>
+        </FloqFormControl>
+
+        <FloqFormControl size="medium">
           <FloqInputLabel label="Ansvarlig" />
           <FloqInput error={errors.responsible && "Påkrevd"}>
             <Select
@@ -129,16 +139,6 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
               styles={FloqReactSelectStyles}
               options={optionsEmployees}
               placeholder={"Knut?"}
-            />
-          </FloqInput>
-        </FloqFormControl>
-
-        <FloqFormControl size="medium">
-          <FloqInput>
-            <FloqCheckbox
-              name="subcontractor"
-              label="Underleverandør"
-              ref={register}
             />
           </FloqInput>
         </FloqFormControl>
