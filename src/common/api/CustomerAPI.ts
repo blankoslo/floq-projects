@@ -14,6 +14,41 @@ const getAll = (): Promise<Customer[]> =>
       return Promise.reject("Response does not validate");
     });
 
+const create = (dto: Customer): Promise<Customer> =>
+  fetch(`${CUSTOMER_API_URL}`, {
+    ...BaseAPI.requestOptions,
+    method: "POST",
+    body: JSON.stringify(dto),
+  })
+    .then(res => res.json())
+    .then(res => {
+      if (IsValidCustomers(res) && res.length === 1) {
+        return Promise.resolve(res[0]);
+      }
+      return Promise.reject("Response does not validate");
+    });
+
+const update = (id: Customer["id"], dto: Customer): Promise<Customer> =>
+  fetch(
+    `${CUSTOMER_API_URL}?${new URLSearchParams({
+      id: `eq.${id}`,
+    }).toString()}`,
+    {
+      ...BaseAPI.requestOptions,
+      method: "PATCH",
+      body: JSON.stringify(dto),
+    }
+  )
+    .then(res => res.json())
+    .then(res => {
+      if (IsValidCustomers(res) && res.length === 1) {
+        return Promise.resolve(res[0]);
+      }
+      return Promise.reject("Response does not validate");
+    });
+
 export const CustomerAPI = {
   getAll,
+  create,
+  update,
 };

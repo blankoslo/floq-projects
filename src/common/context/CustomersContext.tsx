@@ -9,18 +9,16 @@ interface Props {
 interface CustomersContextProps {
   data: Customer[];
   actions: {
-    create: (dto: Customer) => void;
-    update: (id: Customer["id"], dto: Customer) => void;
-    delete: (id: Customer["id"]) => void;
+    create: (dto: Customer) => Promise<Customer>;
+    update: (id: Customer["id"], dto: Customer) => Promise<Customer>;
   };
 }
 
 const CustomersContext = React.createContext<CustomersContextProps>({
   data: [],
   actions: {
-    create: (dto: Customer): void => {},
-    update: (id: Customer["id"], dto: Customer): void => {},
-    delete: (id: Customer["id"]): void => {},
+    create: (): Promise<Customer> => Promise.reject(),
+    update: (): Promise<Customer> => Promise.reject(),
   },
 });
 export default CustomersContext;
@@ -34,23 +32,28 @@ export const CustomersContextProvider: React.FC<Props> = (props: Props) => {
     CustomerAPI.getAll().then(res => setCustomers(res));
   };
 
-  const createCustomer = (dto: Customer): void => {
-    setCustomers([...customers, dto]);
+  const createCustomer = (dto: Customer): Promise<Customer> => {
+    return CustomerAPI.create(dto).then(res => {
+      setCustomers([...customers, res]);
+      return res;
+    });
   };
 
-  const updateCustomer = (id: Customer["id"], dto: Customer): void => {
-    setCustomers(
-      customers.map(p => {
-        if (p.id === id) {
-          return dto;
-        }
-        return p;
-      })
-    );
-  };
-
-  const deleteCustomer = (id: Customer["id"]): void => {
-    setCustomers(customers.filter(p => p.id !== id));
+  const updateCustomer = (
+    id: Customer["id"],
+    dto: Customer
+  ): Promise<Customer> => {
+    return CustomerAPI.update(id, dto).then(res => {
+      setCustomers(
+        customers.map(p => {
+          if (p.id === res.id) {
+            return res;
+          }
+          return p;
+        })
+      );
+      return res;
+    });
   };
 
   useEffect(() => {
@@ -64,7 +67,6 @@ export const CustomersContextProvider: React.FC<Props> = (props: Props) => {
         actions: {
           create: createCustomer,
           update: updateCustomer,
-          delete: deleteCustomer,
         },
       }}>
       {children}

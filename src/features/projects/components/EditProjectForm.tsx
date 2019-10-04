@@ -1,3 +1,4 @@
+import { useCustomers } from "common/context/CustomersContext";
 import { useEmployees } from "common/context/EmployeesContext";
 import FloqButton from "common/floq/components/FloqButton/FloqButton";
 import FloqButtonGroup from "common/floq/components/FloqButtonGroup/FloqButtonGroup";
@@ -13,15 +14,22 @@ import React, { useEffect, useState } from "react";
 import useForm from "react-hook-form";
 import Select from "react-select";
 import { ActionMeta, ValueType } from "react-select/src/types";
+import { Employee } from "types/Employee";
 import { Billable, Project } from "types/Project";
 import { billableElements, EmployeeOption } from "./common";
-import { useCustomers } from "common/context/CustomersContext";
+
+export interface EditProjectValues {
+  name: string;
+  responsible: Employee["id"];
+  subcontractor: boolean;
+  billable: Billable;
+  active: boolean;
+}
 
 type EditProjectFormProps = {
   project: Project;
   onCancel: () => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSubmit: (values: any) => void;
+  onSubmit: (values: EditProjectValues) => void;
 };
 
 const EditProjectForm: React.FC<EditProjectFormProps> = (
@@ -50,7 +58,9 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
     active: project.active,
   });
 
-  const { register, handleSubmit, setValue, errors } = useForm({
+  const { register, handleSubmit, setValue, errors } = useForm<
+    EditProjectValues
+  >({
     defaultValues: {
       name: project.name,
       responsible: project.responsible,

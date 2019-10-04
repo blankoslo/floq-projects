@@ -1,6 +1,4 @@
-import { useCustomers } from "common/context/CustomersContext";
 import { useEmployees } from "common/context/EmployeesContext";
-import { useProjects } from "common/context/ProjectsContext";
 import FloqButton from "common/floq/components/FloqButton/FloqButton";
 import FloqButtonGroup from "common/floq/components/FloqButtonGroup/FloqButtonGroup";
 import FloqCheckbox from "common/floq/components/FloqCheckbox/FloqCheckbox";
@@ -10,20 +8,26 @@ import FloqInputField from "common/floq/components/FloqInput/FloqInputField";
 import FloqInputLabel from "common/floq/components/FloqInputLabel/FloqInputLabel";
 import FloqModalActions from "common/floq/components/FloqModal/FloqModalActions";
 import { FloqReactSelectStyles } from "common/floq/components/FloqReactSelect/FloqReactSelectStyles";
-import SelectOption from "common/floq/components/SelectOption/SelectOption";
 import React, { useEffect, useState } from "react";
 import useForm from "react-hook-form";
-import { useHistory } from "react-router";
 import Select from "react-select";
-import Creatable from "react-select/creatable";
 import { ActionMeta, ValueType } from "react-select/src/types";
+import { Billable, Project } from "types/Project";
+import { billableElements, EmployeeOption } from "./common";
 import { Customer } from "types/Customer";
 import { Employee } from "types/Employee";
-import { Billable, Project } from "types/Project";
-import { billableElements, CustomerOption, EmployeeOption } from "./common";
 
-export interface NewProjectValues {
-  customer: Customer["id"];
+type NewCustomerProjectDialogProps = {
+  customerName?: string;
+  onCancel: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSubmit: (values: NewCustomerProjectValues) => void;
+};
+
+export interface NewCustomerProjectValues {
+  customerName: string;
+  customerId: Customer["id"];
+
   id: Project["id"];
   name: string;
   responsible: Employee["id"];
@@ -31,25 +35,10 @@ export interface NewProjectValues {
   billable: Billable;
 }
 
-type NewProjectFormProps = {
-  customerId?: Customer["id"];
-  onCancel: () => void;
-  onSubmit: (values: NewProjectValues) => void;
-};
-
-const NewProjectForm: React.FC<NewProjectFormProps> = (
-  props: NewProjectFormProps
+const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
+  props: NewCustomerProjectDialogProps
 ) => {
-  const { customerId, onCancel, onSubmit } = props;
-
-  const ctxCustomers = useCustomers();
-  const optionsCustomers = ctxCustomers.data.map(
-    (c): CustomerOption => ({
-      value: c.id,
-      label: c.name,
-      tag: c.id,
-    })
-  );
+  const { customerName, onCancel, onSubmit } = props;
 
   const ctxEmployees = useEmployees();
   const optionsEmployees = ctxEmployees.data.map(
@@ -59,89 +48,43 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
     })
   );
 
-  const ctxProjects = useProjects();
-  const suggestProjectId = (customerId: string): string => {
-    const existing = ctxProjects.data
-      .map(p => p.id)
-      .filter(p => p.startsWith(customerId));
-    if (existing.length === 0) {
-      return `${customerId}1000`;
-    }
-
-    const sorted = existing.sort((a, b) => {
-      if (a < b) return -1;
-      if (a > b) return 1;
-      return 0;
-    });
-
-    const current = parseInt(
-      sorted[sorted.length - 1].slice(customerId.length),
-      10
-    );
-
-    return `${customerId}${current + 1}`;
-  };
-
   const [values, setValues] = useState<{
     billable?: Billable;
-    customer?: CustomerOption;
     responsible?: EmployeeOption;
   }>({});
 
-  const { register, handleSubmit, setValue, errors } = useForm<
-    NewProjectValues
+  const { register, handleSubmit, watch, setValue, errors } = useForm<
+    NewCustomerProjectValues
   >();
 
   useEffect(() => {
-    if (customerId) {
-      setValue("customer", customerId);
-      setValues({
-        ...values,
-        customer: optionsCustomers.find(c => c.value === customerId),
-      });
-      setValue("id", suggestProjectId(customerId), true);
-    }
-  }, [ctxCustomers.data]);
-
-  useEffect(() => {
-    register({ name: "customer" }, { required: true });
     register({ name: "responsible" }, { required: true });
     register({ name: "billable" }, { required: true });
   }, [register]);
 
-  const history = useHistory();
-
-  const onChangeCustomer = (
-    value: ValueType<CustomerOption>,
-    action: ActionMeta
-  ): void => {
-    switch (action.action) {
-      case "select-option": {
-        const option = value as CustomerOption;
-        setValue("customer", option.value, true);
-        setValues({
-          ...values,
-          customer: option,
-        });
-        setValue("id", suggestProjectId(option.value), true);
-        break;
-      }
-      case "clear": {
-        setValue("customer", "", true);
-        setValues({
-          ...values,
-          customer: undefined,
-        });
-        setValue("id", "");
-        break;
-      }
-      case "create-option": {
-        const option = value as { label: string };
-        history.push(`?new-customer=${option.label}`);
-        break;
-      }
+  useEffect(() => {
+    if (customerName) {
+      setValue("customerName", customerName);
     }
-  };
+  }, [customerName]);
+
+  const formValues = watch();
+
+  useEffect(() => {
+    if (!formValues.customerName) return;
+
+    const id = formValues.customerName
+      .replace(/\s/g, "")
+      .slice(0, 3)
+      .toUpperCase();
+    setValue("customerId", id);
+  }, [formValues.customerName]);
+
+  useEffect(() => {
+    if (!formValues.customerId) return;
+
+    setValue("id", `${formValues.customerId}1000`);
+  }, [formValues.customerId]);
 
   const onChangeEmployee = (
     value: ValueType<EmployeeOption>,
@@ -163,16 +106,23 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FloqFormControl size="medium">
-        <FloqInputLabel label="Kunde" />
-        <FloqInput error={errors.customer && "Påkrevd"}>
-          <Creatable
-            value={values.customer}
-            onChange={onChangeCustomer}
-            styles={FloqReactSelectStyles}
-            formatOptionLabel={SelectOption}
-            options={optionsCustomers}
-            placeholder={""}
-            isClearable
+        <FloqInputLabel label="Kundenavn" />
+        <FloqInput error={errors.customerName && "Påkrevd"}>
+          <FloqInputField
+            type="text"
+            name="customerName"
+            ref={register({ required: true })}
+          />
+        </FloqInput>
+      </FloqFormControl>
+
+      <FloqFormControl size="small">
+        <FloqInputLabel label="Kundekode" />
+        <FloqInput error={errors.customerId && "Påkrevd"}>
+          <FloqInputField
+            type="text"
+            name="customerId"
+            ref={register({ required: true })}
           />
         </FloqInput>
       </FloqFormControl>
@@ -254,4 +204,4 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
   );
 };
 
-export default NewProjectForm;
+export default NewCustomerProjectForm;

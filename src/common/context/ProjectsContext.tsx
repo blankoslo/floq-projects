@@ -37,7 +37,7 @@ export const ProjectsContextProvider: React.FC<Props> = (props: Props) => {
 
   const createProject = (dto: Project): Promise<Project> => {
     return ProjectAPI.create(dto).then(res => {
-      setProjects([...projects, dto]);
+      setProjects([...projects, res]);
       return res;
     });
   };

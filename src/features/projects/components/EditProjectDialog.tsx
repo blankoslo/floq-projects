@@ -5,7 +5,7 @@ import FloqModal from "common/floq/components/FloqModal/FloqModal";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Project } from "types/Project";
-import EditProjectForm from "./EditProjectForm";
+import EditProjectForm, { EditProjectValues } from "./EditProjectForm";
 
 interface Props {
   projectId: Project["id"];
@@ -39,14 +39,13 @@ const EditProjectDialog: React.FC<Props> = (props: Props) => {
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = (values: any): void => {
+  const onSubmit = (values: EditProjectValues): void => {
     // TODO: Implement this in database
     delete values.subcontractor;
 
     const dto = { ...project, ...values };
     if (IsValidProject(dto)) {
-      ctxProjects.actions.update(project.id, values).then(() => {
+      ctxProjects.actions.update(project.id, dto).then(() => {
         history.push("/projects");
       });
     }
