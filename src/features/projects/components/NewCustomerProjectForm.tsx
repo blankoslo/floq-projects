@@ -51,11 +51,11 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
   const [values, setValues] = useState<{
     billable?: Billable;
     responsible?: EmployeeOption;
-  }>({});
+  }>({ billable: "billable" });
 
   const { register, handleSubmit, watch, setValue, errors } = useForm<
     NewCustomerProjectValues
-  >();
+  >({ defaultValues: { billable: "billable" } });
 
   useEffect(() => {
     register({ name: "responsible" }, { required: true });

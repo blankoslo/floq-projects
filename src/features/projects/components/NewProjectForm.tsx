@@ -86,11 +86,11 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
     billable?: Billable;
     customer?: CustomerOption;
     responsible?: EmployeeOption;
-  }>({});
+  }>({ billable: "billable" });
 
   const { register, handleSubmit, setValue, getValues, errors } = useForm<
     NewProjectValues
-  >();
+  >({ defaultValues: { billable: "billable" } });
 
   useEffect(() => {
     if (ctxCustomers.data.length === 0 || ctxProjects.data.length === 0) return;
