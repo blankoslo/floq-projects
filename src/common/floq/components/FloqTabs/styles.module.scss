@@ -5,11 +5,6 @@
   flex-direction: row;
   flex-wrap: wrap;
 
-  font-family: "Work Sans", sans-serif;
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: $blank-purple-dark;
-
   & > *:not(:last-child) {
     margin-right: $half-spacing;
   }
@@ -19,6 +14,11 @@
   text-decoration: none;
   cursor: pointer;
   padding-bottom: $eight-spacing;
+
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: $blank-purple-dark;
 
   &.active {
     border-bottom: 4px solid $blank-purple;
