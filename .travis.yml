@@ -7,36 +7,32 @@ node_js:
   - "12"
 script:
   - yarn run lint
-
-notifications:
-  slack:
-    secure: HA/+sU3RGxPTbIp/sg0/rMPVW/fUiebEjv7AwLZLNUpmCig7ZdXrWyB0GZ41jtstnnf1URfUnbgeVCPT9nKbmcJZB67YpP5EhTt73wfgsq97sLpK604gIiDwi0qjF/ps0cspxvGf3kYBLvYHnI0BWJvk1W8WiSUEQrg6P5wlOfYmnhIG9N6X4B0o1GaUaBm5yLpLsvYcMjfLlBTk7P0F3h6EXKZdZxviBfUf/7cs9lIf3SHQnRQJUaT1F28XqovPaDTL5IdXkplVXFt4lUU8ve0J67ppyze3XznJNp8uc0ftn8k8LoxRmoiGrQzS+hfZMQjq/knopt81pfznc2dBEY9fesFRdHw7PVmV8weQrhBxB2DImsgD/ObGZubJpjAyafS6qPDENwLyKV4oX45vR7Tk5+jxR9lxU4yUwHeOcfdWDLElYQV8DBrjSwGXZ8q9z2fIyft+Q6enlPo25LoqkZH/kJAaYSEuN+uNJWrbTM32LQ16XD/F85nUnX6YSHgkqiohI6YUg9TcLTR/3qsr4+xFA7yZBnKEGRJ6iU+AWxucUpFFCNWK6ZIQvwoJoJ/TF82vpZojwDCKPnUrbkCbfRBPGkoIX5wHOLzt08xcg5R8Qpk13AoVV1Y+94E/vprkNYwrcfFapAcyABL0Euu4q+k1pRDJ2+XwzpNEXfUwv/E=
-
 before_deploy: yarn run build
 deploy:
   - provider: gcs
+    access_key_id: GOOG1EDJO33Q7OQ33H6NB4MEBSHAZNPSQO54M5UFMINE5GC5AXPLJIV7752ZI
+    secret_access_key:
+      secure: K6rXDP0qUFMW5a7ANRhojWmpq6i0ZBNvyzzgL0sScbdYF+DkCG1z9H68/3nEKuXjQxZCmD+bTQsxQHImmHE9NVKoe61yI9ZFqvUAq13CFr02IgSoQpaM8sgn1HHhSGrqKsqwrfaAjCMCDxeIeCd+yymF/aiy+fGulAJjz8la7PAyfUGp2RCA4EmH5IJwLyNv2ie8clVtMAkJ/7Flxj2fJVLl45eFySC06/w5S3xcu5ECY9P55y87BIwd1NGQDZuBOX8h2QqruUzkw0vcXAmeEpQ0iRJJGeHKCitI7mS1rAwpcELyzvaFKWs6uEsfhHv6G+PH2WVsgE8s09eZRKAGapwqKnb2dW8wVtMHiZjtH2pLUaxFU79gYOl8GLXjINEWU8KG9KylftzuCgoHjOKSy4NytxfjjrZmYMIbX/H+B0FGz4jODF6H/cDCKcFhb/21x+2SLltv4H2JPbnTU36UxnKQ6uZrnfrIH3MqRlR6yYs5JH6b5lDUuDtXAFvuFOp+x0T6hAz1eiUKY5gYAd9XT+vDX05hE+KRvzhmKpHjPyV+l5wKqmLs2U1FQU0ty13Cg1SRhKz8hSjoGXJ6a2oWue8ObMxc/lS3WS0PMET49MtEuqBhZa2EwP/LEAV0zPzKwfIorUewlafNO//UxuOz1hxDQgJnKR6PbuVGeIjNCms=
     bucket: floq-test
-    local_dir: build
+    local-dir: build
     upload-dir: projects
-    cache_control: max-age=0
     acl: public-read
-    access_key_id: GOOGFFWIXBHTD746XIUI
-    secret_access_key:
-      secure: Z2voEUfwMW00hAlj27fxrF5rKKexPQTpcG9HspVyWvRfrIB6umirgmxIN2xKwWMVNcfkyFrXnn8cmZtno3Y2VxiQMW9hIOpPsGwXd7VheEpc4t2umdixxFu7JwjX/+K59a86KOeCISS/dU8rsHKYbG3g5zKOSI4LQ0ZGkKfsvLZi+gZl+UXidW0wROosYbDeG7RW7oRvSXDq+ErtjReOPNyGODn08zzWzK2ApRzM1xkGJc7hqf8Y0i5icRRy+VqgRb7VIuMJedI2OvzMZDPqfkTI2W1zO1qY9r/xOqmN+vvKzT1D0AHFxPUNiHL3xssuBht8OfXgXOmk4G6JYUBP3u9aHpURBGLN/lk2nuptiezwH4QLldP1EPD7RLRyX1qoVVqj7oEBT27mLzL06H52yPxVoOaiv4GatIGnwPHBm+04RJ+RJ12AtPNKzJJUsCnAPpyU4ByhgnXtJgHYxp+4MPNcmB7k58mA8rjTNVgxfNSD6OQvh2sg5a/+Ea28kI8qaZkV8naj7YJ5ywKA3/0VfxBpVfTrPre8/ZeSXWcHF1GcYZCGq9c+d1AIBrSRwlQqeKTkrQXaSUTAVFJo1bYcCMPV9WcprSEKW0K69X7JtzMODY3L7T7+06EfFaGeQKr7DfDX+GD2oDsuAqbHW9WR7BdEeSSmnm2OVYPtT4niLfs=
     skip_cleanup: true
     on:
+      repo: blankoslo/floq-projects-new
       branch: develop
-      repo: blankoslo/floq-projects-new
   - provider: gcs
-    bucket: floq
-    local_dir: build
-    upload-dir: projects
-    cache_control: max-age=3600
-    acl: public-read
-    access_key_id: GOOGFFWIXBHTD746XIUI
+    access_key_id: GOOG1EDJO33Q7OQ33H6NB4MEBSHAZNPSQO54M5UFMINE5GC5AXPLJIV7752ZI
     secret_access_key:
-      secure: Z2voEUfwMW00hAlj27fxrF5rKKexPQTpcG9HspVyWvRfrIB6umirgmxIN2xKwWMVNcfkyFrXnn8cmZtno3Y2VxiQMW9hIOpPsGwXd7VheEpc4t2umdixxFu7JwjX/+K59a86KOeCISS/dU8rsHKYbG3g5zKOSI4LQ0ZGkKfsvLZi+gZl+UXidW0wROosYbDeG7RW7oRvSXDq+ErtjReOPNyGODn08zzWzK2ApRzM1xkGJc7hqf8Y0i5icRRy+VqgRb7VIuMJedI2OvzMZDPqfkTI2W1zO1qY9r/xOqmN+vvKzT1D0AHFxPUNiHL3xssuBht8OfXgXOmk4G6JYUBP3u9aHpURBGLN/lk2nuptiezwH4QLldP1EPD7RLRyX1qoVVqj7oEBT27mLzL06H52yPxVoOaiv4GatIGnwPHBm+04RJ+RJ12AtPNKzJJUsCnAPpyU4ByhgnXtJgHYxp+4MPNcmB7k58mA8rjTNVgxfNSD6OQvh2sg5a/+Ea28kI8qaZkV8naj7YJ5ywKA3/0VfxBpVfTrPre8/ZeSXWcHF1GcYZCGq9c+d1AIBrSRwlQqeKTkrQXaSUTAVFJo1bYcCMPV9WcprSEKW0K69X7JtzMODY3L7T7+06EfFaGeQKr7DfDX+GD2oDsuAqbHW9WR7BdEeSSmnm2OVYPtT4niLfs=
+      secure: K6rXDP0qUFMW5a7ANRhojWmpq6i0ZBNvyzzgL0sScbdYF+DkCG1z9H68/3nEKuXjQxZCmD+bTQsxQHImmHE9NVKoe61yI9ZFqvUAq13CFr02IgSoQpaM8sgn1HHhSGrqKsqwrfaAjCMCDxeIeCd+yymF/aiy+fGulAJjz8la7PAyfUGp2RCA4EmH5IJwLyNv2ie8clVtMAkJ/7Flxj2fJVLl45eFySC06/w5S3xcu5ECY9P55y87BIwd1NGQDZuBOX8h2QqruUzkw0vcXAmeEpQ0iRJJGeHKCitI7mS1rAwpcELyzvaFKWs6uEsfhHv6G+PH2WVsgE8s09eZRKAGapwqKnb2dW8wVtMHiZjtH2pLUaxFU79gYOl8GLXjINEWU8KG9KylftzuCgoHjOKSy4NytxfjjrZmYMIbX/H+B0FGz4jODF6H/cDCKcFhb/21x+2SLltv4H2JPbnTU36UxnKQ6uZrnfrIH3MqRlR6yYs5JH6b5lDUuDtXAFvuFOp+x0T6hAz1eiUKY5gYAd9XT+vDX05hE+KRvzhmKpHjPyV+l5wKqmLs2U1FQU0ty13Cg1SRhKz8hSjoGXJ6a2oWue8ObMxc/lS3WS0PMET49MtEuqBhZa2EwP/LEAV0zPzKwfIorUewlafNO//UxuOz1hxDQgJnKR6PbuVGeIjNCms=
+    bucket: floq
+    local-dir: build
+    upload-dir: projects
+    acl: public-read
     skip_cleanup: true
     on:
-      branch: master
       repo: blankoslo/floq-projects-new
+      branch: master
+notifications:
+  slack:
+    secure: uPz3zClsAP3VlOZTp2gwrnv+AtVc9WgeCaykEVTF8V7Is+27EmOr6FGzQZVYelYIIOqkd3FWYHuMHUyvKIFgADmlqy8Nv5uE3EEYK7IsKfNCyUM9L2K8YS1Cetb/aFpldESZk4V+FSGlWzNpWmC+0OEAKM3TKOnOuvGDGRlNRIphTRZwwW8YXSYmJFakeW1WoS7VeWego+BRu+O6Yfja6pANwPSL+QXDsmjmP+JIQ7ym8A1WHojKYCUAxy2eWPEX9gBOcTktvl3N5qPjy3V+gTPU+3Q5YrVK6LC6BiWXNd7QHgxjioEhfVK0flFdmCz5sSfeU2zhf4ARR7qwr8Y5ziSCMJ6DOXHGoAPp8uLOhZDQ8Vnz9xXxq8ICTmCsuOewkHUKcKAaTHZTXbytPc5G4QMeKPKzY+9oHlRK7Z+cY2kJEj9hZdLGSCt2LoZemrCzFv9JqxRi3vFR09Wa88uYbsz8LEhqn02vaWH8sogHhmGpwRKmwSX01bPhhgMZgQYIgsgkgstYNQa911G01k2yxujmuXQKBD9TC6+L/rBHtr66hC2bIKCbBsX55PGHZElEfOLYu0HzoghD9srj4ur5W+UkreQxM+ReRdpWwGEgSw2tVLt8dQD33axFbwFTLcKPwDoW3zL+ucu3cHvzJSnxV880ZSn6BNPD2MrkOLu1rtI=
