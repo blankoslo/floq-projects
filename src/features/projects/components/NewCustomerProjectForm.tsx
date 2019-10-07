@@ -16,6 +16,8 @@ import { Billable, Project } from "types/Project";
 import { billableElements, EmployeeOption } from "./common";
 import { Customer } from "types/Customer";
 import { Employee } from "types/Employee";
+import { useProjects } from "common/context/ProjectsContext";
+import { useCustomers } from "common/context/CustomersContext";
 
 type NewCustomerProjectDialogProps = {
   customerName?: string;
@@ -48,6 +50,9 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
     })
   );
 
+  const ctxCustomers = useCustomers();
+  const ctxProjects = useProjects();
+
   const [values, setValues] = useState<{
     billable?: Billable;
     responsible?: EmployeeOption;
@@ -58,8 +63,8 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
   >({ defaultValues: { billable: "billable" } });
 
   useEffect(() => {
-    register({ name: "responsible" }, { required: true });
-    register({ name: "billable" }, { required: true });
+    register({ name: "responsible" }, { required: "Påkrevd" });
+    register({ name: "billable" }, { required: "Påkrevd" });
   }, [register]);
 
   useEffect(() => {
@@ -107,44 +112,56 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FloqFormControl size="medium">
         <FloqInputLabel label="Kundenavn" />
-        <FloqInput error={errors.customerName && "Påkrevd"}>
+        <FloqInput error={errors.customerName && errors.customerName.message}>
           <FloqInputField
             type="text"
             name="customerName"
-            ref={register({ required: true })}
+            ref={register({
+              required: "Påkrevd",
+            })}
           />
         </FloqInput>
       </FloqFormControl>
 
       <FloqFormControl size="small">
         <FloqInputLabel label="Kundekode" />
-        <FloqInput error={errors.customerId && "Påkrevd"}>
+        <FloqInput error={errors.customerId && errors.customerId.message}>
           <FloqInputField
             type="text"
             name="customerId"
-            ref={register({ required: true })}
+            ref={register({
+              required: "Påkrevd",
+              pattern: { value: /^[A-Z]{3}$/, message: "Feil format" },
+              validate: (input: string) =>
+                !ctxCustomers.data.find(p => p.id === input) || "I bruk",
+            })}
           />
         </FloqInput>
       </FloqFormControl>
 
       <FloqFormControl size="small">
         <FloqInputLabel label="Prosjektkode" />
-        <FloqInput error={errors.id && "Påkrevd"}>
+        <FloqInput error={errors.id && errors.id.message}>
           <FloqInputField
             type="text"
             name="id"
-            ref={register({ required: true })}
+            ref={register({
+              required: "Påkrevd",
+              pattern: { value: /^[A-Z]{3}[0-9]{4}$/, message: "Feil format" },
+              validate: (input: string) =>
+                !ctxProjects.data.find(p => p.id === input) || "I bruk",
+            })}
           />
         </FloqInput>
       </FloqFormControl>
 
       <FloqFormControl size="medium">
         <FloqInputLabel label="Prosjektnavn" />
-        <FloqInput error={errors.name && "Påkrevd"}>
+        <FloqInput error={errors.name && errors.name.message}>
           <FloqInputField
             type="text"
             name="name"
-            ref={register({ required: true })}
+            ref={register({ required: "Påkrevd" })}
           />
         </FloqInput>
       </FloqFormControl>
@@ -161,7 +178,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
 
       <FloqFormControl size="medium">
         <FloqInputLabel label="Ansvarlig" />
-        <FloqInput error={errors.responsible && "Påkrevd"}>
+        <FloqInput error={errors.responsible && errors.responsible.message}>
           <Select
             value={values.responsible}
             onChange={onChangeEmployee}
@@ -174,7 +191,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
 
       <FloqFormControl size="medium">
         <FloqInputLabel label="Type" />
-        <FloqInput error={errors.billable && "Påkrevd"}>
+        <FloqInput error={errors.billable && errors.billable.message}>
           <FloqButtonGroup>
             {billableElements.map(e => (
               <FloqButton

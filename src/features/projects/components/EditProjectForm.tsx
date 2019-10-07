@@ -70,9 +70,9 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
   });
 
   useEffect(() => {
-    register({ name: "responsible" }, { required: true });
-    register({ name: "billable" }, { required: true });
-    register({ name: "active" }, { required: true });
+    register({ name: "responsible" }, { required: "Påkrevd" });
+    register({ name: "billable" }, { required: "Påkrevd" });
+    register({ name: "active" }, { required: "Påkrevd" });
   }, [register]);
 
   const onChangeEmployee = (
@@ -111,11 +111,11 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
 
         <FloqFormControl size="medium">
           <FloqInputLabel label="Prosjektnavn" />
-          <FloqInput error={errors.name && "Påkrevd"}>
+          <FloqInput error={errors.name && errors.name.message}>
             <FloqInputField
               type="text"
               name="name"
-              ref={register({ required: true })}
+              ref={register({ required: "Påkrevd" })}
             />
           </FloqInput>
         </FloqFormControl>
@@ -132,7 +132,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
 
         <FloqFormControl size="medium">
           <FloqInputLabel label="Ansvarlig" />
-          <FloqInput error={errors.responsible && "Påkrevd"}>
+          <FloqInput error={errors.responsible && errors.responsible.message}>
             <Select
               value={values.responsible}
               onChange={onChangeEmployee}
@@ -145,7 +145,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
 
         <FloqFormControl size="medium">
           <FloqInputLabel label="Type" />
-          <FloqInput error={errors.billable && "Påkrevd"}>
+          <FloqInput error={errors.billable && errors.billable.message}>
             <FloqButtonGroup>
               {billableElements.map(e => (
                 <FloqButton
@@ -165,7 +165,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
 
         <FloqFormControl size="medium">
           <FloqInputLabel label="Status" />
-          <FloqInput error={errors.active && "Påkrevd"}>
+          <FloqInput error={errors.active && errors.active.message}>
             <FloqButtonGroup>
               <FloqButton
                 type="button"
