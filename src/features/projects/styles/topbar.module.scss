@@ -6,6 +6,10 @@
   align-items: center;
   padding: $half-spacing;
   background-color: #efe5ff;
+
+  & > * {
+    margin-right: $half-spacing;
+  }
 }
 
 .addButton {
