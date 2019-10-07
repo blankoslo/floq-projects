@@ -7,7 +7,6 @@ node_js:
   - "12"
 script:
   - yarn run lint
-  - yarn test
 
 notifications:
   slack:
