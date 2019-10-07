@@ -131,7 +131,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
             name="customerId"
             ref={register({
               required: "Påkrevd",
-              pattern: { value: /^[A-Z]{3}$/, message: "Feil format" },
+              pattern: { value: /^\w{3}$/, message: "Feil format" },
               validate: (input: string) =>
                 !ctxCustomers.data.find(p => p.id === input) || "I bruk",
             })}
