@@ -186,7 +186,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
             name="id"
             ref={register({
               required: "Påkrevd",
-              pattern: { value: /^[A-Z]{3}[0-9]{4}$/, message: "Feil format" },
+              pattern: { value: /^\w{3}\d{4}$/, message: "Feil format" },
               validate: (input: string) =>
                 !ctxProjects.data.find(p => p.id === input) || "I bruk",
             })}

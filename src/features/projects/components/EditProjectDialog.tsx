@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 import { Project } from "types/Project";
 import EditProjectForm, { EditProjectValues } from "./EditProjectForm";
 import FloqForm from "common/floq/components/FloqForm/FloqForm";
+import { useToast } from "common/components/toast/ToastContext";
 
 interface Props {
   projectId: Project["id"];
@@ -39,15 +40,23 @@ const EditProjectDialog: React.FC<Props> = (props: Props) => {
     );
   }
 
+  const toast = useToast();
+
   const onSubmit = (values: EditProjectValues): void => {
     // TODO: Implement this in database
     delete values.subcontractor;
 
     const dto = { ...project, ...values };
     if (IsValidProject(dto)) {
-      ctxProjects.actions.update(project.id, dto).then(() => {
-        history.push("/projects");
-      });
+      ctxProjects.actions
+        .update(project.id, dto)
+        .then(res => {
+          toast.show("success", `${res.id} oppdatert`);
+          history.push("/projects");
+        })
+        .catch(err => {
+          toast.show("error", `Noe gikk galt: ${err}`);
+        });
     }
   };
 

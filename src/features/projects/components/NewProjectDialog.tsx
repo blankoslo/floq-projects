@@ -12,6 +12,7 @@ import NewCustomerProjectForm, {
 import NewProjectForm, { NewProjectValues } from "./NewProjectForm";
 import { useCustomers } from "common/context/CustomersContext";
 import { Customer } from "types/Customer";
+import { useToast } from "common/components/toast/ToastContext";
 
 type NewProjectOptions =
   | { type: "existing-customer"; customerId?: Customer["id"] }
@@ -29,15 +30,23 @@ const NewProjectDialog: React.FC = () => {
 
   const ctxProjects = useProjects();
 
+  const toast = useToast();
+
   const onSubmitExistingCustomer = (values: NewProjectValues): void => {
     // TODO: Implement this in database
     delete values.subcontractor;
 
     const project = { ...values, active: true };
     if (IsValidProject(project)) {
-      ctxProjects.actions.create(project).then(() => {
-        history.push("/projects");
-      });
+      ctxProjects.actions
+        .create(project)
+        .then(res => {
+          toast.show("success", `${res.id} lagt til`);
+          history.push("/projects");
+        })
+        .catch(err => {
+          toast.show("error", `Noe gikk galt: ${err}`);
+        });
     }
   };
 
@@ -54,8 +63,12 @@ const NewProjectDialog: React.FC = () => {
       ctxCustomers.actions
         .create(customer)
         .then(() => ctxProjects.actions.create(project))
-        .then(() => {
+        .then(res => {
+          toast.show("success", `${res.id} lagt til`);
           history.push("/projects");
+        })
+        .catch(err => {
+          toast.show("error", `Noe gikk galt: ${err}`);
         });
     }
   };

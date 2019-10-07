@@ -1,8 +1,9 @@
+import Toast from "common/components/toast/Toast";
 import { useCustomers } from "common/context/CustomersContext";
 import { useProjects } from "common/context/ProjectsContext";
 import FloqCheckbox from "common/floq/components/FloqCheckbox/FloqCheckbox";
-import topbarStyles from "features/projects/styles/topbar.module.scss";
 import overviewStyles from "features/projects/styles/overview.module.scss";
+import topbarStyles from "features/projects/styles/topbar.module.scss";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Customer } from "types/Customer";
@@ -113,6 +114,7 @@ const ProjectsOverview: React.FC = () => {
           }
         />
       </div>
+      <Toast />
       <div className={overviewStyles.projects}>
         {!hasData && (
           <span style={{ fontSize: "4rem", lineHeight: "1.5" }}>⏳</span>

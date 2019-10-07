@@ -1,3 +1,4 @@
+import { ToastContextProvider } from "common/components/toast/ToastContext";
 import { CustomersContextProvider } from "common/context/CustomersContext";
 import { EmployeesContextProvider } from "common/context/EmployeesContext";
 import { ProjectsContextProvider } from "common/context/ProjectsContext";
@@ -17,11 +18,13 @@ const WrapContext: React.FC<{ children: React.ReactNode }> = (props: {
   children: React.ReactNode;
 }) => {
   return (
-    <EmployeesContextProvider>
-      <CustomersContextProvider>
-        <ProjectsContextProvider>{props.children}</ProjectsContextProvider>
-      </CustomersContextProvider>
-    </EmployeesContextProvider>
+    <ToastContextProvider>
+      <EmployeesContextProvider>
+        <CustomersContextProvider>
+          <ProjectsContextProvider>{props.children}</ProjectsContextProvider>
+        </CustomersContextProvider>
+      </EmployeesContextProvider>
+    </ToastContextProvider>
   );
 };
 
