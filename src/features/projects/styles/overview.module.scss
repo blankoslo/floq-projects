@@ -8,18 +8,25 @@
 @media only screen and (min-width: 600px) {
   .projects {
     display: block;
+
+    -webkit-column-count: auto;
+    -moz-column-count: auto;
     column-count: auto;
+
+    -webkit-column-width: 320px;
+    -moz-column-width: 320px;
     column-width: 320px;
-    column-fill: balance;
+
+    -webkit-column-gap: 24px;
+    -moz-column-gap: 24px;
     column-gap: 24px;
+
+    -webkit-column-fill: balance;
+    -moz-column-fill: balance;
+    column-fill: balance;
 
     max-width: 80%;
     width: 100%;
     margin: 2rem auto;
-
-    & > .customer {
-      max-width: 320px;
-      width: 100%;
-    }
   }
 }

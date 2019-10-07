@@ -1,18 +1,12 @@
+@import "common/floq/floq-vars.scss";
+
 .buttonGroup {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  align-items: stretch;
 
   margin-bottom: 1rem;
 
-  & > button {
-    flex-basis: 5rem;
-    flex-shrink: 1;
-    flex-grow: 1;
-  }
-
   & > *:not(:last-child) {
-    margin-right: 0.4rem;
+    margin-right: $quarter-spacing;
   }
 }

@@ -8,8 +8,11 @@ type FloqInputProps = {
 };
 const FloqInput: React.FC<FloqInputProps> = (props: FloqInputProps) => {
   const { children, error } = props;
+  const classNames = [inputStyles.wrapper, error && inputStyles.error]
+    .filter(Boolean)
+    .join(" ");
   return (
-    <div className={inputStyles.wrapper}>
+    <div className={classNames}>
       {children}
       {error && <span className={inputStyles.errorMessage}>{error}</span>}
     </div>

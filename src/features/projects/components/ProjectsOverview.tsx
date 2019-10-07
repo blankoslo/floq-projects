@@ -72,7 +72,7 @@ const ProjectsOverview: React.FC = () => {
   const history = useHistory();
 
   return (
-    <div className="overview">
+    <div className={"container"}>
       <div className={topbarStyles.topbar}>
         <button
           className={topbarStyles.addButton}
@@ -99,9 +99,11 @@ const ProjectsOverview: React.FC = () => {
         />
       </div>
       <div className={overviewStyles.projects}>
-        {!hasData && <span style={{ fontSize: "32rem" }}>⏳</span>}
+        {!hasData && (
+          <span style={{ fontSize: "4rem", lineHeight: "1.5" }}>⏳</span>
+        )}
         {hasData && !hasFilteredData && (
-          <span style={{ fontSize: "32rem" }}>😬</span>
+          <span style={{ fontSize: "4rem", lineHeight: "1.5" }}>😬</span>
         )}
         {hasFilteredData &&
           filteredProjects.map(c => (

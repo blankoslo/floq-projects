@@ -56,6 +56,10 @@
   border: none;
   color: $floq-header-text !important;
   font-size: 1.2em;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .search::placeholder {

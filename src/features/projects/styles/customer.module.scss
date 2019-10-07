@@ -1,16 +1,17 @@
 @import "common/floq/floq-vars.scss";
 
 .customer {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
 
+  max-width: 320px;
   width: 100%;
   margin-bottom: 16px;
 }
 
 .heading {
   display: flex;
-  flex-direction: wrap;
+  flex-direction: row;
   align-items: center;
 
   font-family: "Work Sans", sans-serif;

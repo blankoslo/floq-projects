@@ -1,10 +1,8 @@
 @import "common/floq/floq-vars.scss";
 
 .button {
-  min-width: 4 * $spacing;
   min-height: $half-spacing;
-  margin: $eight-spacing;
-  padding: $quarter-spacing;
+  padding: $quarter-spacing $half-spacing;
 
   border: none;
   border-radius: $quarter-spacing;
