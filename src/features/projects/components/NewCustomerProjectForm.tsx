@@ -81,13 +81,13 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
       .replace(/\s/g, "")
       .slice(0, 3)
       .toUpperCase();
-    setValue("customerId", id);
+    setValue("customerId", id, true);
   }, [formValues.customerName]);
 
   useEffect(() => {
     if (!formValues.customerId) return;
 
-    setValue("id", `${formValues.customerId}1000`);
+    setValue("id", `${formValues.customerId}1000`, true);
   }, [formValues.customerId]);
 
   const onChangeEmployee = (
@@ -97,7 +97,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
     switch (action.action) {
       case "select-option": {
         const option = value as EmployeeOption;
-        setValue("responsible", option.value, true);
+        setValue("responsible", option.value);
         setValues({
           ...values,
           responsible: option,
@@ -199,7 +199,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
                 variant={(values.billable === e.value && "pink") || "creamy"}
                 onClick={(): void => {
                   setValues({ ...values, billable: e.value });
-                  setValue("billable", e.value, true);
+                  setValue("billable", e.value);
                 }}>
                 {e.label}
               </FloqButton>

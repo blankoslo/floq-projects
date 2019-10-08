@@ -119,7 +119,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
     switch (action.action) {
       case "select-option": {
         const option = value as CustomerOption;
-        setValue("customer", option.value, true);
+        setValue("customer", option.value);
         setValues({
           ...values,
           customer: option,
@@ -128,7 +128,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
         break;
       }
       case "clear": {
-        setValue("customer", "", true);
+        setValue("customer", "");
         setValues({
           ...values,
           customer: undefined,
@@ -151,7 +151,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
     switch (action.action) {
       case "select-option": {
         const option = value as EmployeeOption;
-        setValue("responsible", option.value, true);
+        setValue("responsible", option.value);
         setValues({
           ...values,
           responsible: option,
@@ -239,7 +239,7 @@ const NewProjectForm: React.FC<NewProjectFormProps> = (
                 variant={(values.billable === e.value && "pink") || "creamy"}
                 onClick={(): void => {
                   setValues({ ...values, billable: e.value });
-                  setValue("billable", e.value, true);
+                  setValue("billable", e.value);
                 }}>
                 {e.label}
               </FloqButton>
