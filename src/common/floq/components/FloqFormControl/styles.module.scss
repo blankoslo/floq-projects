@@ -1,0 +1,18 @@
+@import "common/floq/floq-vars.scss";
+
+.formcontrol {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.125rem;
+
+  &.small {
+    width: 4 * $spacing;
+  }
+
+  &.medium {
+    width: 12 * $spacing;
+  }
+
+  &.large {
+    width: 16 * $spacing;
+  }
+}

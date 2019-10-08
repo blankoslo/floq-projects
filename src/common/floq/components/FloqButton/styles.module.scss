@@ -1,0 +1,50 @@
+@import "common/floq/floq-vars.scss";
+
+.button {
+  min-height: $half-spacing;
+  padding: $quarter-spacing $half-spacing;
+
+  border: none;
+  border-radius: $quarter-spacing;
+  background-color: $blank-white;
+
+  font-family: "Work Sans", sans-serif;
+  font-size: 0.875rem;
+
+  text-align: center;
+  vertical-align: middle;
+
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.creamy {
+    background-color: $floq-creamy-light-purple;
+  }
+
+  &.purple {
+    background-color: $blank-purple;
+    color: $blank-white;
+  }
+
+  &.pink {
+    background-color: $blank-pink;
+    color: $blank-white;
+  }
+
+  &.yellow {
+    background-color: $blank-yellow;
+  }
+
+  &.fullWidth {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  &.action {
+    height: 1.75 * $spacing;
+  }
+}

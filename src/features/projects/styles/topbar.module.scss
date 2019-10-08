@@ -1,0 +1,72 @@
+@import "common/floq/floq-vars.scss";
+
+.topbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: $half-spacing;
+  background-color: #efe5ff;
+
+  & > * {
+    margin-right: $half-spacing;
+  }
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+
+  min-width: 4 * $spacing;
+  min-height: $half-spacing;
+  margin: $eight-spacing;
+  padding: $quarter-spacing;
+
+  border: none;
+  border-radius: $quarter-spacing;
+  background-color: $blank-black;
+  color: $blank-white;
+
+  font-family: "Work Sans", sans-serif;
+  font-size: 0.875rem;
+
+  text-align: center;
+  vertical-align: middle;
+
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.searchWrapper {
+  width: 300px;
+  margin: 0px 10px 0px 10px;
+  align-self: center;
+  height: 25px;
+  display: flex;
+  border-radius: 20px;
+  background-color: $blank-white;
+  padding: 5px;
+}
+
+.searchIcon {
+  margin: 0px 10px 0px 10px;
+  color: $floq-header-text !important;
+}
+
+.search {
+  background: none;
+  border: none;
+  color: $floq-header-text !important;
+  font-size: 1.2em;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.search::placeholder {
+  color: $floq-header-text;
+  opacity: 1;
+}

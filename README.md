@@ -1,7 +1,21 @@
-# Project application
+# floq-projects
 
-[![Build Status](https://travis-ci.org/blankoslo/floq-projects.svg?branch=develop)](https://travis-ci.org/blankoslo/floq-projects)
+```bash
+yarn
+yarn start
+```
 
-To run:
+## Lokal utvikling
 
-    npm install && npm start
+Vil du utvikle direkte mot API-et uten en lokal `floq`-instans?
+
+Legg tokendata (se under) i `src/common/tokenData.dev.local.json`
+
+```json
+{
+  "id_token": "<>",
+  "apiToken": "<>",
+  "config": { "apiUri": "<TEST_URL>" },
+  "userEmail": "<>"
+}
+```

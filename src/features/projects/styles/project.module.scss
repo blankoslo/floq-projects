@@ -1,0 +1,31 @@
+@import "common/floq/floq-vars.scss";
+
+.project {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+
+  padding: 0.5rem 0;
+
+  &.actionable {
+    background-color: $blank-piss-yellow;
+  }
+
+  &:hover {
+    background-color: #eeeded;
+  }
+}
+
+.name {
+  justify-content: flex-start;
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.code {
+  color: #5e5d5d;
+  font-size: 0.75rem;
+}

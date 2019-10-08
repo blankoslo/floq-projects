@@ -1,0 +1,23 @@
+@import "common/floq/floq-vars.scss";
+
+.toast {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: $half-spacing;
+
+  &.success {
+    background-color: $blank-green;
+  }
+
+  &.error {
+    background-color: $blank-pink;
+  }
+}
+
+.dismiss {
+  margin-left: $quarter-spacing;
+  cursor: pointer;
+}
