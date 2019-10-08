@@ -20,10 +20,15 @@ const Toast: React.FC<{}> = () => {
   );
   return (
     <div className={classNames}>
-      <span>{message}</span>
-      <i className={`${styles.dismiss} material-icons`} onClick={toast.dismiss}>
-        close
-      </i>
+      {type === "success" && (
+        <i className={`${styles.icon} material-icons`}>done</i>
+      )}
+      {type === "error" && (
+        <i className={`${styles.icon} material-icons`}>
+          sentiment_very_dissatisfied
+        </i>
+      )}
+      <span className={styles.message}>{message}</span>
     </div>
   );
 };

@@ -12,8 +12,8 @@ $blank-turquoise: #38fbfe;
 $blank-black: #000000;
 $blank-grey: #979797;
 
-$blank-success: #d9f9a5;
-$blank-error: #ef233c;
+$toast-success: #91dcd2;
+$toast-error: change-color($blank-pink, $alpha: 0.6);
 
 $floq-creamy-light-purple: #efe5ff;
 $floq-list-background: #f8f8f8;

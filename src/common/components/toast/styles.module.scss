@@ -8,16 +8,36 @@
 
   padding: $half-spacing;
 
+  font-family: "Work Sans", sans-serif;
+  font-size: 1rem;
+  color: $blank-purple-dark;
+
   &.success {
-    background-color: $blank-success;
+    background-color: $toast-success;
+
+    & > .icon {
+      padding: 0.2rem;
+      margin: -0.2rem;
+      border-radius: 50%;
+      color: $toast-success;
+      background-color: $blank-purple-dark;
+    }
   }
 
   &.error {
-    background-color: $blank-error;
+    background-color: $toast-error;
+
+    & > .icon {
+      font-size: 2rem;
+      color: $blank-yellow;
+    }
   }
 }
 
-.dismiss {
+.icon {
+  font-size: 1.2rem;
+}
+
+.message {
   margin-left: $quarter-spacing;
-  cursor: pointer;
 }
