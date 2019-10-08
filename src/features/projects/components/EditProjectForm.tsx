@@ -17,6 +17,7 @@ import { ActionMeta, ValueType } from "react-select/src/types";
 import { Employee } from "types/Employee";
 import { Billable, Project } from "types/Project";
 import { billableElements, EmployeeOption } from "./common";
+import { Customer } from "types/Customer";
 
 export interface EditProjectValues {
   name: string;
@@ -38,7 +39,6 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
   const { project, onCancel, onSubmit } = props;
 
   const ctxCustomers = useCustomers();
-  const customer = ctxCustomers.data.find(c => c.id === project.customer);
 
   const ctxEmployees = useEmployees();
   const optionsEmployees = ctxEmployees.data.map(
@@ -54,7 +54,6 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
     active?: boolean;
   }>({
     billable: project.billable,
-    responsible: optionsEmployees.find(e => e.value === project.responsible),
     active: project.active,
   });
 
@@ -68,6 +67,25 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
       active: project.active,
     },
   });
+
+  const [customer, setCustomer] = useState<Customer>();
+
+  useEffect(() => {
+    if (ctxCustomers.data.length > 0 && !customer) {
+      setCustomer(ctxCustomers.data.find(c => c.id === project.customer));
+    }
+  }, [ctxCustomers.data]);
+
+  useEffect(() => {
+    if (ctxEmployees.data.length > 0 && !values.responsible) {
+      setValues({
+        ...values,
+        responsible: optionsEmployees.find(
+          e => e.value === project.responsible
+        ),
+      });
+    }
+  }, [ctxEmployees.data]);
 
   useEffect(() => {
     register({ name: "responsible" }, { required: "Påkrevd" });
