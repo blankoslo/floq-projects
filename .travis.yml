@@ -1,0 +1,38 @@
+language: node_js
+cache:
+  yarn: true
+  directories:
+    - node_modules
+node_js:
+  - "12"
+script:
+  - yarn run lint
+before_deploy: yarn run build
+deploy:
+  - provider: gcs
+    access_key_id: GOOG1EDJO33Q7OQ33H6NB4MEBSHAZNPSQO54M5UFMINE5GC5AXPLJIV7752ZI
+    secret_access_key:
+      secure: K6rXDP0qUFMW5a7ANRhojWmpq6i0ZBNvyzzgL0sScbdYF+DkCG1z9H68/3nEKuXjQxZCmD+bTQsxQHImmHE9NVKoe61yI9ZFqvUAq13CFr02IgSoQpaM8sgn1HHhSGrqKsqwrfaAjCMCDxeIeCd+yymF/aiy+fGulAJjz8la7PAyfUGp2RCA4EmH5IJwLyNv2ie8clVtMAkJ/7Flxj2fJVLl45eFySC06/w5S3xcu5ECY9P55y87BIwd1NGQDZuBOX8h2QqruUzkw0vcXAmeEpQ0iRJJGeHKCitI7mS1rAwpcELyzvaFKWs6uEsfhHv6G+PH2WVsgE8s09eZRKAGapwqKnb2dW8wVtMHiZjtH2pLUaxFU79gYOl8GLXjINEWU8KG9KylftzuCgoHjOKSy4NytxfjjrZmYMIbX/H+B0FGz4jODF6H/cDCKcFhb/21x+2SLltv4H2JPbnTU36UxnKQ6uZrnfrIH3MqRlR6yYs5JH6b5lDUuDtXAFvuFOp+x0T6hAz1eiUKY5gYAd9XT+vDX05hE+KRvzhmKpHjPyV+l5wKqmLs2U1FQU0ty13Cg1SRhKz8hSjoGXJ6a2oWue8ObMxc/lS3WS0PMET49MtEuqBhZa2EwP/LEAV0zPzKwfIorUewlafNO//UxuOz1hxDQgJnKR6PbuVGeIjNCms=
+    bucket: floq-test
+    local-dir: build
+    upload-dir: projects
+    acl: public-read
+    skip_cleanup: true
+    on:
+      repo: blankoslo/floq-projects-new
+      branch: develop
+  - provider: gcs
+    access_key_id: GOOG1EDJO33Q7OQ33H6NB4MEBSHAZNPSQO54M5UFMINE5GC5AXPLJIV7752ZI
+    secret_access_key:
+      secure: K6rXDP0qUFMW5a7ANRhojWmpq6i0ZBNvyzzgL0sScbdYF+DkCG1z9H68/3nEKuXjQxZCmD+bTQsxQHImmHE9NVKoe61yI9ZFqvUAq13CFr02IgSoQpaM8sgn1HHhSGrqKsqwrfaAjCMCDxeIeCd+yymF/aiy+fGulAJjz8la7PAyfUGp2RCA4EmH5IJwLyNv2ie8clVtMAkJ/7Flxj2fJVLl45eFySC06/w5S3xcu5ECY9P55y87BIwd1NGQDZuBOX8h2QqruUzkw0vcXAmeEpQ0iRJJGeHKCitI7mS1rAwpcELyzvaFKWs6uEsfhHv6G+PH2WVsgE8s09eZRKAGapwqKnb2dW8wVtMHiZjtH2pLUaxFU79gYOl8GLXjINEWU8KG9KylftzuCgoHjOKSy4NytxfjjrZmYMIbX/H+B0FGz4jODF6H/cDCKcFhb/21x+2SLltv4H2JPbnTU36UxnKQ6uZrnfrIH3MqRlR6yYs5JH6b5lDUuDtXAFvuFOp+x0T6hAz1eiUKY5gYAd9XT+vDX05hE+KRvzhmKpHjPyV+l5wKqmLs2U1FQU0ty13Cg1SRhKz8hSjoGXJ6a2oWue8ObMxc/lS3WS0PMET49MtEuqBhZa2EwP/LEAV0zPzKwfIorUewlafNO//UxuOz1hxDQgJnKR6PbuVGeIjNCms=
+    bucket: floq
+    local-dir: build
+    upload-dir: projects
+    acl: public-read
+    skip_cleanup: true
+    on:
+      repo: blankoslo/floq-projects-new
+      branch: master
+notifications:
+  slack:
+    secure: uPz3zClsAP3VlOZTp2gwrnv+AtVc9WgeCaykEVTF8V7Is+27EmOr6FGzQZVYelYIIOqkd3FWYHuMHUyvKIFgADmlqy8Nv5uE3EEYK7IsKfNCyUM9L2K8YS1Cetb/aFpldESZk4V+FSGlWzNpWmC+0OEAKM3TKOnOuvGDGRlNRIphTRZwwW8YXSYmJFakeW1WoS7VeWego+BRu+O6Yfja6pANwPSL+QXDsmjmP+JIQ7ym8A1WHojKYCUAxy2eWPEX9gBOcTktvl3N5qPjy3V+gTPU+3Q5YrVK6LC6BiWXNd7QHgxjioEhfVK0flFdmCz5sSfeU2zhf4ARR7qwr8Y5ziSCMJ6DOXHGoAPp8uLOhZDQ8Vnz9xXxq8ICTmCsuOewkHUKcKAaTHZTXbytPc5G4QMeKPKzY+9oHlRK7Z+cY2kJEj9hZdLGSCt2LoZemrCzFv9JqxRi3vFR09Wa88uYbsz8LEhqn02vaWH8sogHhmGpwRKmwSX01bPhhgMZgQYIgsgkgstYNQa911G01k2yxujmuXQKBD9TC6+L/rBHtr66hC2bIKCbBsX55PGHZElEfOLYu0HzoghD9srj4ur5W+UkreQxM+ReRdpWwGEgSw2tVLt8dQD33axFbwFTLcKPwDoW3zL+ucu3cHvzJSnxV880ZSn6BNPD2MrkOLu1rtI=

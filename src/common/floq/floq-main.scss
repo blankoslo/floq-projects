@@ -1,0 +1,58 @@
+@import "./floq-vars.scss";
+
+html {
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+body {
+  height: 100%;
+  background-color: #f8f8f8;
+}
+
+input[type="text"],
+input[type="password"] {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100%;
+  height: 100%;
+}
+
+.floq-padding {
+  padding: $spacing;
+
+  &-half {
+    padding: $half-spacing;
+  }
+
+  &-quarter {
+    padding: $quarter-spacing;
+  }
+
+  &-eight {
+    padding: $eight-spacing;
+  }
+}
+
+.floq-margin {
+  margin: $spacing;
+
+  &-half {
+    margin: $half-spacing;
+  }
+
+  &-quarter {
+    margin: $quarter-spacing;
+  }
+
+  &-eight {
+    margin: $eight-spacing;
+  }
+}

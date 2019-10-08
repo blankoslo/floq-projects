@@ -1,0 +1,11 @@
+@import "common/floq/floq-vars.scss";
+
+.headerText {
+  margin: $spacing 0 $eight-spacing 0;
+  line-height: 1.2;
+
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: $blank-purple-dark;
+}
