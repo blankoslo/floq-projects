@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import inputStyles from "./styles.module.scss";
 import React from "react";
 

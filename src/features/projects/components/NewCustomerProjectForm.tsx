@@ -22,7 +22,6 @@ import { useCustomers } from "common/context/CustomersContext";
 type NewCustomerProjectDialogProps = {
   customerName?: string;
   onCancel: () => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSubmit: (values: NewCustomerProjectValues) => void;
 };
 
@@ -131,7 +130,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
             name="customerId"
             ref={register({
               required: "Påkrevd",
-              pattern: { value: /^\w{3}$/, message: "Feil format" },
+              pattern: { value: /^.{3}$/, message: "Feil format" },
               validate: (input: string) =>
                 !ctxCustomers.data.find(p => p.id === input) || "I bruk",
             })}
@@ -147,7 +146,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
             name="id"
             ref={register({
               required: "Påkrevd",
-              pattern: { value: /^\w{3}\d{4}$/, message: "Feil format" },
+              pattern: { value: /^.{3}\d{4}$/, message: "Feil format" },
               validate: (input: string) =>
                 !ctxProjects.data.find(p => p.id === input) || "I bruk",
             })}

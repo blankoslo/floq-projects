@@ -28,7 +28,7 @@ const ProjectsOverview: React.FC = () => {
   const [filter, setFilter] = useState<ProjectsFilter>({
     search: "",
     onlyActive: true,
-    onlyBillable: false,
+    onlyBillable: true,
   });
 
   const [filteredProjects, setFilteredProjects] = useState<CustomerProjects[]>(
@@ -100,14 +100,14 @@ const ProjectsOverview: React.FC = () => {
           />
         </div>
         <FloqCheckbox
-          label="Vis kun aktive prosjekter"
+          label="Aktive"
           checked={filter.onlyActive}
           onChange={(e): void =>
             setFilter({ ...filter, onlyActive: e.target.checked })
           }
         />
         <FloqCheckbox
-          label="Vis kun fakturerbare prosjekter"
+          label="Fakturerbare"
           checked={filter.onlyBillable}
           onChange={(e): void =>
             setFilter({ ...filter, onlyBillable: e.target.checked })
