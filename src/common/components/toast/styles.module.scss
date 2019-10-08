@@ -9,11 +9,11 @@
   padding: $half-spacing;
 
   &.success {
-    background-color: $blank-green;
+    background-color: $blank-success;
   }
 
   &.error {
-    background-color: $blank-pink;
+    background-color: $blank-error;
   }
 }
 
