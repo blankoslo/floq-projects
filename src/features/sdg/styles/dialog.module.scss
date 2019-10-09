@@ -1,0 +1,30 @@
+@import "common/floq/floq-vars.scss";
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.select {
+  flex: 2;
+  width: 420px;
+}
+
+.tiles {
+  width: 220px;
+}
+
+.tiles img {
+  max-width: 96px;
+  height: auto;
+  margin: 0.25rem;
+}

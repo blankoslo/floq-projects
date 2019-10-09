@@ -4,21 +4,26 @@ import SDGs from "../sdg.json";
 
 interface Props {
   selected: number[];
+  onSelect: (id: number, checked: boolean) => void;
 }
 
 const SDGList: React.FC<Props> = (props: Props) => {
-  const { selected } = props;
+  const { selected, onSelect } = props;
   return (
-    <ul>
+    <div>
       {SDGs.map(sdg => (
-        <li key={`sdg-${sdg.id}`}>
+        <div key={`sdg-${sdg.id}`}>
           <FloqCheckbox
+            data-id={sdg.id}
             label={`${sdg.id}. ${sdg.title}`}
-            checked={sdg.id in selected}
+            checked={selected.includes(sdg.id)}
+            onChange={(e): void => {
+              onSelect(sdg.id, e.target.checked);
+            }}
           />
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
