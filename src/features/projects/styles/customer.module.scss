@@ -4,9 +4,12 @@
   display: inline-flex;
   flex-direction: column;
 
-  max-width: 320px;
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
+
+  @media only screen and (min-width: 600px) {
+    max-width: 320px;
+  }
 }
 
 .heading {
@@ -18,8 +21,13 @@
   font-size: 1.25rem;
   color: $blank-purple-dark;
 
-  padding-bottom: $eight-spacing;
+  padding: 0.5rem 0.2rem;
   border-bottom: 1px solid $blank-purple-dark;
+
+  @media only screen and (min-width: 600px) {
+    padding: 0;
+    padding-bottom: $eight-spacing;
+  }
 }
 
 .name {

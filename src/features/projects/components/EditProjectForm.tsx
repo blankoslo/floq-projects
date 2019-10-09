@@ -113,7 +113,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
   return (
     <FloqForm>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FloqFormControl size="medium">
+        <FloqFormControl size="large">
           <FloqInputLabel label="Kunde" />
           <FloqInput>
             <span>{customer && `${customer.name} (${customer.id})`}</span>
@@ -127,7 +127,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
           </FloqInput>
         </FloqFormControl>
 
-        <FloqFormControl size="medium">
+        <FloqFormControl size="large">
           <FloqInputLabel label="Prosjektnavn" />
           <FloqInput error={errors.name && errors.name.message}>
             <FloqInputField
@@ -138,7 +138,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
           </FloqInput>
         </FloqFormControl>
 
-        <FloqFormControl size="medium">
+        <FloqFormControl size="large">
           <FloqInput>
             <FloqCheckbox
               name="subcontractor"
@@ -148,7 +148,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
           </FloqInput>
         </FloqFormControl>
 
-        <FloqFormControl size="medium">
+        <FloqFormControl size="large">
           <FloqInputLabel label="Ansvarlig" />
           <FloqInput error={errors.responsible && errors.responsible.message}>
             <Select
@@ -161,7 +161,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
           </FloqInput>
         </FloqFormControl>
 
-        <FloqFormControl size="medium">
+        <FloqFormControl size="large">
           <FloqInputLabel label="Type" />
           <FloqInput error={errors.billable && errors.billable.message}>
             <FloqButtonGroup>
@@ -181,7 +181,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
           </FloqInput>
         </FloqFormControl>
 
-        <FloqFormControl size="medium">
+        <FloqFormControl size="large">
           <FloqInputLabel label="Status" />
           <FloqInput error={errors.active && errors.active.message}>
             <FloqButtonGroup>

@@ -6,7 +6,7 @@
   align-items: center;
   cursor: pointer;
 
-  padding: 0.5rem 0;
+  padding: 0.5rem 0.2rem;
 
   &.actionable {
     background-color: $blank-piss-yellow;
@@ -14,6 +14,10 @@
 
   &:hover {
     background-color: #eeeded;
+  }
+
+  @media only screen and (min-width: 600px) {
+    padding: 0.5rem 0;
   }
 }
 
