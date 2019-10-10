@@ -36,10 +36,14 @@
   align-items: center;
 
   margin-bottom: 3rem;
+
+  color: $blank-purple-dark;
 }
 
 .close {
   flex-grow: 1;
+
+  color: $blank-black;
 
   & > i {
     float: right;
