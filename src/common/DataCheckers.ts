@@ -3,10 +3,12 @@ import { BasicType, basicTypes } from "ts-interface-checker/dist/types";
 import { Customer, Customers } from "../types/Customer";
 import { Employee, Employees } from "../types/Employee";
 import { Project, Projects } from "../types/Project";
+import { SDGEvent, SDGEvents } from "../types/SDGEvent";
 import { TokenData } from "../types/TokenData";
 import CustomerTI from "./validators/Customer-ti";
 import EmployeeTI from "./validators/Employee-ti";
 import ProjectTI from "./validators/Project-ti";
+import SDGEventTI from "./validators/SDGEvent-ti";
 import TokenDataTI from "./validators/TokenData-ti";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -69,4 +71,17 @@ const { TokenData: TokenDataChecker } = createCheckers(TokenDataTI);
 
 export function IsValidTokenData(value: any): value is TokenData {
   return TokenDataChecker.test(value);
+}
+
+const {
+  SDGEvent: SDGEventChecker,
+  SDGEvents: SDGEventsChecker,
+} = createCheckers(SDGEventTI);
+
+export function IsValidSDGEvent(value: any): value is SDGEvent {
+  return SDGEventChecker.test(value);
+}
+
+export function IsValidSDGEvents(value: any): value is SDGEvents {
+  return SDGEventsChecker.test(value);
 }
