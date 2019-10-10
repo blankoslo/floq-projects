@@ -17,6 +17,14 @@ input[type="password"] {
   width: 100%;
 }
 
+a {
+  font-family: "Work Sans", sans-serif;
+  font-size: 0.9375rem;
+  color: #3c1345;
+  text-decoration: underline;
+  line-height: 1.15;
+}
+
 .container {
   display: flex;
   flex-direction: column;

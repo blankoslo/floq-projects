@@ -1,0 +1,26 @@
+@import "common/floq/floq-vars.scss";
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin-top: $half-spacing;
+  padding: $half-spacing;
+  width: 100%;
+  background-color: #f7f7f7;
+
+  @media only screen and (min-width: 600px) {
+    margin: 0 -#{$half-spacing} -#{$spacing} $half-spacing;
+    width: 176px;
+  }
+
+  a {
+    margin-top: $half-spacing;
+    text-align: center;
+  }
+}
+
+.tiles img {
+  max-width: 80px;
+  height: auto;
+  margin: 0.25rem;
+}

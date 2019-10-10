@@ -1,3 +1,5 @@
+import { useToast } from "common/components/toast/ToastContext";
+import { useCustomers } from "common/context/CustomersContext";
 import { useProjects } from "common/context/ProjectsContext";
 import { IsValidCustomer, IsValidProject } from "common/DataCheckers";
 import FloqForm from "common/floq/components/FloqForm/FloqForm";
@@ -6,13 +8,11 @@ import FloqTab from "common/floq/components/FloqTabs/FloqTab";
 import FloqTabs from "common/floq/components/FloqTabs/FloqTabs";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
+import { Customer } from "types/Customer";
 import NewCustomerProjectForm, {
   NewCustomerProjectValues,
 } from "./NewCustomerProjectForm";
 import NewProjectForm, { NewProjectValues } from "./NewProjectForm";
-import { useCustomers } from "common/context/CustomersContext";
-import { Customer } from "types/Customer";
-import { useToast } from "common/components/toast/ToastContext";
 
 type NewProjectOptions =
   | { type: "existing-customer"; customerId?: Customer["id"] }

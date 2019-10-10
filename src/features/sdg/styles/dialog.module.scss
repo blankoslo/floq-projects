@@ -1,30 +1,18 @@
 @import "common/floq/floq-vars.scss";
 
-.row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-}
-
 .select {
-  flex: 2;
   width: 420px;
 }
 
 .tiles {
-  width: 220px;
+  width: 100%;
+  @media only screen and (min-width: 600px) {
+    width: 176px;
+  }
 }
 
 .tiles img {
-  max-width: 96px;
+  max-width: 80px;
   height: auto;
   margin: 0.25rem;
 }
