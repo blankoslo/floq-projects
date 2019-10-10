@@ -5,6 +5,8 @@ import styles from "../styles/column.module.scss";
 import { useProjects } from "common/context/ProjectsContext";
 import { ProjectAPI } from "common/api/ProjectAPI";
 import { getSDGAggregate } from "common/utils/SDGAggregator";
+import SDGLogo from "features/sdg/resources/SDG_Wheel.png";
+import { useHistory } from "react-router";
 
 interface Props {
   projectId: Project["id"];
@@ -12,6 +14,8 @@ interface Props {
 
 const SDGColumn: React.FC<Props> = (props: Props) => {
   const { projectId } = props;
+
+  const history = useHistory();
 
   const ctxProjects = useProjects();
   const project = ctxProjects.data.find(p => p.id === projectId);
@@ -28,19 +32,40 @@ const SDGColumn: React.FC<Props> = (props: Props) => {
 
   if (goals.length > 0) {
     return (
-      <div className={styles.column}>
+      <div
+        className={styles.column}
+        onClick={(): void => {
+          history.push(`/projects/sdg/${projectId}`);
+        }}>
         <div className={styles.tiles}>
           {goals.map(s => (
             <img key={`img-${s}`} src={require(`../icons/${s}.jpg`)} />
           ))}
         </div>
-        <Link to={`/projects/sdg/${projectId}`}>Endre bærekraftsmål</Link>
+        <p>
+          Endre
+          <br />
+          bærekraftsmål
+          <br />
+          -------&gt;
+        </p>
       </div>
     );
   }
   return (
-    <div className={styles.column}>
-      <Link to={`/projects/sdg/${projectId}`}>Legg til bærekraftsmål</Link>
+    <div
+      className={styles.column}
+      onClick={(): void => {
+        history.push(`/projects/sdg/${projectId}`);
+      }}>
+      <img className={styles.logo} src={SDGLogo} />
+      <p>
+        Legg til
+        <br />
+        bærekraftsmål
+        <br />
+        -------&gt;
+      </p>
     </div>
   );
 };

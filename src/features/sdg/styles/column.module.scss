@@ -7,20 +7,34 @@
   padding: $half-spacing;
   width: 100%;
   background-color: #f7f7f7;
+  cursor: pointer;
 
   @media only screen and (min-width: 600px) {
-    margin: 0 -#{$half-spacing} -#{$spacing} $half-spacing;
+    margin: -2rem -1rem -1rem 1rem;
     width: 176px;
   }
 
-  a {
-    margin-top: $half-spacing;
-    text-align: center;
+  .logo {
+    margin: 50% auto;
+    max-width: 80%;
+    height: auto;
   }
-}
 
-.tiles img {
-  max-width: 80px;
-  height: auto;
-  margin: 0.25rem;
+  .tiles {
+    margin: 2rem auto;
+  }
+
+  .tiles img {
+    max-width: 80px;
+    height: auto;
+    margin: 0.25rem;
+  }
+
+  p {
+    margin: 0 auto;
+    font-family: "Work Sans", sans-serif;
+    font-size: 0.9375rem;
+    color: #3c1345;
+    line-height: 1.15;
+  }
 }
