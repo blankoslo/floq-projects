@@ -116,15 +116,13 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
         <FloqFormControl size="large">
           <FloqInputLabel label="Kunde" />
           <FloqInput>
-            <span>{customer && `${customer.name} (${customer.id})`}</span>
+            {customer && `${customer.name} (${customer.id})`}
           </FloqInput>
         </FloqFormControl>
 
         <FloqFormControl size="small">
           <FloqInputLabel label="Prosjektkode" />
-          <FloqInput>
-            <span>{project.id}</span>
-          </FloqInput>
+          <FloqInput>{project.id}</FloqInput>
         </FloqFormControl>
 
         <FloqFormControl size="large">
