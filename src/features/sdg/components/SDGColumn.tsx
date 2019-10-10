@@ -2,6 +2,7 @@ import { ProjectAPI } from "common/api/ProjectAPI";
 import { useProjects } from "common/context/ProjectsContext";
 import { getSDGAggregate } from "common/utils/SDGAggregator";
 import SDGLogo from "features/sdg/resources/SDG_Wheel.png";
+import Arrow from "features/sdg/resources/Arrow.png";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Project } from "types/Project";
@@ -45,9 +46,8 @@ const SDGColumn: React.FC<Props> = (props: Props) => {
           Endre
           <br />
           bærekraftsmål
-          <br />
-          -------&gt;
         </p>
+        <img className={styles.arrow} src={Arrow} />
       </div>
     );
   }
@@ -62,9 +62,8 @@ const SDGColumn: React.FC<Props> = (props: Props) => {
         Legg til
         <br />
         bærekraftsmål
-        <br />
-        -------&gt;
       </p>
+      <img className={styles.arrow} src={Arrow} />
     </div>
   );
 };

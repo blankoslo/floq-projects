@@ -10,13 +10,19 @@
   cursor: pointer;
 
   @media only screen and (min-width: 600px) {
-    margin: -2rem -1rem -1rem 1rem;
+    margin: -#{$spacing} -#{$half-spacing} -#{$half-spacing} $half-spacing;
     width: 176px;
   }
 
   .logo {
     margin: 50% auto;
     max-width: 80%;
+    height: auto;
+  }
+
+  .arrow {
+    margin: $quarter-spacing auto;
+    max-width: 98px;
     height: auto;
   }
 

@@ -103,7 +103,10 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
               <SDGList selected={newGoalState} onSelect={onSelect} />
             </FloqFormControl>
             <p>
-              <a href="https://www.fn.no/Om-FN/FNs-baerekraftsmaal">
+              <a
+                href="https://www.fn.no/Om-FN/FNs-baerekraftsmaal"
+                target="_blank"
+                rel="noopener noreferrer">
                 Les mer om FNs bærekraftsmål
               </a>
             </p>
