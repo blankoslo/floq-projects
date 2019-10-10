@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Project } from "types/Project";
 import styles from "../styles/column.module.scss";
+import { useProjects } from "common/context/ProjectsContext";
+import { ProjectAPI } from "common/api/ProjectAPI";
+import { getSDGAggregate } from "common/utils/SDGAggregator";
 
 interface Props {
   projectId: Project["id"];
-  goals: number[];
 }
 
 const SDGColumn: React.FC<Props> = (props: Props) => {
-  const { projectId, goals } = props;
+  const { projectId } = props;
+
+  const ctxProjects = useProjects();
+  const project = ctxProjects.data.find(p => p.id === projectId);
+
+  const [goals, setGoals] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (!project) return;
+    ProjectAPI.getSDGEvents(project.id).then(res => {
+      const agg = getSDGAggregate(res);
+      setGoals(agg);
+    });
+  }, [project]);
 
   if (goals.length > 0) {
     return (

@@ -214,7 +214,7 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
               </FloqInput>
             </FloqFormControl>
           </div>
-          <SDGColumn projectId={project.id} goals={[1, 3, 5]} />
+          <SDGColumn projectId={project.id} />
         </div>
         <FloqModalActions>
           <FloqButton fullWidth action onClick={onCancel} type="button">

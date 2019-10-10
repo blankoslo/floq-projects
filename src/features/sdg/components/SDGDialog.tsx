@@ -16,6 +16,7 @@ import { ProjectAPI } from "common/api/ProjectAPI";
 import { getSDGAggregate, diffSDGStates } from "common/utils/SDGAggregator";
 import { useEmployees } from "common/context/EmployeesContext";
 import Config from "common/Config";
+import { useHistory } from "react-router";
 
 interface Props {
   projectId: Project["id"];
@@ -34,6 +35,7 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
   const project = ctxProjects.data.find(p => p.id === projectId);
 
   const toast = useToast();
+  const history = useHistory();
 
   const [goalState, setGoalState] = useState<number[]>([]);
   const [newGoalState, setNewGoalState] = useState<number[]>([]);
@@ -81,8 +83,14 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
           } as SDGEvent)
       ),
     ];
-    ProjectAPI.createSDGEvents(events).then(res => console.log(res));
-    toast.show("success", newGoalState.toString());
+    ProjectAPI.createSDGEvents(events)
+      .then(() => {
+        toast.show("success", `Bærekraftsmål for ${project.id} oppdatert`);
+        history.push("/projects");
+      })
+      .catch(err => {
+        toast.show("error", `Noe gikk galt: ${err}`);
+      });
   };
 
   return (
