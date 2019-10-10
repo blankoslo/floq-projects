@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Project } from "types/Project";
-import styles from "../styles/column.module.scss";
-import { useProjects } from "common/context/ProjectsContext";
 import { ProjectAPI } from "common/api/ProjectAPI";
+import { useProjects } from "common/context/ProjectsContext";
 import { getSDGAggregate } from "common/utils/SDGAggregator";
 import SDGLogo from "features/sdg/resources/SDG_Wheel.png";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { Project } from "types/Project";
+import styles from "../styles/column.module.scss";
 
 interface Props {
   projectId: Project["id"];
