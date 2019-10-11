@@ -11,7 +11,6 @@ import FloqModal from "common/floq/components/FloqModal/FloqModal";
 import FloqModalActions from "common/floq/components/FloqModal/FloqModalActions";
 import flex from "common/styles/flex.module.scss";
 import { diffSDGStates, getSDGAggregate } from "common/utils/SDGAggregator";
-import { getUrl } from "common/utils/url";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Project } from "types/Project";
@@ -125,7 +124,7 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
               <img
                 key={`img-${s}`}
                 // eslint-disable-next-line @typescript-eslint/no-var-requires
-                src={getUrl(require(`../icons/${s}.jpg`))}
+                src={require(`../icons/${s}.jpg`)}
               />
             ))}
           </div>
