@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$TRAVIS_BRANCH" == "master" ]; then
+    PUBLIC_URL=https://storage.googleapis.com/floq/projects yarn run build
+else
+    PUBLIC_URL=https://storage.googleapis.com/floq-test/projects yarn run build
+fi
+
