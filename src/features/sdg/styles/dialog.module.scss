@@ -1,5 +1,11 @@
 @import "common/floq/floq-vars.scss";
 
+.sdg {
+  background-color: #f7f7f7;
+  margin: -#{$half-spacing};
+  padding: $half-spacing;
+}
+
 .select {
   width: 100%;
   @media only screen and (min-width: 600px) {

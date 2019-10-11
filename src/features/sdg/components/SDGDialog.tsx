@@ -95,44 +95,46 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
 
   return (
     <FloqModal open={isOpen} onClose={onClose} title={project.name}>
-      <p>Velg bærekraftsmålene prosjektet bidrar til</p>
-      <div className={flex.row}>
-        <div className={`${flex.column} ${styles.select}`}>
-          <FloqForm>
-            <FloqFormControl size="large">
-              <SDGList selected={newGoalState} onSelect={onSelect} />
-            </FloqFormControl>
-            <p>
-              <a
-                href="https://www.fn.no/Om-FN/FNs-baerekraftsmaal"
-                target="_blank"
-                rel="noopener noreferrer">
-                Les mer om FNs bærekraftsmål
-              </a>
-            </p>
-          </FloqForm>
-        </div>
-        <div className={`${flex.column} ${styles.tiles}`}>
-          <div className={flex.row}>
-            {newGoalState.map(s => (
-              <img key={`img-${s}`} src={require(`../icons/${s}.jpg`)} />
-            ))}
+      <div className={styles.sdg}>
+        <p>Velg bærekraftsmålene prosjektet bidrar til</p>
+        <div className={flex.row}>
+          <div className={`${flex.column} ${styles.select}`}>
+            <FloqForm>
+              <FloqFormControl size="large">
+                <SDGList selected={newGoalState} onSelect={onSelect} />
+              </FloqFormControl>
+              <p>
+                <a
+                  href="https://www.fn.no/Om-FN/FNs-baerekraftsmaal"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Les mer om FNs bærekraftsmål
+                </a>
+              </p>
+            </FloqForm>
+          </div>
+          <div className={`${flex.column} ${styles.tiles}`}>
+            <div className={flex.row}>
+              {newGoalState.map(s => (
+                <img key={`img-${s}`} src={require(`../icons/${s}.jpg`)} />
+              ))}
+            </div>
           </div>
         </div>
+        <FloqModalActions>
+          <FloqButton fullWidth action onClick={onClose} type="button">
+            Avbryt
+          </FloqButton>
+          <FloqButton
+            fullWidth
+            action
+            variant="yellow"
+            onClick={onSubmit}
+            type="button">
+            Lagre
+          </FloqButton>
+        </FloqModalActions>
       </div>
-      <FloqModalActions>
-        <FloqButton fullWidth action onClick={onClose} type="button">
-          Avbryt
-        </FloqButton>
-        <FloqButton
-          fullWidth
-          action
-          variant="yellow"
-          onClick={onSubmit}
-          type="button">
-          Lagre
-        </FloqButton>
-      </FloqModalActions>
     </FloqModal>
   );
 };
