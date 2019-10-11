@@ -1,7 +1,10 @@
 @import "common/floq/floq-vars.scss";
 
 .select {
-  width: 420px;
+  width: 100%;
+  @media only screen and (min-width: 600px) {
+    width: 420px;
+  }
 }
 
 .tiles {
