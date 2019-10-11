@@ -25,8 +25,13 @@ interface Props {
 const SDGDialog: React.FC<Props> = (props: Props) => {
   const { projectId } = props;
 
+  const history = useHistory();
+
   const [isOpen, setOpen] = useState<boolean>(true);
-  const onClose = (): void => setOpen(false);
+  const onClose = (): void => {
+    setOpen(false);
+    history.push("/projects");
+  };
 
   const ctxEmployees = useEmployees();
   const curEmployee = ctxEmployees.data.find(e => e.email === Config.userEmail);
@@ -35,7 +40,6 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
   const project = ctxProjects.data.find(p => p.id === projectId);
 
   const toast = useToast();
-  const history = useHistory();
 
   const [goalState, setGoalState] = useState<number[]>([]);
   const [newGoalState, setNewGoalState] = useState<number[]>([]);
