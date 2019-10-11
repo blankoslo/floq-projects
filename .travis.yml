@@ -12,12 +12,9 @@ notifications:
   slack:
     secure: HA/+sU3RGxPTbIp/sg0/rMPVW/fUiebEjv7AwLZLNUpmCig7ZdXrWyB0GZ41jtstnnf1URfUnbgeVCPT9nKbmcJZB67YpP5EhTt73wfgsq97sLpK604gIiDwi0qjF/ps0cspxvGf3kYBLvYHnI0BWJvk1W8WiSUEQrg6P5wlOfYmnhIG9N6X4B0o1GaUaBm5yLpLsvYcMjfLlBTk7P0F3h6EXKZdZxviBfUf/7cs9lIf3SHQnRQJUaT1F28XqovPaDTL5IdXkplVXFt4lUU8ve0J67ppyze3XznJNp8uc0ftn8k8LoxRmoiGrQzS+hfZMQjq/knopt81pfznc2dBEY9fesFRdHw7PVmV8weQrhBxB2DImsgD/ObGZubJpjAyafS6qPDENwLyKV4oX45vR7Tk5+jxR9lxU4yUwHeOcfdWDLElYQV8DBrjSwGXZ8q9z2fIyft+Q6enlPo25LoqkZH/kJAaYSEuN+uNJWrbTM32LQ16XD/F85nUnX6YSHgkqiohI6YUg9TcLTR/3qsr4+xFA7yZBnKEGRJ6iU+AWxucUpFFCNWK6ZIQvwoJoJ/TF82vpZojwDCKPnUrbkCbfRBPGkoIX5wHOLzt08xcg5R8Qpk13AoVV1Y+94E/vprkNYwrcfFapAcyABL0Euu4q+k1pRDJ2+XwzpNEXfUwv/E=
 
-if: branch = develop
-  env: PUBLIC_URL=https://storage.googleapis.com/floq-test/projects
-if: branch = master
-  env: PUBLIC_URL=https://storage.googleapis.com/floq/projects
+before_deploy:
+  - ci-build
 
-before_deploy: yarn run build
 deploy:
   - provider: gcs
     bucket: floq-test
