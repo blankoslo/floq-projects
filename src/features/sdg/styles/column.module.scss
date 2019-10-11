@@ -10,7 +10,7 @@
   cursor: pointer;
 
   @media only screen and (min-width: 600px) {
-    margin: -#{$spacing} -#{$half-spacing} -#{$half-spacing} $half-spacing;
+    margin: 0 -#{$half-spacing} -#{$half-spacing} $half-spacing;
     width: 176px;
   }
 
