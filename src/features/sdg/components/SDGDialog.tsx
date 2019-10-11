@@ -119,12 +119,10 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
               </p>
             </FloqForm>
           </div>
-          <div className={`${flex.column} ${styles.tiles}`}>
-            <div className={flex.row}>
-              {newGoalState.map(s => (
-                <img key={`img-${s}`} src={require(`../icons/${s}.jpg`)} />
-              ))}
-            </div>
+          <div className={styles.tiles}>
+            {newGoalState.map(s => (
+              <img key={`img-${s}`} src={require(`../icons/${s}.jpg`)} />
+            ))}
           </div>
         </div>
         <FloqModalActions>
