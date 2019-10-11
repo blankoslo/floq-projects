@@ -94,7 +94,13 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <FloqModal open={isOpen} onClose={onClose} title={project.name}>
+    <FloqModal
+      open={isOpen}
+      onClose={onClose}
+      title={project.name}
+      onBackClick={(): void => {
+        history.push(`/projects/${project.id}`);
+      }}>
       <div className={styles.sdg}>
         <p>Velg bærekraftsmålene prosjektet bidrar til</p>
         <div className={flex.row}>
