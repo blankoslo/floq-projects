@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
+import { ProjectAPI } from "common/api/ProjectAPI";
 import { useToast } from "common/components/toast/ToastContext";
+import Config from "common/Config";
+import { useEmployees } from "common/context/EmployeesContext";
 import { useProjects } from "common/context/ProjectsContext";
 import FloqButton from "common/floq/components/FloqButton/FloqButton";
 import FloqForm from "common/floq/components/FloqForm/FloqForm";
@@ -7,16 +10,14 @@ import FloqFormControl from "common/floq/components/FloqFormControl/FloqFormCont
 import FloqModal from "common/floq/components/FloqModal/FloqModal";
 import FloqModalActions from "common/floq/components/FloqModal/FloqModalActions";
 import flex from "common/styles/flex.module.scss";
-import React, { useState, useEffect } from "react";
+import { diffSDGStates, getSDGAggregate } from "common/utils/SDGAggregator";
+import { getUrl } from "common/utils/url";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { Project } from "types/Project";
 import { SDGEvent } from "types/SDGEvent";
 import styles from "../styles/dialog.module.scss";
 import SDGList from "./SDGList";
-import { ProjectAPI } from "common/api/ProjectAPI";
-import { getSDGAggregate, diffSDGStates } from "common/utils/SDGAggregator";
-import { useEmployees } from "common/context/EmployeesContext";
-import Config from "common/Config";
-import { useHistory } from "react-router";
 
 interface Props {
   projectId: Project["id"];
@@ -121,7 +122,11 @@ const SDGDialog: React.FC<Props> = (props: Props) => {
           </div>
           <div className={styles.tiles}>
             {newGoalState.map(s => (
-              <img key={`img-${s}`} src={require(`../icons/${s}.jpg`)} />
+              <img
+                key={`img-${s}`}
+                // eslint-disable-next-line @typescript-eslint/no-var-requires
+                src={getUrl(require(`../icons/${s}.jpg`))}
+              />
             ))}
           </div>
         </div>

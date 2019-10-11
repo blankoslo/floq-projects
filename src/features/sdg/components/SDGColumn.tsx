@@ -1,8 +1,9 @@
 import { ProjectAPI } from "common/api/ProjectAPI";
 import { useProjects } from "common/context/ProjectsContext";
 import { getSDGAggregate } from "common/utils/SDGAggregator";
-import SDGLogo from "features/sdg/resources/SDG_Wheel.png";
+import { getUrl } from "common/utils/url";
 import Arrow from "features/sdg/resources/Arrow.png";
+import SDGLogo from "features/sdg/resources/SDG_Wheel.png";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Project } from "types/Project";
@@ -39,7 +40,8 @@ const SDGColumn: React.FC<Props> = (props: Props) => {
         }}>
         <div className={styles.tiles}>
           {goals.map(s => (
-            <img key={`img-${s}`} src={require(`../icons/${s}.jpg`)} />
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
+            <img key={`img-${s}`} src={getUrl(require(`../icons/${s}.jpg`))} />
           ))}
         </div>
         <p>
@@ -47,7 +49,7 @@ const SDGColumn: React.FC<Props> = (props: Props) => {
           <br />
           bærekraftsmål
         </p>
-        <img className={styles.arrow} src={Arrow} />
+        <img className={styles.arrow} src={getUrl(Arrow)} />
       </div>
     );
   }
@@ -57,13 +59,13 @@ const SDGColumn: React.FC<Props> = (props: Props) => {
       onClick={(): void => {
         history.push(`/projects/sdg/${projectId}`);
       }}>
-      <img className={styles.logo} src={SDGLogo} />
+      <img className={styles.logo} src={getUrl(SDGLogo)} />
       <p>
         Legg til
         <br />
         bærekraftsmål
       </p>
-      <img className={styles.arrow} src={Arrow} />
+      <img className={styles.arrow} src={getUrl(Arrow)} />
     </div>
   );
 };
