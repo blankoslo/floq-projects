@@ -8,6 +8,7 @@
 
   width: 100%;
   height: 100%;
+  overflow-y: hidden;
 
   background-color: change-color($color: $blank-purple-dark, $alpha: 0.8);
 }
@@ -17,15 +18,29 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   max-height: 100%;
-  overflow-y: visible;
+  max-width: 100%;
+
+  width: 100%;
+  @media only screen and (min-width: 600px) {
+    height: auto;
+    max-width: max-content;
+  }
+
   padding: $half-spacing;
+
+  overflow-y: auto;
 
   background-color: $blank-white;
 
   font-size: 1.2rem;
   font-family: "Work Sans", sans-serif;
   color: $blank-black;
+}
+
+.content {
+  width: 100%;
 }
 
 .header {

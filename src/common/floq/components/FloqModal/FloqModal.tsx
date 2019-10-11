@@ -20,24 +20,26 @@ const FloqModal: React.FC<Props> = (props: Props) => {
       <div
         className={modalStyles.modal}
         onClick={(e): void => e.stopPropagation()}>
-        <div className={modalStyles.header}>
-          {props.onBackClick && (
-            <div className={modalStyles.back}>
-              <i className="material-icons" onClick={props.onBackClick}>
-                chevron_left
+        <div className={modalStyles.content}>
+          <div className={modalStyles.header}>
+            {props.onBackClick && (
+              <div className={modalStyles.back}>
+                <i className="material-icons" onClick={props.onBackClick}>
+                  chevron_left
+                </i>
+              </div>
+            )}
+            {props.title && (
+              <span className={modalStyles.title}>{props.title}</span>
+            )}
+            <div className={modalStyles.close}>
+              <i className="material-icons" onClick={props.onClose}>
+                close
               </i>
             </div>
-          )}
-          {props.title && (
-            <span className={modalStyles.title}>{props.title}</span>
-          )}
-          <div className={modalStyles.close}>
-            <i className="material-icons" onClick={props.onClose}>
-              close
-            </i>
           </div>
+          {props.children}
         </div>
-        {props.children}
       </div>
     </div>
   );
