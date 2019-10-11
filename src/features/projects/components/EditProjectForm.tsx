@@ -6,11 +6,13 @@ import FloqCheckbox from "common/floq/components/FloqCheckbox/FloqCheckbox";
 import FloqForm from "common/floq/components/FloqForm/FloqForm";
 import FloqFormControl from "common/floq/components/FloqFormControl/FloqFormControl";
 import FloqInput from "common/floq/components/FloqInput/FloqInput";
+import FloqInputDefaultText from "common/floq/components/FloqInput/FloqInputDefaultText";
 import FloqInputField from "common/floq/components/FloqInput/FloqInputField";
 import FloqInputLabel from "common/floq/components/FloqInputLabel/FloqInputLabel";
 import FloqModalActions from "common/floq/components/FloqModal/FloqModalActions";
 import { FloqReactSelectStyles } from "common/floq/components/FloqReactSelect/FloqReactSelectStyles";
 import flex from "common/styles/flex.module.scss";
+import SDGColumn from "features/sdg/components/SDGColumn";
 import React, { useEffect, useState } from "react";
 import useForm from "react-hook-form";
 import Select from "react-select";
@@ -19,7 +21,6 @@ import { Customer } from "types/Customer";
 import { Employee } from "types/Employee";
 import { Billable, Project } from "types/Project";
 import { billableElements, EmployeeOption } from "./common";
-import SDGColumn from "features/sdg/components/SDGColumn";
 
 export interface EditProjectValues {
   name: string;
@@ -121,14 +122,16 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
               <FloqFormControl size="large">
                 <FloqInputLabel label="Kunde" />
                 <FloqInput>
-                  <span>{customer && `${customer.name} (${customer.id})`}</span>
+                  <FloqInputDefaultText>
+                    {(customer && `${customer.name} (${customer.id})`) || ""}
+                  </FloqInputDefaultText>
                 </FloqInput>
               </FloqFormControl>
 
               <FloqFormControl size="small">
                 <FloqInputLabel label="Prosjektkode" />
                 <FloqInput>
-                  <span>{project.id}</span>
+                  <FloqInputDefaultText>{project.id}</FloqInputDefaultText>
                 </FloqInput>
               </FloqFormControl>
 

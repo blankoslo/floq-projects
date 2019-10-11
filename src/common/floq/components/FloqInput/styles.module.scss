@@ -3,11 +3,6 @@
 .wrapper {
   position: relative;
   margin-bottom: $quarter-spacing;
-  color: #626262;
-
-  div {
-    color: $blank-black;
-  }
 }
 
 .input {
@@ -26,4 +21,8 @@
 
   font-size: 0.75rem;
   color: $blank-pink;
+}
+
+.defaultText {
+  color: #626262;
 }
