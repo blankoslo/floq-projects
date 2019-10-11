@@ -8,16 +8,16 @@
   font-size: 0.875rem;
   color: $blank-purple-dark;
 
-  input:checked + .label {
-    font-weight: 600;
-  }
-
   cursor: pointer;
   & > * {
     cursor: pointer;
   }
-}
 
-.label {
-  margin-left: $quarter-spacing;
+  input:checked + .label {
+    font-weight: 600;
+  }
+
+  .label {
+    margin-left: $quarter-spacing;
+  }
 }
