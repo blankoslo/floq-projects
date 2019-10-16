@@ -4,15 +4,22 @@
   font-family: "Work Sans", sans-serif;
   font-size: 1.125rem;
 
+  max-width: 100%;
+  @media only screen and (min-width: 600px) {
+    max-width: 24rem;
+  }
+
+  margin-bottom: $spacing;
+
   &.small {
-    width: 4 * $spacing;
+    width: 25%;
   }
 
   &.medium {
-    width: 12 * $spacing;
+    width: 75%;
   }
 
   &.large {
-    width: 16 * $spacing;
+    width: 100%;
   }
 }

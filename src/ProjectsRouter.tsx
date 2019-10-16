@@ -13,6 +13,7 @@ import {
   RouteComponentProps,
   Switch,
 } from "react-router-dom";
+import SDGDialog from "features/sdg/components/SDGDialog";
 
 const WrapContext: React.FC<{ children: React.ReactNode }> = (props: {
   children: React.ReactNode;
@@ -37,6 +38,14 @@ const ProjectsRouter: React.FC = () => {
             <ProjectsOverview />
             <Switch>
               <Route path="/projects/new" component={NewProjectDialog} />
+              <Route
+                path="/projects/sdg/:id"
+                render={(
+                  props: RouteComponentProps<{ id: string }>
+                ): React.ReactNode => (
+                  <SDGDialog projectId={props.match.params.id} />
+                )}
+              />
               <Route
                 path="/projects/:id"
                 render={(

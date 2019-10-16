@@ -8,6 +8,7 @@
 
   width: 100%;
   height: 100%;
+  overflow-y: hidden;
 
   background-color: change-color($color: $blank-purple-dark, $alpha: 0.8);
 }
@@ -17,7 +18,19 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  max-height: 100%;
+  max-width: 100%;
+
+  width: 100%;
+  @media only screen and (min-width: 600px) {
+    height: auto;
+    max-width: max-content;
+  }
+
   padding: $half-spacing;
+
+  overflow-y: auto;
 
   background-color: $blank-white;
 
@@ -26,21 +39,30 @@
   color: $blank-black;
 }
 
+.content {
+  width: 100%;
+}
+
 .header {
   display: flex;
   flex-direction: row;
 
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 3rem;
+  margin-bottom: $spacing;
+  color: $blank-black;
 }
 
+.title {
+  color: $blank-purple-dark;
+}
+
+.back,
 .close {
-  flex-grow: 1;
+  flex-shrink: 1;
 
   & > i {
-    float: right;
     cursor: pointer;
   }
 }

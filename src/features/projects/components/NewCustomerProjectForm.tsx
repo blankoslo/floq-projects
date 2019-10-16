@@ -109,7 +109,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FloqFormControl size="medium">
+      <FloqFormControl size="large">
         <FloqInputLabel label="Kundenavn" />
         <FloqInput error={errors.customerName && errors.customerName.message}>
           <FloqInputField
@@ -154,7 +154,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
         </FloqInput>
       </FloqFormControl>
 
-      <FloqFormControl size="medium">
+      <FloqFormControl size="large">
         <FloqInputLabel label="Prosjektnavn" />
         <FloqInput error={errors.name && errors.name.message}>
           <FloqInputField
@@ -165,7 +165,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
         </FloqInput>
       </FloqFormControl>
 
-      <FloqFormControl size="medium">
+      <FloqFormControl size="large">
         <FloqInput>
           <FloqCheckbox
             name="subcontractor"
@@ -175,7 +175,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
         </FloqInput>
       </FloqFormControl>
 
-      <FloqFormControl size="medium">
+      <FloqFormControl size="large">
         <FloqInputLabel label="Ansvarlig" />
         <FloqInput error={errors.responsible && errors.responsible.message}>
           <Select
@@ -188,7 +188,7 @@ const NewCustomerProjectForm: React.FC<NewCustomerProjectDialogProps> = (
         </FloqInput>
       </FloqFormControl>
 
-      <FloqFormControl size="medium">
+      <FloqFormControl size="large">
         <FloqInputLabel label="Type" />
         <FloqInput error={errors.billable && errors.billable.message}>
           <FloqButtonGroup>

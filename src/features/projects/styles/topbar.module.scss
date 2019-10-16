@@ -2,22 +2,38 @@
 
 .topbar {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: $half-spacing;
+  flex-direction: column;
+  min-height: min-content;
+
   background-color: #efe5ff;
+  padding: $half-spacing;
 
   & > * {
-    margin-right: $half-spacing;
+    margin-bottom: $quarter-spacing;
+
+    @media only screen and (min-width: 600px) {
+      margin: inherit;
+      margin-right: $half-spacing;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    flex-direction: row;
+    align-items: center;
+
+    margin: 0;
+
+    & > *:not(:last-child) {
+      margin-right: $half-spacing;
+    }
   }
 }
 
 .addButton {
   display: flex;
   align-items: center;
+  flex: 1 1 1;
 
-  min-width: 4 * $spacing;
-  min-height: $half-spacing;
   margin: $eight-spacing;
   padding: $quarter-spacing;
 
@@ -37,17 +53,26 @@
   &:focus {
     outline: none;
   }
+
+  @media only screen and (min-width: 600px) {
+    min-width: 4 * $spacing;
+    min-height: $half-spacing;
+  }
 }
 
 .searchWrapper {
-  width: 300px;
-  margin: 0px 10px 0px 10px;
-  align-self: center;
-  height: 25px;
   display: flex;
+
+  margin: 0px 10px 0px 10px;
+  height: 25px;
+
   border-radius: 20px;
   background-color: $blank-white;
   padding: 5px;
+
+  @media only screen and (min-width: 600px) {
+    width: 300px;
+  }
 }
 
 .searchIcon {

@@ -1,0 +1,28 @@
+@import "common/floq/floq-vars.scss";
+
+.sdg {
+  background-color: #f7f7f7;
+  margin: -#{$half-spacing};
+  padding: $half-spacing;
+}
+
+.select {
+  width: 100%;
+  @media only screen and (min-width: 600px) {
+    width: 420px;
+  }
+}
+
+.tiles {
+  width: 100%;
+  @media only screen and (min-width: 600px) {
+    width: 176px;
+  }
+}
+
+.tiles img {
+  max-width: 80px;
+  height: auto;
+  margin: 0.25rem;
+  object-fit: contain;
+}

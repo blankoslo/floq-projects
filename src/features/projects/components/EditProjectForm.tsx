@@ -6,18 +6,21 @@ import FloqCheckbox from "common/floq/components/FloqCheckbox/FloqCheckbox";
 import FloqForm from "common/floq/components/FloqForm/FloqForm";
 import FloqFormControl from "common/floq/components/FloqFormControl/FloqFormControl";
 import FloqInput from "common/floq/components/FloqInput/FloqInput";
+import FloqInputDefaultText from "common/floq/components/FloqInput/FloqInputDefaultText";
 import FloqInputField from "common/floq/components/FloqInput/FloqInputField";
 import FloqInputLabel from "common/floq/components/FloqInputLabel/FloqInputLabel";
 import FloqModalActions from "common/floq/components/FloqModal/FloqModalActions";
 import { FloqReactSelectStyles } from "common/floq/components/FloqReactSelect/FloqReactSelectStyles";
+import flex from "common/styles/flex.module.scss";
+import SDGColumn from "features/sdg/components/SDGColumn";
 import React, { useEffect, useState } from "react";
 import useForm from "react-hook-form";
 import Select from "react-select";
 import { ActionMeta, ValueType } from "react-select/src/types";
+import { Customer } from "types/Customer";
 import { Employee } from "types/Employee";
 import { Billable, Project } from "types/Project";
 import { billableElements, EmployeeOption } from "./common";
-import { Customer } from "types/Customer";
 
 export interface EditProjectValues {
   name: string;
@@ -113,108 +116,119 @@ const EditProjectForm: React.FC<EditProjectFormProps> = (
   return (
     <FloqForm>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FloqFormControl size="medium">
-          <FloqInputLabel label="Kunde" />
-          <FloqInput>
-            <span>{customer && `${customer.name} (${customer.id})`}</span>
-          </FloqInput>
-        </FloqFormControl>
+        <div className={flex.row}>
+          <div className={flex.column}>
+            <FloqForm>
+              <FloqFormControl size="large">
+                <FloqInputLabel label="Kunde" />
+                <FloqInput>
+                  <FloqInputDefaultText>
+                    {(customer && `${customer.name} (${customer.id})`) || ""}
+                  </FloqInputDefaultText>
+                </FloqInput>
+              </FloqFormControl>
 
-        <FloqFormControl size="small">
-          <FloqInputLabel label="Prosjektkode" />
-          <FloqInput>
-            <span>{project.id}</span>
-          </FloqInput>
-        </FloqFormControl>
+              <FloqFormControl size="small">
+                <FloqInputLabel label="Prosjektkode" />
+                <FloqInput>
+                  <FloqInputDefaultText>{project.id}</FloqInputDefaultText>
+                </FloqInput>
+              </FloqFormControl>
 
-        <FloqFormControl size="medium">
-          <FloqInputLabel label="Prosjektnavn" />
-          <FloqInput error={errors.name && errors.name.message}>
-            <FloqInputField
-              type="text"
-              name="name"
-              ref={register({ required: "Påkrevd" })}
-            />
-          </FloqInput>
-        </FloqFormControl>
+              <FloqFormControl size="large">
+                <FloqInputLabel label="Prosjektnavn" />
+                <FloqInput error={errors.name && errors.name.message}>
+                  <FloqInputField
+                    type="text"
+                    name="name"
+                    ref={register({ required: "Påkrevd" })}
+                  />
+                </FloqInput>
+              </FloqFormControl>
 
-        <FloqFormControl size="medium">
-          <FloqInput>
-            <FloqCheckbox
-              name="subcontractor"
-              label="Underleverandør"
-              ref={register}
-            />
-          </FloqInput>
-        </FloqFormControl>
+              <FloqFormControl size="large">
+                <FloqInput>
+                  <FloqCheckbox
+                    name="subcontractor"
+                    label="Underleverandør"
+                    ref={register}
+                  />
+                </FloqInput>
+              </FloqFormControl>
 
-        <FloqFormControl size="medium">
-          <FloqInputLabel label="Ansvarlig" />
-          <FloqInput error={errors.responsible && errors.responsible.message}>
-            <Select
-              value={values.responsible}
-              onChange={onChangeEmployee}
-              styles={FloqReactSelectStyles}
-              options={optionsEmployees}
-              placeholder={"Knut?"}
-            />
-          </FloqInput>
-        </FloqFormControl>
+              <FloqFormControl size="large">
+                <FloqInputLabel label="Ansvarlig" />
+                <FloqInput
+                  error={errors.responsible && errors.responsible.message}>
+                  <Select
+                    value={values.responsible}
+                    onChange={onChangeEmployee}
+                    styles={FloqReactSelectStyles}
+                    options={optionsEmployees}
+                    placeholder={"Knut?"}
+                  />
+                </FloqInput>
+              </FloqFormControl>
 
-        <FloqFormControl size="medium">
-          <FloqInputLabel label="Type" />
-          <FloqInput error={errors.billable && errors.billable.message}>
-            <FloqButtonGroup>
-              {billableElements.map(e => (
-                <FloqButton
-                  type="button"
-                  key={e.label}
-                  variant={(values.billable === e.value && "pink") || "creamy"}
-                  onClick={(): void => {
-                    setValues({ ...values, billable: e.value });
-                    setValue("billable", e.value, true);
-                  }}>
-                  {e.label}
-                </FloqButton>
-              ))}
-            </FloqButtonGroup>
-          </FloqInput>
-        </FloqFormControl>
+              <FloqFormControl size="large">
+                <FloqInputLabel label="Type" />
+                <FloqInput error={errors.billable && errors.billable.message}>
+                  <FloqButtonGroup>
+                    {billableElements.map(e => (
+                      <FloqButton
+                        type="button"
+                        key={e.label}
+                        variant={
+                          (values.billable === e.value && "pink") || "creamy"
+                        }
+                        onClick={(): void => {
+                          setValues({ ...values, billable: e.value });
+                          setValue("billable", e.value, true);
+                        }}>
+                        {e.label}
+                      </FloqButton>
+                    ))}
+                  </FloqButtonGroup>
+                </FloqInput>
+              </FloqFormControl>
 
-        <FloqFormControl size="medium">
-          <FloqInputLabel label="Status" />
-          <FloqInput error={errors.active && errors.active.message}>
-            <FloqButtonGroup>
-              <FloqButton
-                type="button"
-                variant={(values.active && "purple") || "creamy"}
-                onClick={(): void => {
-                  setValues({ ...values, active: true });
-                  setValue("active", true, true);
-                }}>
-                Aktiv
+              <FloqFormControl size="large">
+                <FloqInputLabel label="Status" />
+                <FloqInput error={errors.active && errors.active.message}>
+                  <FloqButtonGroup>
+                    <FloqButton
+                      type="button"
+                      variant={(values.active && "purple") || "creamy"}
+                      onClick={(): void => {
+                        setValues({ ...values, active: true });
+                        setValue("active", true, true);
+                      }}>
+                      Aktiv
+                    </FloqButton>
+                    <FloqButton
+                      type="button"
+                      variant={(!values.active && "purple") || "creamy"}
+                      onClick={(): void => {
+                        setValues({ ...values, active: false });
+                        setValue("active", false, true);
+                      }}>
+                      Inaktiv
+                    </FloqButton>
+                  </FloqButtonGroup>
+                </FloqInput>
+              </FloqFormControl>
+            </FloqForm>
+            <FloqModalActions>
+              <FloqButton fullWidth action onClick={onCancel} type="button">
+                Avbryt
               </FloqButton>
-              <FloqButton
-                type="button"
-                variant={(!values.active && "purple") || "creamy"}
-                onClick={(): void => {
-                  setValues({ ...values, active: false });
-                  setValue("active", false, true);
-                }}>
-                Inaktiv
+              <FloqButton fullWidth action variant="yellow" type="submit">
+                Lagre
               </FloqButton>
-            </FloqButtonGroup>
-          </FloqInput>
-        </FloqFormControl>
-
-        <FloqModalActions>
-          <FloqButton fullWidth action onClick={onCancel} type="button">
-            Avbryt
-          </FloqButton>
-          <FloqButton fullWidth action variant="yellow" type="submit">
-            Lagre
-          </FloqButton>
-        </FloqModalActions>
+            </FloqModalActions>
+          </div>
+          <SDGColumn projectId={project.id} />
+        </div>
       </form>
     </FloqForm>
   );

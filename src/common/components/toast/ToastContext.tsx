@@ -17,12 +17,15 @@ export const ToastContextProvider: React.FC<React.PropsWithChildren<{}>> = (
 ) => {
   const [toast, setToast] = useState<ToastProps>();
 
-  const show = (type: ToastType, message: string): void => {
-    setToast({ type, message });
-  };
-
   const dismiss = (): void => {
     setToast(undefined);
+  };
+
+  const show = (type: ToastType, message: string): void => {
+    setToast({ type, message });
+    setTimeout((): void => {
+      dismiss();
+    }, 5000);
   };
 
   return (

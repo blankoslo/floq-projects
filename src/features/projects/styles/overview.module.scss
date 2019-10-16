@@ -3,14 +3,15 @@
 .projects {
   display: flex;
   flex-direction: column;
+  min-height: min-content;
 
   font-family: "Roboto", sans-serif;
   font-size: 1rem;
   line-height: 1.15;
-}
 
-@media only screen and (min-width: 600px) {
-  .projects {
+  margin-top: $spacing;
+
+  @media only screen and (min-width: 600px) {
     display: block;
 
     -webkit-column-count: auto;

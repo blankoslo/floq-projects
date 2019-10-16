@@ -1,18 +1,19 @@
+import { useToast } from "common/components/toast/ToastContext";
+import { useCustomers } from "common/context/CustomersContext";
 import { useProjects } from "common/context/ProjectsContext";
 import { IsValidCustomer, IsValidProject } from "common/DataCheckers";
 import FloqForm from "common/floq/components/FloqForm/FloqForm";
+import FloqFormControl from "common/floq/components/FloqFormControl/FloqFormControl";
 import FloqModal from "common/floq/components/FloqModal/FloqModal";
 import FloqTab from "common/floq/components/FloqTabs/FloqTab";
 import FloqTabs from "common/floq/components/FloqTabs/FloqTabs";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
+import { Customer } from "types/Customer";
 import NewCustomerProjectForm, {
   NewCustomerProjectValues,
 } from "./NewCustomerProjectForm";
 import NewProjectForm, { NewProjectValues } from "./NewProjectForm";
-import { useCustomers } from "common/context/CustomersContext";
-import { Customer } from "types/Customer";
-import { useToast } from "common/components/toast/ToastContext";
 
 type NewProjectOptions =
   | { type: "existing-customer"; customerId?: Customer["id"] }
@@ -101,22 +102,24 @@ const NewProjectDialog: React.FC = () => {
   return (
     <FloqModal open={isOpen} onClose={onClose} title="Legg til prosjekt">
       <FloqForm>
-        <FloqTabs>
-          <FloqTab
-            label="Velg kunde"
-            active={tab.type === "existing-customer"}
-            onClick={(): void => {
-              history.push("?existing-customer");
-            }}
-          />
-          <FloqTab
-            label="Ny kunde"
-            active={tab.type === "new-customer"}
-            onClick={(): void => {
-              history.push("?new-customer");
-            }}
-          />
-        </FloqTabs>
+        <FloqFormControl size="large">
+          <FloqTabs>
+            <FloqTab
+              label="Velg kunde"
+              active={tab.type === "existing-customer"}
+              onClick={(): void => {
+                history.push("?existing-customer");
+              }}
+            />
+            <FloqTab
+              label="Ny kunde"
+              active={tab.type === "new-customer"}
+              onClick={(): void => {
+                history.push("?new-customer");
+              }}
+            />
+          </FloqTabs>
+        </FloqFormControl>
         {tab.type === "existing-customer" && (
           <NewProjectForm
             customerId={tab.customerId}

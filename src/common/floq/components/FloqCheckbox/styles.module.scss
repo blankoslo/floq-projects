@@ -12,8 +12,12 @@
   & > * {
     cursor: pointer;
   }
-}
 
-.label {
-  margin-left: $quarter-spacing;
+  input:checked + .label {
+    font-weight: 600;
+  }
+
+  .label {
+    margin-left: $quarter-spacing;
+  }
 }
